@@ -50,7 +50,7 @@ rm -rf /tmp/tezos_proto_doc_snapshot
 sed -i.old.old -e 's/let version_value = "alpha_current"/let version_value = "'${current}'"/' \
     src/proto_${version}/lib_protocol/raw_context.ml
 
-long_hash=$(./tezos-protocol-compiler -hash-only src/proto_${version}/lib_protocol)
+long_hash=$(./tlnt-protocol-compiler -hash-only src/proto_${version}/lib_protocol)
 short_hash=$(echo $long_hash | head -c 8)
 
 if [ -d src/proto_${version}_${short_hash} ] ; then

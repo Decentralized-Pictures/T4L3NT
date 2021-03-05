@@ -393,7 +393,7 @@ module Make (Client : Resto_cohttp_client.Client.CALL) = struct
       (obj1 (req "endpoint" RPC_encoding.uri_encoding))
 
   let default_config =
-    {endpoint = Uri.of_string "http://localhost:8732"; logger = null_logger}
+    {endpoint = Uri.of_string "http://localhost:8733"; logger = null_logger}
 
   class http_ctxt config media_types : RPC_context.json =
     let base = config.endpoint in

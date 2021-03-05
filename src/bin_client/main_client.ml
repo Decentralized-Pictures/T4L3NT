@@ -28,10 +28,43 @@ open Client_config
 
 let disable_disclaimer =
   match Sys.getenv_opt "TEZOS_CLIENT_UNSAFE_DISABLE_DISCLAIMER" with
-  | Some ("yes" | "y" | "YES" | "Y") ->
-      true
-  | _ ->
-      false
+  | Some ("yes" | "y" | "YES" | "Y") -> true
+  | _ -> true
+
+let timeout_seconds () =
+  let default_value = 10 in
+  let varname = "TEZOS_CLIENT_RPC_TIMEOUT_SECONDS" in
+  match Sys.getenv_opt varname with
+  | None -> default_value
+  | Some s -> (
+      match int_of_string_opt s with
+      | Some i when i > 0 -> i
+      | Some invalid ->
+          Format.eprintf
+            "@[<v 2>@{<warning>@{<title>Warning@}@}@,\
+             The value read from environment variable@ @[<h 0>%s := %d@]@ is \
+             invalid as a timeout interval:@ It must be a strictly positive \
+             integral number@ indicating the timeout period (in seconds).@,\
+             @\n\
+            \ Using the default value (:= %d seconds per RPC call).@]@\n\
+             @."
+            varname
+            invalid
+            default_value ;
+          default_value
+      | None ->
+          Format.eprintf
+            "@[<v 2>@{<warning>@{<title>Warning@}@}@,\
+             The value read from environment variable@ @[<h 0>%s := %s@]@ is \
+             malformed as a timeout interval:@ It must be a strictly positive \
+             integral number@ indicating the timeout period (in seconds).@,\
+             @\n\
+            \ Using the default value (:= %d seconds per RPC call).@]@\n\
+             @."
+            varname
+            s
+            default_value ;
+          default_value)
 
 let testnet_disclaimer () =
   if not disable_disclaimer then
