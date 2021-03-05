@@ -28,15 +28,15 @@ open Filename.Infix
 
 let home = try Sys.getenv "HOME" with Not_found -> "/root"
 
-let data_dir_env_name = "TEZOS_NODE_DIR"
+let data_dir_env_name = "TLNT_NODE_DIR"
 
-let default_data_dir = home // ".tezos-node"
+let default_data_dir = home // ".tlnt-node"
 
-let default_rpc_port = 8732
+let default_rpc_port = 8733
 
-let default_p2p_port = 9732
+let default_p2p_port = 9733
 
-let default_discovery_port = 10732
+let default_discovery_port = 10733
 
 type chain_name = Distributed_db_version.Name.t
 
@@ -79,94 +79,34 @@ let make_blockchain_network ~alias ~chain_name ?old_chain_name
   }
 
 let blockchain_network_mainnet =
-  let giganode_1 = "116.202.172.21" in
-  let giganode_2 = "95.216.45.62" in
   make_blockchain_network
     ~alias:"mainnet"
     {
-      time = Time.Protocol.of_notation_exn "2018-06-30T16:07:32Z";
+      time = Time.Protocol.of_notation_exn "2021-02-19T15:16:17Z";
       block =
         Block_hash.of_b58check_exn
-          "BLockGenesisGenesisGenesisGenesisGenesisf79b5d1CoW2";
+          "BM9tu2uu3ybiTb9kcap5oP7nGhgR9kbE8gM2Tov4fnjSTnvhNL5";
       protocol =
         Protocol_hash.of_b58check_exn
           "Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P";
     }
-    ~chain_name:"TEZOS_MAINNET"
-    ~old_chain_name:"TEZOS_BETANET_2018-06-30T16:07:32Z"
+    ~genesis_parameters:
+      {
+        context_key = "sandbox_parameter";
+        values =
+          `O
+            [ ( "genesis_pubkey",
+                `String
+                  "edpkvP2UA8K5XNpux4hd91vXNQCJuAmk3ymDhjCSA2v8nMEf7v3v3y" ) ];
+      }
+    ~chain_name:"TLNT_NET"
     ~incompatible_chain_name:"INCOMPATIBLE"
-    ~sandboxed_chain_name:"SANDBOXED_TEZOS_MAINNET"
+    ~sandboxed_chain_name:"SANDBOXED_TLNT_NET"
     ~user_activated_upgrades:
-      [ (28082l, "PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt");
-        (204761l, "PsddFKi32cMJ2qPjf43Qv5GDWLDPZb3T3bF6fLKiF5HtvHNU7aP") ]
+      [ ]
     ~user_activated_protocol_overrides:
-      [ ( "PsBABY5HQTSkA4297zNHfsZNKtxULfL18y95qb3m53QJiXGmrbU",
-          "PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS" );
-        ( "PtEdoTezd3RHSC31mpxxo1npxFjoWWcFgQtxapi51Z8TLu6v6Uq",
-          "PtEdo2ZkT9oKpimTah6x2embF25oss54njMuPzkJTEi5RqfdZFA" ) ]
-    ~default_bootstrap_peers:["boot.tzbeta.net"; giganode_1; giganode_2]
-
-let blockchain_network_delphinet =
-  make_blockchain_network
-    ~alias:"delphinet"
-    {
-      time = Time.Protocol.of_notation_exn "2020-09-04T07:08:53Z";
-      block =
-        Block_hash.of_b58check_exn
-          "BLockGenesisGenesisGenesisGenesisGenesis355e8bjkYPv";
-      protocol =
-        Protocol_hash.of_b58check_exn
-          "PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex";
-    }
-    ~genesis_parameters:
-      {
-        context_key = "sandbox_parameter";
-        values =
-          `O
-            [ ( "genesis_pubkey",
-                `String
-                  "edpkugeDwmwuwyyD3Q5enapgEYDxZLtEUFFSrvVwXASQMVEqsvTqWu" ) ];
-      }
-    ~chain_name:"TEZOS_DELPHINET_2020-09-04T07:08:53Z"
-    ~sandboxed_chain_name:"SANDBOXED_TEZOS"
-    ~default_bootstrap_peers:
-      [ "delphinet.tezos.co.il";
-        "delphinet.smartpy.io";
-        "delphinet.kaml.fr";
-        "13.53.41.201" ]
-
-let blockchain_network_edonet =
-  make_blockchain_network
-    ~alias:"edonet"
-    {
-      time = Time.Protocol.of_notation_exn "2020-11-30T12:00:00Z";
-      block =
-        Block_hash.of_b58check_exn
-          "BLockGenesisGenesisGenesisGenesisGenesis2431bbUwV2a";
-      protocol =
-        Protocol_hash.of_b58check_exn
-          "PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex";
-    }
-    ~genesis_parameters:
-      {
-        context_key = "sandbox_parameter";
-        values =
-          `O
-            [ ( "genesis_pubkey",
-                `String
-                  "edpkugeDwmwuwyyD3Q5enapgEYDxZLtEUFFSrvVwXASQMVEqsvTqWu" ) ];
-      }
-    ~chain_name:"TEZOS_EDONET_2020-11-30T12:00:00Z"
-    ~sandboxed_chain_name:"SANDBOXED_TEZOS"
-    ~default_bootstrap_peers:
-      [ "51.75.246.56:9733";
-        "edonet.tezos.co.il";
-        "46.245.179.161:9733";
-        "edonet.smartpy.io";
-        "188.40.128.216:29732";
-        "51.79.165.131";
-        "edonet.boot.tezostaquito.io";
-        "95.216.228.228:9733" ]
+      [ ]
+    ~default_bootstrap_peers:["34.217.66.19"; "34.216.112.26"; "34.219.230.202"]
 
 let blockchain_network_sandbox =
   make_blockchain_network
@@ -259,9 +199,7 @@ let blockchain_network_encoding : blockchain_network Data_encoding.t =
 
 let builtin_blockchain_networks_with_tags =
   [ (1, blockchain_network_sandbox);
-    (4, blockchain_network_mainnet);
-    (9, blockchain_network_delphinet);
-    (11, blockchain_network_edonet) ]
+    (4, blockchain_network_mainnet); ]
   |> List.map (fun (tag, network) ->
          match network.alias with
          | None ->
@@ -641,13 +579,13 @@ let p2p =
           "bootstrap-peers"
           ~description:
             "List of hosts. Tezos can connect to both IPv6 and IPv4 hosts. If \
-             the port is not specified, default port 9732 will be assumed."
+             the port is not specified, default port 9733 will be assumed."
           (list string))
        (opt
           "listen-addr"
           ~description:
             "Host to listen to. If the port is not specified, the default \
-             port 8732 will be assumed."
+             port 8733 will be assumed."
           string)
        (dft
           "discovery-addr"
@@ -738,7 +676,7 @@ let rpc : rpc Data_encoding.t =
           "listen-addrs"
           ~description:
             "Hosts to listen to. If the port is not specified, the default \
-             port 8732 will be assumed."
+             port 8733 will be assumed."
           (list string))
        (opt "listen-addr" ~description:"Legacy value: Host to listen to" string)
        (dft

@@ -196,7 +196,7 @@ let tez_of_string_exn index field s =
       return t
   | None ->
       failwith
-        "Invalid \xEA\x9C\xA9 notation at entry %i, field \"%s\": %s"
+        "Invalid \xd1\x84 notation at entry %i, field \"%s\": %s"
         index
         field
         s
