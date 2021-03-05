@@ -1,0 +1,85 @@
+(library
+ (name tezos_baking_009_Prr7Qc9h)
+ (public_name tezos-baking-009-Prr7Qc9h)
+ (libraries tezos-base
+            tezos-version
+            tezos-protocol-009-Prr7Qc9h
+            tezos-protocol-environment
+            tezos-shell-context
+            tezos-shell-services
+            tezos-client-base
+            tezos-client-009-Prr7Qc9h
+            tezos-client-commands
+            tezos-stdlib-unix
+            tezos-storage
+            tezos-rpc-http
+            tezos-rpc
+            lwt-canceler)
+ (library_flags (:standard -linkall))
+ (modules (:standard \
+                     delegate_commands
+                     delegate_commands_registration))
+ (flags (:standard -open Tezos_base__TzPervasives
+                   -open Tezos_protocol_009_Prr7Qc9h
+                   -open Tezos_shell_services
+                   -open Tezos_client_base
+                   -open Tezos_client_009_Prr7Qc9h
+                   -open Tezos_client_commands
+                   -open Tezos_stdlib_unix
+                   -open Tezos_shell_context
+                   -open Tezos_storage
+                   -open Tezos_rpc
+                   -open Tezos_rpc_http)))
+
+(library
+ (name tezos_baking_009_Prr7Qc9h_commands)
+ (public_name tezos-baking-009-Prr7Qc9h-commands)
+ (libraries tezos-base
+            tezos-protocol-009-Prr7Qc9h
+            tezos-protocol-environment
+            tezos-shell-services
+            tezos-client-base
+            tezos-client-009-Prr7Qc9h
+            tezos-client-commands
+            tezos-baking-009-Prr7Qc9h)
+ (library_flags (:standard -linkall))
+ (modules delegate_commands)
+ (flags (:standard -open Tezos_base__TzPervasives
+                   -open Tezos_protocol_009_Prr7Qc9h
+                   -open Tezos_stdlib_unix
+                   -open Tezos_shell_services
+                   -open Tezos_client_base
+                   -open Tezos_client_009_Prr7Qc9h
+                   -open Tezos_client_commands
+                   -open Tezos_baking_009_Prr7Qc9h
+                   -open Tezos_rpc)))
+
+(library
+ (name tezos_baking_009_Prr7Qc9h_commands_registration)
+ (public_name tezos-baking-009-Prr7Qc9h-commands.registration)
+ (libraries tezos-base
+            tezos-protocol-009-Prr7Qc9h
+            tezos-protocol-environment
+            tezos-shell-services
+            tezos-client-base
+            tezos-client-009-Prr7Qc9h
+            tezos-client-commands
+            tezos-baking-009-Prr7Qc9h
+            tezos-baking-009-Prr7Qc9h-commands
+            tezos-rpc)
+ (library_flags (:standard -linkall))
+ (modules delegate_commands_registration)
+ (flags (:standard -open Tezos_base__TzPervasives
+                   -open Tezos_protocol_009_Prr7Qc9h
+                   -open Tezos_shell_services
+                   -open Tezos_client_base
+                   -open Tezos_client_009_Prr7Qc9h
+                   -open Tezos_client_commands
+                   -open Tezos_baking_009_Prr7Qc9h
+                   -open Tezos_baking_009_Prr7Qc9h_commands
+                   -open Tezos_rpc)))
+
+(rule
+ (alias runtest_lint)
+ (deps (glob_files *.ml{,i}))
+ (action (run %{lib:tezos-tooling:lint.sh} %{deps})))

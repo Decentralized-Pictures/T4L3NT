@@ -1,0 +1,23 @@
+(library
+ (name tezos_client_009_Prr7Qc9h)
+ (public_name tezos-client-009-Prr7Qc9h)
+ (libraries tezos-base
+            tezos-protocol-009-Prr7Qc9h
+            tezos-shell-services
+            tezos-client-base
+            tezos-mockup-registration
+            tezos-rpc
+            tezos-signer-backends
+            tezos-protocol-009-Prr7Qc9h-parameters)
+ (library_flags (:standard -linkall))
+ (flags (:standard -open Tezos_base__TzPervasives
+                   -open Tezos_shell_services
+                   -open Tezos_client_base
+                   -open Tezos_protocol_009_Prr7Qc9h
+                   -open Tezos_protocol_009_Prr7Qc9h_parameters
+                   -open Tezos_rpc)))
+
+(rule
+ (alias runtest_lint)
+ (deps (glob_files *.ml{,i}))
+ (action (run %{lib:tezos-tooling:lint.sh} %{deps})))
