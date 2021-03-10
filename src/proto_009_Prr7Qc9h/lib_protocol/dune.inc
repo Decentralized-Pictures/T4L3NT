@@ -250,15 +250,15 @@ module CamlinternalFormatBasics = struct include CamlinternalFormatBasics end
    main.mli main.ml)
  (action
   (write-file %{targets}
-    "module Environment = Tezos_protocol_environment_alpha.Environment
-let hash = Tezos_crypto.Protocol_hash.of_b58check_exn \"ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK\"
+    "module Environment = Tezos_protocol_environment_009_Prr7Qc9h.Environment
+let hash = Tezos_crypto.Protocol_hash.of_b58check_exn \"Prr7Qc9hHq2XomYNUjHtUVcBZa1bbaiZjXcbjKVeb72upTkqJ3T\"
 let name = Environment.Name.name
 include Tezos_raw_protocol_009_Prr7Qc9h
 include Tezos_raw_protocol_009_Prr7Qc9h.Main
 ")))
 
 (library
- (name tezos_protocol_environment_alpha)
+ (name tezos_protocol_environment_009_Prr7Qc9h)
  (public_name tezos-protocol-009-Prr7Qc9h.environment)
  (library_flags (:standard -linkall))
  (libraries tezos-protocol-environment)
@@ -267,12 +267,12 @@ include Tezos_raw_protocol_009_Prr7Qc9h.Main
 (library
  (name tezos_raw_protocol_009_Prr7Qc9h)
  (public_name tezos-protocol-009-Prr7Qc9h.raw)
- (libraries tezos_protocol_environment_alpha)
+ (libraries tezos_protocol_environment_009_Prr7Qc9h)
  (library_flags (:standard -linkall))
  (flags (:standard -nopervasives -nostdlib
                    -w +a-4-6-7-9-29-32-40..42-44-45-48-60-67
                    -warn-error +a
-                   -open Tezos_protocol_environment_alpha__Environment
+                   -open Tezos_protocol_environment_009_Prr7Qc9h__Environment
                    -open Pervasives
                    -open Error_monad))
  (modules
@@ -467,7 +467,7 @@ include Tezos_raw_protocol_009_Prr7Qc9h.Main
 
 (rule
  (alias runtest_sandbox)
- (deps .tezos_protocol_009_Prr7Qc9h.objs/native/tezos_protocol_alpha.cmx)
+ (deps .tezos_protocol_009_Prr7Qc9h.objs/native/tezos_protocol_009_Prr7Qc9h.cmx)
  (action (progn)))
 
 (rule
