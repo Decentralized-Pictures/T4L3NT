@@ -71,12 +71,18 @@
             (select void_for_linking-008-PtEdo2Zk from
               (tezos-embedded-protocol-008-PtEdo2Zk -> void_for_linking-008-PtEdo2Zk.empty)
               (-> void_for_linking-008-PtEdo2Zk.empty))
+            (select void_for_linking-009-Prr7Qc9h from
+              (tezos-embedded-protocol-009-Prr7Qc9h -> void_for_linking-009-Prr7Qc9h.empty)
+              (-> void_for_linking-009-Prr7Qc9h.empty))
             (select void_for_linking-007-PsDELPH1-protocol-plugin-registerer from
               (tezos-protocol-plugin-007-PsDELPH1-registerer -> void_for_linking-007-PsDELPH1-protocol-plugin-registerer.empty)
               (-> void_for_linking-007-PsDELPH1-protocol-plugin-registerer.empty))
             (select void_for_linking-008-PtEdo2Zk-protocol-plugin-registerer from
               (tezos-protocol-plugin-008-PtEdo2Zk-registerer -> void_for_linking-008-PtEdo2Zk-protocol-plugin-registerer.empty)
               (-> void_for_linking-008-PtEdo2Zk-protocol-plugin-registerer.empty))
+            (select void_for_linking-009-Prr7Qc9h-protocol-plugin-registerer from
+              (tezos-protocol-plugin-009-Prr7Qc9h-registerer -> void_for_linking-009-Prr7Qc9h-protocol-plugin-registerer.empty)
+              (-> void_for_linking-009-Prr7Qc9h-protocol-plugin-registerer.empty))
              cmdliner
              tls)
  (flags (:standard -open Tezos_base__TzPervasives
@@ -113,8 +119,10 @@
    (write-file void_for_linking-007-PsDELPH1.empty "")
    (write-file void_for_linking-008-PtEdoTez.empty "")
    (write-file void_for_linking-008-PtEdo2Zk.empty "")
+   (write-file void_for_linking-009-Prr7Qc9h.empty "")
    (write-file void_for_linking-007-PsDELPH1-protocol-plugin-registerer.empty "")
    (write-file void_for_linking-008-PtEdo2Zk-protocol-plugin-registerer.empty "")
+   (write-file void_for_linking-009-Prr7Qc9h-protocol-plugin-registerer.empty "")
 )))
 
 (install
