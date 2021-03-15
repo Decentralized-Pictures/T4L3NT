@@ -106,7 +106,7 @@ let blockchain_network_mainnet =
       [ ]
     ~user_activated_protocol_overrides:
       [ ]
-    ~default_bootstrap_peers:["34.217.66.19"; "34.216.112.26"; "34.219.230.202"]
+    ~default_bootstrap_peers:["network.decentralized.pictures"]
 
 let blockchain_network_sandbox =
   make_blockchain_network
