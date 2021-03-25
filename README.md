@@ -1,4 +1,4 @@
-# Tezos
+# T4L3NT a Tezos Fork Arts & Culture focused blockchain
 
 ## Introduction
 
