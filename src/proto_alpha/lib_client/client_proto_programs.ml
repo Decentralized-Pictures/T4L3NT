@@ -57,7 +57,7 @@ let print_errors (cctxt : #Client_context.printer) errs ~show_source ~parsed =
 
 let print_run_result (cctxt : #Client_context.printer) ~show_source ~parsed =
   function
-  | Ok (storage, operations, maybe_diff) ->
+  | Ok (storage, operations, maybe_lazy_storage_diff) ->
       cctxt#message
         "@[<v 0>@[<v 2>storage@,\
          %a@]@,\
@@ -71,14 +71,14 @@ let print_run_result (cctxt : #Client_context.printer) ~show_source ~parsed =
         operations
         (fun ppf -> function None -> () | Some diff ->
               print_big_map_diff ppf diff)
-        maybe_diff
+        maybe_lazy_storage_diff
       >>= fun () -> return_unit
   | Error errs ->
       print_errors cctxt errs ~show_source ~parsed
 
 let print_trace_result (cctxt : #Client_context.printer) ~show_source ~parsed =
   function
-  | Ok (storage, operations, trace, maybe_big_map_diff) ->
+  | Ok (storage, operations, trace, maybe_lazy_storage_diff) ->
       cctxt#message
         "@[<v 0>@[<v 2>storage@,\
          %a@]@,\
@@ -94,7 +94,7 @@ let print_trace_result (cctxt : #Client_context.printer) ~show_source ~parsed =
         operations
         (fun ppf -> function None -> () | Some diff ->
               print_big_map_diff ppf diff)
-        maybe_big_map_diff
+        maybe_lazy_storage_diff
         print_execution_trace
         trace
       >>= fun () -> return_unit
@@ -102,61 +102,72 @@ let print_trace_result (cctxt : #Client_context.printer) ~show_source ~parsed =
       print_errors cctxt errs ~show_source ~parsed
 
 let run (cctxt : #Protocol_client_context.rpc_context)
-    ~(chain : Chain_services.chain) ~block ?(amount = Tez.fifty_cents)
+    ~(chain : Chain_services.chain) ~block ?(amount = Tez.fifty_cents) ~balance
     ~(program : Michelson_v1_parser.parsed)
     ~(storage : Michelson_v1_parser.parsed)
-    ~(input : Michelson_v1_parser.parsed) ?source ?payer ?gas
-    ?(entrypoint = "default") () =
+    ~(input : Michelson_v1_parser.parsed)
+    ~(unparsing_mode : Script_ir_translator.unparsing_mode) ?source ?payer ?gas
+    ?entrypoint () =
   Chain_services.chain_id cctxt ~chain ()
   >>=? fun chain_id ->
   Alpha_services.Helpers.Scripts.run_code
     cctxt
     (chain, block)
-    program.expanded
-    ( storage.expanded,
-      input.expanded,
-      amount,
-      chain_id,
-      source,
-      payer,
-      gas,
-      entrypoint )
+    ?gas
+    ?entrypoint
+    ~unparsing_mode
+    ~script:program.expanded
+    ~storage:storage.expanded
+    ~input:input.expanded
+    ~amount
+    ~balance
+    ~chain_id
+    ~source
+    ~payer
 
 let trace (cctxt : #Protocol_client_context.rpc_context)
-    ~(chain : Chain_services.chain) ~block ?(amount = Tez.fifty_cents)
+    ~(chain : Chain_services.chain) ~block ?(amount = Tez.fifty_cents) ~balance
     ~(program : Michelson_v1_parser.parsed)
     ~(storage : Michelson_v1_parser.parsed)
-    ~(input : Michelson_v1_parser.parsed) ?source ?payer ?gas
-    ?(entrypoint = "default") () =
+    ~(input : Michelson_v1_parser.parsed)
+    ~(unparsing_mode : Script_ir_translator.unparsing_mode) ?source ?payer ?gas
+    ?entrypoint () =
   Chain_services.chain_id cctxt ~chain ()
   >>=? fun chain_id ->
   Alpha_services.Helpers.Scripts.trace_code
     cctxt
     (chain, block)
-    program.expanded
-    ( storage.expanded,
-      input.expanded,
-      amount,
-      chain_id,
-      source,
-      payer,
-      gas,
-      entrypoint )
+    ?gas
+    ?entrypoint
+    ~unparsing_mode
+    ~script:program.expanded
+    ~storage:storage.expanded
+    ~input:input.expanded
+    ~amount
+    ~balance
+    ~chain_id
+    ~source
+    ~payer
 
-let typecheck_data cctxt ~(chain : Chain_services.chain) ~block ?gas
+let typecheck_data cctxt ~(chain : Chain_services.chain) ~block ?gas ?legacy
     ~(data : Michelson_v1_parser.parsed) ~(ty : Michelson_v1_parser.parsed) ()
     =
   Alpha_services.Helpers.Scripts.typecheck_data
     cctxt
     (chain, block)
-    (data.expanded, ty.expanded, gas)
+    ?gas
+    ?legacy
+    ~data:data.expanded
+    ~ty:ty.expanded
 
-let typecheck_program cctxt ~(chain : Chain_services.chain) ~block ?gas
+let typecheck_program cctxt ~(chain : Chain_services.chain) ~block ?gas ?legacy
     (program : Michelson_v1_parser.parsed) =
   Alpha_services.Helpers.Scripts.typecheck_code
     cctxt
     (chain, block)
-    (program.expanded, gas)
+    ?gas
+    ?legacy
+    ~script:program.expanded
 
 let print_typecheck_result ~emacs ~show_types ~print_source_on_error program
     res (cctxt : #Client_context.printer) =

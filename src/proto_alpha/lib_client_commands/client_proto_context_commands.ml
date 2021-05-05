@@ -216,11 +216,11 @@ let prepare_batch_operation cctxt ?arg ?fee ?gas_limit ?storage_limit
   >>=? fun amount ->
   tez_of_opt_string_exn index "fee" batch.fee
   >>=? fun batch_fee ->
-  let fee = Option.first_some batch_fee fee in
-  let arg = Option.first_some batch.arg arg in
-  let gas_limit = Option.first_some batch.gas_limit gas_limit in
-  let storage_limit = Option.first_some batch.storage_limit storage_limit in
-  let entrypoint = Option.first_some batch.entrypoint entrypoint in
+  let fee = Option.either batch_fee fee in
+  let arg = Option.either batch.arg arg in
+  let gas_limit = Option.either batch.gas_limit gas_limit in
+  let storage_limit = Option.either batch.storage_limit storage_limit in
+  let entrypoint = Option.either batch.entrypoint entrypoint in
   parse_arg_transfer arg
   >>=? fun parameters ->
   ( match Contract.is_implicit source with
@@ -249,7 +249,7 @@ let prepare_batch_operation cctxt ?arg ?fee ?gas_limit ?storage_limit
            ?storage_limit
            destination) )
   >>=? fun operation ->
-  return (Injection.Annotated_manager_operation operation)
+  return (Annotated_manager_operation.Annotated_manager_operation operation)
 
 let commands network () =
   let open Clic in
@@ -277,7 +277,7 @@ let commands network () =
       (fun () (cctxt : Protocol_client_context.full) ->
         list_contract_labels cctxt ~chain:cctxt#chain ~block:cctxt#block
         >>=? fun contracts ->
-        Lwt_list.iter_s
+        List.iter_s
           (fun (alias, hash, kind) -> cctxt#message "%s%s%s" hash kind alias)
           contracts
         >>= fun () -> return_unit);
@@ -355,7 +355,7 @@ let commands network () =
           cctxt
           ~chain:cctxt#chain
           ~block:cctxt#block
-          (Z.of_int id)
+          (Big_map.Id.parse_z (Z.of_int id))
           key
         >>=? fun value ->
         cctxt#answer "%a" Michelson_v1_printer.print_expr_unwrapped value
@@ -375,17 +375,12 @@ let commands network () =
         | Some {code; storage = _} -> (
           match Script_repr.force_decode code with
           | Error errs ->
-              cctxt#error
-                "%a"
-                (Format.pp_print_list
-                   ~pp_sep:Format.pp_print_newline
-                   Environment.Error_monad.pp)
-                errs
+              cctxt#error "%a" Environment.Error_monad.pp_trace errs
           | Ok (code, _) ->
               let {Michelson_v1_parser.source; _} =
                 Michelson_v1_printer.unparse_toplevel code
               in
-              cctxt#answer "%a" Format.pp_print_text source >>= return ));
+              cctxt#answer "%s" source >>= return ));
     command
       ~group
       ~desc:"Get the type of an entrypoint of a contract."
@@ -840,9 +835,11 @@ let commands network () =
                 >>=? fun (_, src_pk, src_sk) -> return (source, src_pk, src_sk)
             )
             >>=? fun (source, src_pk, src_sk) ->
-            mapi_p prepare operations
+            List.mapi_ep prepare operations
             >>=? fun contents ->
-            let (Manager_list contents) = Injection.manager_of_list contents in
+            let (Manager_list contents) =
+              Annotated_manager_operation.manager_of_list contents
+            in
             Injection.inject_manager_operation
               cctxt
               ~chain:cctxt#chain
@@ -851,9 +848,9 @@ let commands network () =
               ~dry_run
               ~verbose_signing
               ~source
-              ?fee
-              ?gas_limit
-              ?storage_limit
+              ~fee:(Limit.of_option fee)
+              ~gas_limit:(Limit.of_option gas_limit)
+              ~storage_limit:(Limit.of_option storage_limit)
               ?counter
               ~src_pk
               ~src_sk
@@ -1354,7 +1351,13 @@ let commands network () =
           | Some src_pkh -> (
               Client_keys.get_key cctxt src_pkh
               >>=? fun (src_name, _src_pk, src_sk) ->
-              get_period_info ~chain:cctxt#chain ~block:cctxt#block cctxt
+              get_period_info
+              (* Find period info of the successor, because the operation will
+                 be injected on the next block at the earliest *)
+                ~successor:true
+                ~chain:cctxt#chain
+                ~block:cctxt#block
+                cctxt
               >>=? fun info ->
               ( match info.current_period_kind with
               | Proposal ->
@@ -1534,14 +1537,19 @@ let commands network () =
           | Some src_pkh ->
               Client_keys.get_key cctxt src_pkh
               >>=? fun (_src_name, _src_pk, src_sk) ->
-              get_period_info ~chain:cctxt#chain ~block:cctxt#block cctxt
+              get_period_info
+              (* Find period info of the successor, because the operation will
+                 be injected on the next block at the earliest *)
+                ~successor:true
+                ~chain:cctxt#chain
+                ~block:cctxt#block
+                cctxt
               >>=? fun info ->
               ( match info.current_period_kind with
-              | Testing_vote | Promotion_vote ->
+              | Exploration | Promotion ->
                   return_unit
               | _ ->
-                  cctxt#error "Not in a Testing_vote or Promotion_vote period"
-              )
+                  cctxt#error "Not in Exploration or Promotion period" )
               >>=? fun () ->
               submit_ballot
                 cctxt
@@ -1580,48 +1588,64 @@ let commands network () =
           in
           let print_proposal = function
             | None ->
-                assert false (* not called during proposal phase *)
+                cctxt#message "The current proposal has already been cleared."
+            (* The proposal is cleared on the last block of adoption period, and
+               also on the last block of the exploration and promotion
+               periods when the proposal is not approved *)
             | Some proposal ->
                 cctxt#message "Current proposal: %a" Protocol_hash.pp proposal
           in
           match info.current_period_kind with
           | Proposal ->
-              cctxt#answer
-                "Current proposals:%t"
-                Format.(
-                  fun ppf ->
-                    pp_print_cut ppf () ;
-                    pp_open_vbox ppf 0 ;
-                    List.iter
-                      (fun (p, w) ->
-                        fprintf
-                          ppf
-                          "* %a %ld (%sknown by the node)@."
-                          Protocol_hash.pp
-                          p
-                          w
-                          (if List.mem p known_protos then "" else "not "))
-                      ranks ;
-                    pp_close_box ppf ())
-              >>= fun () -> return_unit
-          | Testing_vote | Promotion_vote ->
+              (* the current proposals are cleared on the last block of the
+                proposal period *)
+              if info.remaining <> 0l then
+                cctxt#answer
+                  "Current proposals:%t"
+                  Format.(
+                    fun ppf ->
+                      pp_print_cut ppf () ;
+                      pp_open_vbox ppf 0 ;
+                      List.iter
+                        (fun (p, w) ->
+                          fprintf
+                            ppf
+                            "* %a %ld (%sknown by the node)@."
+                            Protocol_hash.pp
+                            p
+                            w
+                            (if List.mem p known_protos then "" else "not "))
+                        ranks ;
+                      pp_close_box ppf ())
+                >>= fun () -> return_unit
+              else
+                cctxt#message "The proposals have already been cleared."
+                >>= fun () -> return_unit
+          | Exploration | Promotion ->
               print_proposal info.current_proposal
               >>= fun () ->
-              get_ballots_info ~chain:cctxt#chain ~block:cctxt#block cctxt
-              >>=? fun ballots_info ->
-              cctxt#answer
-                "Ballots: %a@,\
-                 Current participation %.2f%%, necessary quorum %.2f%%@,\
-                 Current in favor %ld, needed supermajority %ld"
-                Data_encoding.Json.pp
-                (Data_encoding.Json.construct
-                   Vote.ballots_encoding
-                   ballots_info.ballots)
-                (Int32.to_float ballots_info.participation /. 100.)
-                (Int32.to_float ballots_info.current_quorum /. 100.)
-                ballots_info.ballots.yay
-                ballots_info.supermajority
-              >>= fun () -> return_unit
-          | Testing ->
+              (* the ballots are cleared on the last block of these periods *)
+              if info.remaining <> 0l then
+                get_ballots_info ~chain:cctxt#chain ~block:cctxt#block cctxt
+                >>=? fun ballots_info ->
+                cctxt#answer
+                  "Ballots: %a@,\
+                   Current participation %.2f%%, necessary quorum %.2f%%@,\
+                   Current in favor %ld, needed supermajority %ld"
+                  Data_encoding.Json.pp
+                  (Data_encoding.Json.construct
+                     Vote.ballots_encoding
+                     ballots_info.ballots)
+                  (Int32.to_float ballots_info.participation /. 100.)
+                  (Int32.to_float ballots_info.current_quorum /. 100.)
+                  ballots_info.ballots.yay
+                  ballots_info.supermajority
+                >>= fun () -> return_unit
+              else
+                cctxt#message "The ballots have already been cleared."
+                >>= fun () -> return_unit
+          | Cooldown ->
+              print_proposal info.current_proposal >>= fun () -> return_unit
+          | Adoption ->
               print_proposal info.current_proposal >>= fun () -> return_unit)
     ]

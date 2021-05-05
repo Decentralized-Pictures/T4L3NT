@@ -51,7 +51,7 @@ val get_big_map_value :
   #Protocol_client_context.rpc_context ->
   chain:Shell_services.chain ->
   block:Shell_services.block ->
-  Z.t ->
+  Big_map.Id.t ->
   Script_expr_hash.t ->
   Script.expr tzresult Lwt.t
 
@@ -74,7 +74,7 @@ val build_delegate_operation :
   ?gas_limit:Gas.Arith.integral ->
   ?storage_limit:Z.t ->
   public_key_hash option ->
-  Kind.delegation Injection.annotated_manager_operation
+  Kind.delegation Annotated_manager_operation.t
 
 val set_delegate :
   #Protocol_client_context.full ->
@@ -143,7 +143,7 @@ val build_transaction_operation :
   ?gas_limit:Gas.Arith.integral ->
   ?storage_limit:Z.t ->
   Contract.t ->
-  Kind.transaction Injection.annotated_manager_operation
+  Kind.transaction Annotated_manager_operation.t
 
 val transfer :
   #Protocol_client_context.full ->
@@ -174,7 +174,7 @@ val build_reveal_operation :
   ?gas_limit:Gas.Arith.integral ->
   ?storage_limit:Z.t ->
   public_key ->
-  Kind.reveal Injection.annotated_manager_operation
+  Kind.reveal Annotated_manager_operation.t
 
 val reveal :
   #Protocol_client_context.full ->
@@ -253,6 +253,7 @@ type ballots_info = {
 }
 
 val get_period_info :
+  ?successor:bool ->
   #Protocol_client_context.full ->
   chain:Shell_services.chain ->
   block:Shell_services.block ->

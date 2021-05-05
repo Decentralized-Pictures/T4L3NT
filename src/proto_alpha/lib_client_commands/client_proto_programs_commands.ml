@@ -59,6 +59,12 @@ let commands () =
   let zero_loc_switch =
     switch ~short:'z' ~long:"zero-loc" ~doc:"replace location with \"0\"" ()
   in
+  let legacy_switch =
+    switch
+      ~long:"legacy"
+      ~doc:"typecheck in legacy mode as if the data was taken from the chain"
+      ()
+  in
   let amount_arg =
     Client_proto_args.tez_arg
       ~parameter:"amount"
@@ -77,6 +83,12 @@ let commands () =
       ~doc:"name of the payer (i.e. SOURCE) contract for the transaction"
       ()
   in
+  let balance_arg =
+    Client_proto_args.tez_arg
+      ~parameter:"balance"
+      ~doc:"balance of run contract in \xEA\x9C\xA9"
+      ~default:"4_000_000"
+  in
   let custom_gas_flag =
     arg
       ~long:"gas"
@@ -87,7 +99,7 @@ let commands () =
            try
              let v = Z.of_string str in
              assert (Compare.Z.(v >= Z.zero)) ;
-             return (Alpha_context.Gas.Arith.integral v)
+             return (Alpha_context.Gas.Arith.integral_exn v)
            with _ -> failwith "invalid gas limit (must be a positive number)"))
   in
   let resolve_max_gas cctxt block = function
@@ -179,7 +191,7 @@ let commands () =
       (fun () (cctxt : Protocol_client_context.full) ->
         Program.load cctxt
         >>=? fun list ->
-        Lwt_list.iter_s (fun (n, _) -> cctxt#message "%s" n) list
+        List.iter_s (fun (n, _) -> cctxt#message "%s" n) list
         >>= fun () -> return_unit);
     command
       ~group
@@ -208,14 +220,16 @@ let commands () =
     command
       ~group
       ~desc:"Ask the node to run a script."
-      (args7
+      (args9
          trace_stack_switch
          amount_arg
+         balance_arg
          source_arg
          payer_arg
          no_print_source_flag
          custom_gas_flag
-         entrypoint_arg)
+         entrypoint_arg
+         (unparsing_mode_arg ~default:"Readable"))
       ( prefixes ["run"; "script"]
       @@ Program.source_param
       @@ prefixes ["on"; "storage"]
@@ -223,7 +237,15 @@ let commands () =
       @@ prefixes ["and"; "input"]
       @@ param ~name:"input" ~desc:"the input data" data_parameter
       @@ stop )
-      (fun (trace_exec, amount, source, payer, no_print_source, gas, entrypoint)
+      (fun ( trace_exec,
+             amount,
+             balance,
+             source,
+             payer,
+             no_print_source,
+             gas,
+             entrypoint,
+             unparsing_mode )
            program
            storage
            input
@@ -239,9 +261,11 @@ let commands () =
             ~chain:cctxt#chain
             ~block:cctxt#block
             ~amount
+            ~balance
             ~program
             ~storage
             ~input
+            ~unparsing_mode
             ?source
             ?payer
             ?gas
@@ -255,9 +279,11 @@ let commands () =
             ~chain:cctxt#chain
             ~block:cctxt#block
             ~amount
+            ~balance
             ~program
             ~storage
             ~input
+            ~unparsing_mode
             ?source
             ?payer
             ?gas
@@ -268,13 +294,14 @@ let commands () =
     command
       ~group
       ~desc:"Ask the node to typecheck a script."
-      (args4
+      (args5
          show_types_switch
          emacs_mode_switch
          no_print_source_flag
-         custom_gas_flag)
+         custom_gas_flag
+         legacy_switch)
       (prefixes ["typecheck"; "script"] @@ Program.source_param @@ stop)
-      (fun (show_types, emacs_mode, no_print_source, original_gas)
+      (fun (show_types, emacs_mode, no_print_source, original_gas, legacy)
            program
            cctxt ->
         match program with
@@ -286,6 +313,7 @@ let commands () =
               ~chain:cctxt#chain
               ~block:cctxt#block
               ~gas:original_gas
+              ~legacy
               program
             >>= fun res ->
             print_typecheck_result
@@ -316,13 +344,13 @@ let commands () =
     command
       ~group
       ~desc:"Ask the node to typecheck a data expression."
-      (args2 no_print_source_flag custom_gas_flag)
+      (args3 no_print_source_flag custom_gas_flag legacy_switch)
       ( prefixes ["typecheck"; "data"]
       @@ param ~name:"data" ~desc:"the data to typecheck" data_parameter
       @@ prefixes ["against"; "type"]
       @@ param ~name:"type" ~desc:"the expected type" data_parameter
       @@ stop )
-      (fun (no_print_source, custom_gas) data ty cctxt ->
+      (fun (no_print_source, custom_gas, legacy) data ty cctxt ->
         resolve_max_gas cctxt cctxt#block custom_gas
         >>=? fun original_gas ->
         Client_proto_programs.typecheck_data
@@ -330,6 +358,7 @@ let commands () =
           ~chain:cctxt#chain
           ~block:cctxt#block
           ~gas:original_gas
+          ~legacy
           ~data
           ~ty
           ()
@@ -369,7 +398,9 @@ let commands () =
         Alpha_services.Helpers.Scripts.pack_data
           cctxt
           (cctxt#chain, cctxt#block)
-          (data.expanded, typ.expanded, Some original_gas)
+          ~gas:original_gas
+          ~data:data.expanded
+          ~ty:typ.expanded
         >>= function
         | Ok (bytes, remaining_gas) ->
             let hash = Script_expr_hash.hash_bytes [bytes] in
@@ -433,6 +464,97 @@ let commands () =
             >>= fun () -> return_unit);
     command
       ~group
+      ~desc:"Ask the node to normalize a script."
+      (args1 (unparsing_mode_arg ~default:"Readable"))
+      (prefixes ["normalize"; "script"] @@ Program.source_param @@ stop)
+      (fun unparsing_mode program cctxt ->
+        Lwt.return @@ Micheline_parser.no_parsing_error program
+        >>=? fun program ->
+        Alpha_services.Helpers.Scripts.normalize_script
+          cctxt
+          (cctxt#chain, cctxt#block)
+          ~script:program.expanded
+          ~unparsing_mode
+        >>= function
+        | Ok program ->
+            cctxt#message
+              "%a"
+              (fun ppf () ->
+                (Michelson_v1_printer.print_expr_unwrapped ppf program : unit))
+              ()
+            >>= fun () -> return_unit
+        | Error errs ->
+            cctxt#warning
+              "%a"
+              (Michelson_v1_error_reporter.report_errors
+                 ~details:false
+                 ~show_source:false
+                 ?parsed:None)
+              errs
+            >>= fun () -> cctxt#error "ill-typed script");
+    command
+      ~group
+      ~desc:"Ask the node to normalize a data expression."
+      (args2 (unparsing_mode_arg ~default:"Readable") legacy_switch)
+      ( prefixes ["normalize"; "data"]
+      @@ param
+           ~name:"data"
+           ~desc:"the data expression to normalize"
+           data_parameter
+      @@ prefixes ["of"; "type"]
+      @@ param ~name:"type" ~desc:"type of the data expression" data_parameter
+      @@ stop )
+      (fun (unparsing_mode, legacy) data typ cctxt ->
+        Alpha_services.Helpers.Scripts.normalize_data
+          cctxt
+          (cctxt#chain, cctxt#block)
+          ~legacy
+          ~data:data.expanded
+          ~ty:typ.expanded
+          ~unparsing_mode
+        >>= function
+        | Ok expr ->
+            cctxt#message "%a" Michelson_v1_printer.print_expr_unwrapped expr
+            >>= fun () -> return_unit
+        | Error errs ->
+            cctxt#warning
+              "%a"
+              (Michelson_v1_error_reporter.report_errors
+                 ~details:false
+                 ~show_source:false
+                 ?parsed:None)
+              errs
+            >>= fun () -> cctxt#error "ill-typed data expression");
+    command
+      ~group
+      ~desc:"Ask the node to normalize a type."
+      no_options
+      ( prefixes ["normalize"; "type"]
+      @@ param
+           ~name:"typ"
+           ~desc:"the Michelson type to normalize"
+           data_parameter
+      @@ stop )
+      (fun () typ cctxt ->
+        Plugin.RPC.normalize_type
+          cctxt
+          (cctxt#chain, cctxt#block)
+          ~ty:typ.expanded
+        >>= function
+        | Ok expr ->
+            cctxt#message "%a" Michelson_v1_printer.print_expr_unwrapped expr
+            >>= fun () -> return_unit
+        | Error errs ->
+            cctxt#warning
+              "%a"
+              (Michelson_v1_error_reporter.report_errors
+                 ~details:false
+                 ~show_source:false
+                 ?parsed:None)
+              errs
+            >>= fun () -> cctxt#error "ill-formed type");
+    command
+      ~group
       ~desc:
         "Sign a raw sequence of bytes and display it using the format \
          expected by Michelson instruction `CHECK_SIGNATURE`."
@@ -452,9 +574,9 @@ let commands () =
         "Check the signature of a byte sequence as per Michelson instruction \
          `CHECK_SIGNATURE`."
       (args1 (switch ~doc:"Use only exit codes" ~short:'q' ~long:"quiet" ()))
-      ( prefixes ["check"; "that"]
+      ( prefixes ["check"; "that"; "bytes"]
       @@ bytes_parameter ~name:"bytes" ~desc:"the signed data"
-      @@ prefixes ["was"; "signed"; "by"]
+      @@ prefixes ["were"; "signed"; "by"]
       @@ Client_keys.Public_key.alias_param ~name:"key"
       @@ prefixes ["to"; "produce"]
       @@ param

@@ -254,8 +254,7 @@ let gas_limit_kind =
   parameter (fun _ s ->
       try
         let v = Z.of_string s in
-        assert (Compare.Z.(v >= Z.zero)) ;
-        return (Gas.Arith.integral v)
+        return (Gas.Arith.integral_exn v)
       with _ -> failwith "invalid gas limit (must be a positive number)")
 
 let gas_limit_arg =
@@ -468,6 +467,45 @@ let signature_parameter =
           return s
       | None ->
           failwith "Not given a valid signature")
+
+let unparsing_mode_parameter =
+  parameter
+    ~autocomplete:(fun _cctxt ->
+      return ["Readable"; "Optimized"; "Optimized_legacy"])
+    (fun _cctxt s ->
+      match s with
+      | "Readable" ->
+          return Script_ir_translator.Readable
+      | "Optimized" ->
+          return Script_ir_translator.Optimized
+      | "Optimized_legacy" ->
+          return Script_ir_translator.Optimized_legacy
+      | _ ->
+          failwith "Unknown unparsing mode %s" s)
+
+let unparsing_mode_arg ~default =
+  default_arg
+    ~long:"unparsing-mode"
+    ~placeholder:"mode"
+    ~doc:
+      "Unparsing mode to use\n\
+       One of \"Readable\", \"Optimized\", or \"Optimized_legacy\".\n\
+       This option affects the way the values of the following Michelson \
+       types are represented:\n\
+       - timestamp: the Readable representation is a RFC3339 string, the \
+       Optimized and Optimized_legacy representations are the number of \
+       seconds since Epoch\n\
+       - key, signature, key_hash, address, contract, chain_id: the Readable \
+       representation is a Base58Check string, the Optimized and \
+       Optimized_legacy representations are byte sequences\n\
+       - nested pairs: in Readable mode, the Pair constructor is used even \
+       with arity bigger than 2 such as in Pair 0 1 2; in Optimized_legacy \
+       mode, the Pair constructor is always use with arity 2 such as in Pair \
+       0 (Pair 1 2); in Optimized mode, a sequence is used if there are at \
+       least 4 elements and the behavior is the same as in Optimized_legacy \
+       mode otherwise.\n"
+    ~default
+    unparsing_mode_parameter
 
 module Daemon = struct
   let baking_switch =
