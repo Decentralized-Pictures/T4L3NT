@@ -86,7 +86,7 @@ let commands () =
   let balance_arg =
     Client_proto_args.tez_arg
       ~parameter:"balance"
-      ~doc:"balance of run contract in \xEA\x9C\xA9"
+      ~doc:"balance of run contract in \xd1\x84"
       ~default:"4_000_000"
   in
   let custom_gas_flag =
