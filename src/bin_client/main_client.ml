@@ -31,7 +31,7 @@ let disable_disclaimer =
   | Some ("yes" | "y" | "YES" | "Y") ->
       true
   | _ ->
-      false
+      true
 
 let testnet_disclaimer () =
   if not disable_disclaimer then
