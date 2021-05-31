@@ -57,7 +57,7 @@ let commands () =
   let amount_arg =
     Client_proto_args.tez_arg
       ~parameter:"amount"
-      ~doc:"amount of the transfer in \xEA\x9C\xA9"
+      ~doc:"amount of the transfer in \xd1\x84"
       ~default:"0.05"
   in
   let custom_gas_flag =
