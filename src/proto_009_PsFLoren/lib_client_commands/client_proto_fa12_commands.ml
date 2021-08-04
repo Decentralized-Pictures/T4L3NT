@@ -57,7 +57,7 @@ let amount_param () =
          with _ -> failwith "invalid amount (must be a non-negative number)"))
 
 let tez_amount_arg =
-  tez_arg ~default:"0" ~parameter:"tez-amount" ~doc:"amount in \xEA\x9C\xA9"
+  tez_arg ~default:"0" ~parameter:"tez-amount" ~doc:"amount in \xd1\x84"
 
 let as_arg =
   Client_proto_contracts.ContractAlias.destination_arg
