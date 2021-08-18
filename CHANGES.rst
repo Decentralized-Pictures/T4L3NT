@@ -1,3 +1,6 @@
+Changelog
+'''''''''
+
 This file lists the changes added to each version of tezos-node,
 tezos-client, and the other Tezos binaries. The changes to the Tezos
 protocol are documented in the ``docs/protocols/`` directory; in
@@ -85,6 +88,44 @@ Docker Images
 
 Miscellaneous
 -------------
+
+Version 10.0~rc3
+================
+
+Node
+----
+
+-  Included fixes from versions 9.6 and 9.7.
+
+-  Fixed an issue in the store that prevented some blocks from being queried,
+   resulting in "block not found" errors.
+
+-  Store version is now 0.0.6.
+   If you were previously using Octez 10.0~rc1 or 10.0~rc2, you were using
+   store version 0.0.5. If you were previously using Octez 9.x, you were
+   using store version 0.0.4. In both cases, use command
+   ``tezos-node upgrade storage`` to upgrade to 0.0.6.
+
+-  Added an upgrade procedure to upgrade from `v0.0.5` to `v0.0.6`. The
+   procedure is implemented through the ``tezos-node upgrade storage``
+   command.
+
+-  Added an ``integrity-check-index`` subcommand to ``tezos-node
+   storage``, which can be used to check for corruptions (missing
+   entries) in the index of the store. This command also accepts an
+   optional flag ``--auto-repair`` to fix those specific corruptions
+   by adding back missing entries.
+
+-  Fixed an RPC inconsistency where, after a migration occured, the
+   metadata from blocks returned by RPCs would return inconsistent
+   data (blocks prior to a migration from a protocol A to B would
+   return that their current protocol is A and next protocol is B
+   instead of A and A).
+
+Baker
+-----
+
+-  Improved error reporting for ill-formed liquidity-baking escape vote files.
 
 Version 10.0~rc2
 ================
@@ -277,6 +318,31 @@ Proxy server
 
    Please refer to the `online documentation <https://tezos.gitlab.io/user/proxy-server.html>`__
    for further details.
+
+
+Version 9.7
+===========
+
+-  The mempool plugin now avoids some costly operations on outdated
+   consensus operations such as endorsements for old blocks.
+
+-  The mempool now filters out old consensus operations to avoid
+   reevaluating them again after flushing when the node receives a new
+   head.
+
+Version 9.6
+===========
+
+-  Increased the delay after which the endorser gives up on endorsing to
+   1200 seconds (previously 110 seconds), to prevent an issue where
+   blocks that arrived too late were not endorsed at all, causing the
+   next block to also be produced late.
+
+Version 9.5
+===========
+
+-  Fixed a bug that could result in a corrupted storage and in assert
+   failure errors.
 
 Version 9.4
 ===========
