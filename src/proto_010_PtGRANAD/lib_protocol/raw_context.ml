@@ -837,7 +837,7 @@ let prepare_first_block ~level ~timestamp ~fitness ctxt =
               Period_repr.of_seconds_exn
                 ( if Compare.Int64.(time_between_blocks_at_first_priority = 1L)
                 then 1L
-                else (Int64.div time_between_blocks_at_first_priority) 2L );
+                else (Int64.mul time_between_blocks_at_first_priority) 2L );
             preserved_cycles = c.preserved_cycles;
             blocks_per_cycle =
               ( if mainnet_constants then Int32.mul 2l c.blocks_per_cycle

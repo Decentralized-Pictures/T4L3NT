@@ -53,7 +53,6 @@ endif
 	@cp _build/default/src/bin_codec/codec.exe tlnt-codec
 	@cp _build/default/src/lib_protocol_compiler/main_native.exe tlnt-protocol-compiler
 	@cp _build/default/src/bin_snoop/main_snoop.exe tlnt-snoop
-	@cp _build/default/src/bin_proxy_server/main_proxy_server.exe tlnt-proxy-server
 	@for p in $(active_protocol_directories) ; do \
 	   cp _build/default/src/proto_$$p/bin_baker/main_baker_$$p.exe tlnt-baker-`echo $$p | tr -- _ -` ; \
 	   cp _build/default/src/proto_$$p/bin_endorser/main_endorser_$$p.exe tlnt-endorser-`echo $$p | tr -- _ -` ; \
