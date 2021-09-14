@@ -37,6 +37,7 @@ module Hardcoded = struct
     List.map
       proj
       [
+        ("TLNT_NET", 4096);
         ("TEZOS_MAINNET", 4096);
         ("TEZOS_EDO2NET_2021-02-11T14:00:00Z", 2048);
         ("TEZOS_FLORENCENOBANET_2021-03-04T20:00:00Z", 2048);
