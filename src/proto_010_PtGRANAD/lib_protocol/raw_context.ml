@@ -837,7 +837,7 @@ let prepare_first_block ~level ~timestamp ~fitness ctxt =
               Period_repr.of_seconds_exn
                 ( if Compare.Int64.(time_between_blocks_at_first_priority = 1L)
                 then 1L
-                else (Int64.div time_between_blocks_at_first_priority) 2L );
+                else (Int64.mul time_between_blocks_at_first_priority) 2L );
             preserved_cycles = c.preserved_cycles;
             blocks_per_cycle =
               ( if mainnet_constants then Int32.mul 2l c.blocks_per_cycle
@@ -880,9 +880,9 @@ let prepare_first_block ~level ~timestamp ~fitness ctxt =
             delay_per_missing_endorsement =
               ( if mainnet_constants then Period_repr.of_seconds_exn 4L
               else c.delay_per_missing_endorsement );
-            liquidity_baking_subsidy = Tez_repr.of_mutez_exn 2_500_000L;
+            liquidity_baking_subsidy = Tez_repr.of_mutez_exn 0L;
             (* Approximately 6 month after the first activation of Liquidity Baking on mainnet *)
-            liquidity_baking_sunset_level = 2_032_928l;
+            liquidity_baking_sunset_level = 1l;
             liquidity_baking_escape_ema_threshold = 1_000_000l;
           }
       in
