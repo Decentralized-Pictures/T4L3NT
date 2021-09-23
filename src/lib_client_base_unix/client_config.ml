@@ -176,13 +176,13 @@ let base_dir_env_name = "TEZOS_CLIENT_DIR"
 
 let default_base_dir =
   try Sys.getenv base_dir_env_name
-  with Not_found -> Filename.concat home ".tezos-client"
+  with Not_found -> Filename.concat home ".tlnt-client"
 
 let default_chain = `Main
 
 let default_block = `Head 0
 
-let default_endpoint = Uri.of_string "http://localhost:8732"
+let default_endpoint = Uri.of_string "http://localhost:8733"
 
 open Filename.Infix
 
@@ -482,7 +482,7 @@ let endpoint_arg () =
     ~short:'E'
     ~placeholder:"uri"
     ~doc:
-      "HTTP(S) endpoint of the node RPC interface; e.g. 'http://localhost:8732'"
+      "HTTP(S) endpoint of the node RPC interface; e.g. 'http://localhost:8733'"
     (endpoint_parameter ())
 
 let sources_arg () =

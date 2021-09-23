@@ -52,11 +52,11 @@ let () =
     `Permanent
     ~id:"main.run.port_already_in_use"
     ~title:"Cannot start node: RPC port already in use"
-    ~description:"Another tezos node is probably running on the same RPC port."
+    ~description:"Another TLNT node is probably running on the same RPC port."
     ~pp:(fun ppf addrlist ->
       Format.fprintf
         ppf
-        "Another tezos node is probably running on one of these addresses \
+        "Another TLNT node is probably running on one of these addresses \
          (%a). Please choose another RPC port."
         (Format.pp_print_list P2p_point.Id.pp)
         addrlist)
@@ -141,7 +141,12 @@ module Event = struct
     declare_1
       ~section
       ~name:"starting_node"
-      ~msg:"starting the Tezos node"
+      ~msg:"starting the TLNT node
+\  _____ _     _   _ _____
+\ |_   _| |   | \\ | |_   _| \
+\   | | | |   |  \\| | | |
+\   | | | |___| |\\  | | |
+\   |_| |_____|_| \\_| |_|"
       ~level:Notice
       ("chain", Distributed_db_version.Name.encoding)
 
@@ -149,7 +154,7 @@ module Event = struct
     declare_0
       ~section
       ~name:"node_is_ready"
-      ~msg:"the Tezos node is now running"
+      ~msg:"the TLNT node is now running"
       ~level:Notice
       ()
 
@@ -157,7 +162,7 @@ module Event = struct
     declare_0
       ~section
       ~name:"shutting_down_node"
-      ~msg:"shutting down the Tezos node"
+      ~msg:"shutting down the TLNT node"
       ~level:Notice
       ()
 
@@ -525,7 +530,7 @@ module Term = struct
        disabled, and constants of the economic protocol can be altered with a \
        JSON file which overrides the $(b,genesis_parameters) field of the \
        network configuration (e.g. scripts/sandbox.json). $(b,IMPORTANT): \
-       Using sandbox mode affects the node state and subsequent runs of Tezos \
+       Using sandbox mode affects the node state and subsequent runs of TLNT \
        node must also use sandbox mode. In order to run the node in normal \
        mode afterwards, a full reset must be performed (by removing the node's \
        data directory)."
@@ -590,7 +595,7 @@ end
 
 module Manpage = struct
   let command_description =
-    "The $(b,run) command is meant to run the Tezos node. Most of its command \
+    "The $(b,run) command is meant to run the TLNT node. Most of its command \
      line arguments corresponds to config file entries, and will have priority \
      over the latter if used."
 
@@ -621,10 +626,10 @@ module Manpage = struct
       `S "EXAMPLES";
       `I
         ( "$(b,Run in sandbox mode listening to RPC commands at localhost port \
-           8732)",
+           8733)",
           "$(mname) run \
            --sandbox=src/proto_alpha/parameters/sandbox-parameters.json \
-           --data-dir /custom/data/dir --rpc-addr localhost:8732" );
+           --data-dir /custom/data/dir --rpc-addr localhost:8733" );
       `I ("$(b,Run a node that accepts network connections)", "$(mname) run");
     ]
 
@@ -632,7 +637,7 @@ module Manpage = struct
     description @ Node_shared_arg.Manpage.args @ debug @ examples
     @ Node_shared_arg.Manpage.bugs
 
-  let info = Cmdliner.Term.info ~doc:"Run the Tezos node" ~man "run"
+  let info = Cmdliner.Term.info ~doc:"Run the TLNT node" ~man "run"
 end
 
 let cmd = (Term.term, Manpage.info)
