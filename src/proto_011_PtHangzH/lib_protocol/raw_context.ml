@@ -740,7 +740,7 @@ let prepare_first_block ~level ~timestamp ~fitness ctxt =
         (* removes michelson_maximum_type_size *)
         Constants_repr.
           {
-            minimal_block_delay = Period_repr.of_seconds_exn 30L;
+            minimal_block_delay = c.minimal_block_delay;
             preserved_cycles = c.preserved_cycles;
             blocks_per_cycle = c.blocks_per_cycle;
             blocks_per_commitment = c.blocks_per_commitment;
