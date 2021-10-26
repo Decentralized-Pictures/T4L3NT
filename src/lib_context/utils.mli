@@ -1,7 +1,7 @@
 (*****************************************************************************)
 (*                                                                           *)
 (* Open Source License                                                       *)
-(* Copyright (c) 2018 Dynamic Ledger Solutions, Inc. <contact@tezos.com>     *)
+(* Copyright (c) 2021 Tarides <contact@tarides.com>                          *)
 (*                                                                           *)
 (* Permission is hereby granted, free of charge, to any person obtaining a   *)
 (* copy of this software and associated documentation files (the "Software"),*)
@@ -23,15 +23,5 @@
 (*                                                                           *)
 (*****************************************************************************)
 
-include Internal_event.Simple
-
-let section = ["db"]
-
-let serializing_error =
-  declare_1
-    ~section
-    ~name:"serializing_error"
-    ~msg:"exception while serializing value {write_error}"
-    ~level:Error
-    ~pp1:Data_encoding.Binary.pp_write_error
-    ("write_error", Data_encoding.Binary.write_error_encoding)
+(** @inline *)
+include Utils_intf.Intf

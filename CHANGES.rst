@@ -41,6 +41,10 @@ Codec
 Docker Images
 -------------
 
+-  The ``--force-history-mode-switch`` option is now available for
+   ``tezos-node`` entrypoint. It allows the user to switch the history
+   mode of the node's storage.
+
 Miscellaneous
 -------------
 
@@ -111,6 +115,9 @@ Node
    since Edo and Florence have been replaced by Granada.
 
 -  Added a built-in network alias for Hangzhounet.
+
+-  Improved the snapshot export mechanism by reducing both the export
+   time and the memory footprint.
 
 Client
 ------
