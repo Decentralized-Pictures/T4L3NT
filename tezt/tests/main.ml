@@ -75,6 +75,7 @@ let () =
   Baking.register ~protocols:[Alpha] ;
   Mempool.register ~protocols:[Alpha] ;
   Monitor_operations.register ~protocols:[Alpha] ;
+  Precheck.register ~protocols:[Alpha] ;
   (* Tests that are protocol-independent.
      They do not take a protocol as a parameter and thus need to be registered only once. *)
   Light.register_protocol_independent () ;
@@ -89,5 +90,6 @@ let () =
   RPC_test.register () ;
   (* This file tests an RPC added in protocol G *)
   Big_map_all.register () ;
+  Reject_malformed_micheline.register ~protocols:[Alpha] ;
   (* Test.run () should be the last statement, don't register afterwards! *)
   Test.run ()
