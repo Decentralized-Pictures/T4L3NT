@@ -1,74 +1,51 @@
-# Tezos Octez implementation
+# T4L3NT a Tezos Fork Arts & Culture focused blockchain
 
 ## Introduction
 
-Tezos is a blockchain that offers both  _consensus_ and _meta-consensus_, by which we mean that Tezos comes to consensus both about the state of its ledger, and  _also_ about how the
-protocol and the nodes should adapt and upgrade.
-For more information about the project, see https://tezos.com.
+T4L3NT is a distributed consensus platform with meta-consensus
+capability. T4L3NT not only comes to consensus about the state of its ledger,
+like Bitcoin or Ethereum. It also comes to consensus about how the
+protocol and the nodes should adapt and upgrade. For more information about
+the project, see https://t4l3nt.net.
 
 ## Getting started
 
-Instructions to
-[install](https://tezos.gitlab.io/introduction/howtoget.html), [start
-using](https://tezos.gitlab.io/introduction/howtouse.html), and
-[taking part in the
-consensus](https://tezos.gitlab.io/introduction/howtorun.html) are
-available at https://tezos.gitlab.io/.
+Instructions to install 
+Downlaod the latest build or clone the repo
 
-## The Tezos software
+Docker
+After downloading run the docker iamge <here>:
 
-This repository hosts **Octez**, an implementation of the Tezos blockchain.
-**Octez** provides a node, a client, a baker, an endorser, an accuser, and other tools, distributed with the Tezos economic protocols of Mainnet for convenience.
+bunzip2 tlnt-chain.tar.bz2
 
-In more detail, this git repository contains:
-- the source code, in directory src/
-- tests (mainly system tests):
-  * in a Python testing and execution framework, under tests_python/
-  * in an OCaml system testing framework for Tezos called Tezt, under tezt/
-- the developer documentation of the Tezos software, under docs/
-- a few third-party libraries, adapted for Tezos, under vendors/
+Load the docker image:
 
-The Tezos software may run either on the nodes of
-the main Tezos network (mainnet) or on [various Tezos test
-networks](https://tezos.gitlab.io/introduction/test_networks.html).
+docker load -i ./tlnt-chain.tar
 
-The documentation for developers, including developers of the Tezos software
-and developer of Tezos applications and tools, is available
-online at https://tezos.gitlab.io/. This documentation is always in
-sync with the master branch which may however be slightly
-desynchronized with the code running on the live networks.
+docker run -it -p 8733:8733 -p 9733:9733  -v tlnt-data:/home/tlnt tlnt-chain:prod
 
-The source code of Octez is placed under the [MIT Open Source
+docker exec -it <imagename> bash
+
+Generate a wallet:
+
+tlnt-client get keys <keyname>
+
+Register as delegate to start staking
+
+tlnt-client register key <keyname> as baker
+
+Block explorer: explorer.tlnt.net
+
+The source code of T4L3NT and Tezos is placed under the [MIT Open Source
 License](https://opensource.org/licenses/MIT).
-
-## Contributing
 
 ### Development workflow
 
-All development of the Tezos code happens on
-GitLab at https://gitlab.com/tezos/tezos. Merge requests
-(https://gitlab.com/tezos/tezos/-/merge_requests) should usually
-target the `master` branch; see [the contribution
-instructions](https://tezos.gitlab.io/developer/contributing.html).
-
-The issue tracker at https://gitlab.com/tezos/tezos/issues can be used
-to report bugs and to request new simple features. The [Tezos Agora
-forum](https://forum.tezosagora.org/) is another great place to
-discuss the future of Tezos with the community at large.
-
-### Development of the Tezos protocol
-
-The core of the Tezos software that implements the economic ruleset is
-called the *protocol*. Unlike the rest of the source code, updates to the
-protocol must be further adopted through the [Tezos
-on-chain voting
-procedure](https://tezos.gitlab.io/whitedoc/voting.html). Protocol
-contributors are encouraged to synchronize their contributions to
-minimize the number of protocol proposals that the stakeholders have
-to study and to maximize the throughput of the voting procedure.
+We are a small team and intend to follow the updates to Tezos mainnet. Node operators can choose vote for upgrades.
 
 ## Community
 
 Links to community websites are gathered in the following community portals:
-- https://www.tezos.help/
-- https://developers.tezos.com/ (for developers of applications built on Tezos)
+- Telegram https://t.me/joinchat/EfCQuhnt205jMTJh
+- Reddit 
+- Decentralized Pictures https://app.decentralized.pictures
