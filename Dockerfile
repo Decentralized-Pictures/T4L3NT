@@ -1,91 +1,97 @@
-ARG BASE_IMAGE
-ARG BASE_IMAGE_VERSION
-ARG BASE_IMAGE_VERSION_NON_MIN
-ARG BUILD_IMAGE
-ARG BUILD_IMAGE_VERSION
+######################## build ###############################
+FROM ubuntu:20.04 as builder
+ENV DEBIAN_FRONTEND=noninteractive
+ENV OPAMSOLVERTIMEOUT=60000
+RUN apt-get update
+RUN apt-get install -y build-essential autoconf git m4 unzip rsync curl libev-dev libgmp-dev pkg-config libhidapi-dev libffi-dev zlib1g-dev wget libcap2
 
-FROM ${BUILD_IMAGE}:${BUILD_IMAGE_VERSION} as builder
+ADD . T4L3NT
+WORKDIR T4L3NT
 
+RUN wget https://sh.rustup.rs/rustup-init.sh && chmod +x rustup-init.sh && \
+  ./rustup-init.sh --profile minimal --default-toolchain 1.44.0 -y
+RUN wget https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh && chmod +x install.sh && \
+  ./install.sh --download-only --version 2.0.9
 
-FROM ${BASE_IMAGE}:${BASE_IMAGE_VERSION} as intermediate
-# Pull in built binaries
-COPY --chown=tezos:nogroup --from=builder /home/tezos/tezos/tezos-baker-* /home/tezos/bin/
-COPY --chown=tezos:nogroup --from=builder /home/tezos/tezos/tezos-endorser-* /home/tezos/bin/
-COPY --chown=tezos:nogroup --from=builder /home/tezos/tezos/tezos-accuser-* /home/tezos/bin/
-COPY --chown=tezos:nogroup --from=builder /home/tezos/tezos/tezos-client /home/tezos/bin/
-COPY --chown=tezos:nogroup --from=builder /home/tezos/tezos/tezos-admin-client /home/tezos/bin/
-COPY --chown=tezos:nogroup --from=builder /home/tezos/tezos/tezos-node /home/tezos/bin/
-COPY --chown=tezos:nogroup --from=builder /home/tezos/tezos/tezos-proxy-server /home/tezos/bin/
-COPY --chown=tezos:nogroup --from=builder /home/tezos/tezos/tezos-signer /home/tezos/bin/
-# Add entrypoint scripts
-COPY --chown=tezos:nogroup scripts/docker/entrypoint.* /home/tezos/bin/
-# Add scripts
-COPY --chown=tezos:nogroup scripts/alphanet_version scripts/tezos-docker-manager.sh src/bin_client/bash-completion.sh active_protocol_versions /home/tezos/scripts/
+ENV PATH="${HOME}/.cargo/bin:${PATH}"
 
-# Although alphanet.sh has been replaced by tezos-docker-manager.sh,
-# the built-in auto-update mechanism expects an alphanet.sh script to exist.
-# So we keep it for a while as a symbolic link.
-CMD ["ln", "-s", "tezos-docker-manager.sh", "/home/tezos/scripts/alphanet.sh"]
+RUN mv opam-2.0.9-x86_64-linux /usr/local/bin/opam
+RUN chmod a+x /usr/local/bin/opam
+RUN opam init --bare --disable-sandboxing
+SHELL ["/bin/bash", "-c", "-l"]
+RUN make build-deps
+RUN eval $(opam env) && make
+RUN mkdir /_scripts && mkdir /_bin
+RUN cp -a scripts/docker/entrypoint.sh /_bin/ && \
+  cp -a scripts/docker/entrypoint.inc.sh /_bin/ && \
+  cp scripts/alphanet_version /_scripts/ && \
+  cp src/bin_client/bash-completion.sh /_scripts/ && \
+  cp active_protocol_versions /_scripts/
 
-FROM ${BASE_IMAGE}:${BASE_IMAGE_VERSION} as debug
-ARG BUILD_IMAGE
-ARG BUILD_IMAGE_VERSION
-ARG COMMIT_SHORT_SHA
-LABEL maintainer="contact@nomadic-labs.com" \
-      org.label-schema.name="Tezos" \
-      org.label-schema.docker.schema-version="1.0" \
-      org.label-schema.description="Tezos node" \
-      org.label-schema.url="https://www.nomadic-labs.com" \
-      org.label-schema.vcs-url="https://gitlab.com/tezos/tezos" \
-      org.label-schema.vcs-ref="${COMMIT_SHORT_SHA}" \
-      org.label-schema.build-image="${BUILD_IMAGE}:${BUILD_IMAGE_VERSION}"
+RUN wget https://raw.githubusercontent.com/zcash/zcash/master/zcutil/fetch-params.sh && chmod +x fetch-params.sh && \
+  ./fetch-params.sh
+RUN mv $HOME/.zcash-params /_zcash-params
 
-USER root
-# hadolint ignore=DL3018
-RUN apk --no-cache add vim
-USER tezos
+######################## final ###############################
 
-ENV EDITOR=/usr/bin/vi
-COPY --chown=tezos:nogroup --from=intermediate /home/tezos/bin/ /usr/local/bin/
-COPY --chown=tezos:nogroup --from=intermediate /home/tezos/scripts/ /usr/local/share/tezos/
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+FROM ubuntu:latest as final
 
+ARG BAKER_ID=${BAKER_ID}
+ENV BAKER_ID=${BAKER_ID}
+ENV BAKER_NAME=${BAKER_NAME:-baker}
 
-FROM ${BASE_IMAGE}:${BASE_IMAGE_VERSION_NON_MIN} as stripper
-COPY --chown=tezos:nogroup --from=intermediate /home/tezos/bin/tezos-* /home/tezos/bin/
-RUN chmod +rw /home/tezos/bin/tezos* && strip /home/tezos/bin/tezos*
+VOLUME ["/home/tlnt"]
 
+RUN apt-get update && \
+  apt-get install -y libev-dev libgmp-dev libhidapi-dev netbase supervisor && \
+  apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-FROM  ${BASE_IMAGE}:${BASE_IMAGE_VERSION} as bare
-ARG BUILD_IMAGE
-ARG BUILD_IMAGE_VERSION
-ARG COMMIT_SHORT_SHA
-LABEL maintainer="contact@nomadic-labs.com" \
-      org.label-schema.name="Tezos" \
-      org.label-schema.docker.schema-version="1.0" \
-      org.label-schema.description="Tezos node" \
-      org.label-schema.url="https://www.nomadic-labs.com" \
-      org.label-schema.vcs-url="https://gitlab.com/tezos/tezos" \
-      org.label-schema.vcs-ref="${COMMIT_SHORT_SHA}" \
-      org.label-schema.build-image="${BUILD_IMAGE}:${BUILD_IMAGE_VERSION}"
-COPY --chown=tezos:nogroup --from=stripper /home/tezos/bin/ /usr/local/bin/
-COPY --chown=tezos:nogroup --from=intermediate /home/tezos/scripts/ /usr/local/share/tezos
+RUN mkdir -p /var/run/tezos/node /var/run/tezos/client /usr/local/share/zcash-params
 
+COPY --from=builder /_scripts/* /usr/local/share/tezos/
+COPY --from=builder /_bin/* /usr/local/bin/
+COPY --from=builder /_zcash-params/* /usr/local/share/zcash-params/
+COPY --from=builder /T4L3NT/tlnt-node /usr/local/bin/
+COPY --from=builder /T4L3NT/tlnt-accuser-* /usr/local/bin/
+COPY --from=builder /T4L3NT/tlnt-admin-client /usr/local/bin/
+COPY --from=builder /T4L3NT/tlnt-baker-* /usr/local/bin/
+COPY --from=builder /T4L3NT/tlnt-client /usr/local/bin/
+COPY --from=builder /T4L3NT/tlnt-endorser-* /usr/local/bin/
+COPY --from=builder /T4L3NT/tlnt-protocol-compiler /usr/local/bin/
+COPY --from=builder /T4L3NT/tlnt-signer /usr/local/bin/
 
-FROM  ${BASE_IMAGE}:${BASE_IMAGE_VERSION} as minimal
-ARG BUILD_IMAGE
-ARG BUILD_IMAGE_VERSION
-ARG COMMIT_SHORT_SHA
-LABEL maintainer="contact@nomadic-labs.com" \
-      org.label-schema.name="Tezos" \
-      org.label-schema.docker.schema-version="1.0" \
-      org.label-schema.description="Tezos node" \
-      org.label-schema.url="https://www.nomadic-labs.com" \
-      org.label-schema.vcs-url="https://gitlab.com/tezos/tezos" \
-      org.label-schema.vcs-ref="${COMMIT_SHORT_SHA}" \
-      org.label-schema.build-image="${BUILD_IMAGE}:${BUILD_IMAGE_VERSION}"
+# Override the official entrypoint with our own
+COPY docker/entrypoint.sh /usr/local/bin
+COPY docker/setup.sh /usr/local/bin
+RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/setup.sh
 
-COPY --chown=tezos:nogroup --from=stripper /home/tezos/bin/ /usr/local/bin/
-COPY --chown=tezos:nogroup --from=intermediate /home/tezos/bin/entrypoint.* /usr/local/bin/
-COPY --chown=tezos:nogroup --from=intermediate /home/tezos/scripts/ /usr/local/share/tezos
+RUN useradd -u 1000 -m tlnt
+
+COPY docker/tlnt-baker /usr/local/bin
+COPY docker/tlnt-endorser /usr/local/bin
+COPY docker/tlnt-accuser /usr/local/bin
+COPY docker/tlnt-baker-next /usr/local/bin
+COPY docker/tlnt-endorser-next /usr/local/bin
+COPY docker/tlnt-accuser-next /usr/local/bin
+RUN chmod +x /usr/local/bin/tlnt-*
+
+COPY --chown=tlnt docker/talent-chain-params.json /tmp/chain.json
+COPY --chown=tlnt docker/config.json /tmp/config.json
+
+# Setup supervisor for other subprocesses
+COPY docker/supervisor/tlnt-node.conf /etc/supervisor/conf.d/
+COPY docker/supervisor/baker.conf /etc/supervisor/conf.d/
+COPY docker/supervisor/endorser.conf /etc/supervisor/conf.d/
+COPY docker/supervisor/accuser.conf /etc/supervisor/conf.d/
+COPY docker/supervisor/baker-next.conf /etc/supervisor/conf.d/
+COPY docker/supervisor/endorser-next.conf /etc/supervisor/conf.d/
+COPY docker/supervisor/accuser-next.conf /etc/supervisor/conf.d/
+COPY docker/supervisor/tlnt-node-stdout-log.conf /etc/supervisor/conf.d/
+
+RUN chown tlnt /var/log/supervisor /var/run
+
+USER tlnt
+ENV USER=tlnt
+WORKDIR /home/tlnt
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
