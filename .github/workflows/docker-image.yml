@@ -50,3 +50,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Outputs
+        run: |
+          echo "The name:tag of the Docker Image is: ${{ steps.meta.outputs.tags }}"
+          echo "The labels are ${{ steps.meta.outputs.labels }}"
