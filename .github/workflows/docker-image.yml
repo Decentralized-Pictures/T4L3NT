@@ -55,3 +55,13 @@ jobs:
         run: |
           echo "The name:tag of the Docker Image is: ${{ steps.meta.outputs.tags }}"
           echo "The labels are ${{ steps.meta.outputs.labels }}"
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'The latest docker name:tag for this PR is ${{ steps.meta.outputs.tags }}'
+            })
