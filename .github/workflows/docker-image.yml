@@ -57,6 +57,7 @@ jobs:
           echo "The labels are ${{ steps.meta.outputs.labels }}"
 
       - name: Comment on PR
+        if: ${{ github.event_name == 'pull_request' }}
         uses: actions/github-script@v3
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -65,5 +66,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'The latest docker name:tag for this PR is ${{ steps.meta.outputs.tags }}'
+              body: 'The latest docker name:tag for this PR is **${{ steps.meta.outputs.tags }}** and can be found'
             })
