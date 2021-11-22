@@ -55,6 +55,8 @@ jobs:
         run: |
           echo "The name:tag of the Docker Image is: ${{ steps.meta.outputs.tags }}"
           echo "The labels are ${{ steps.meta.outputs.labels }}"
+
+      - name: Comment on PR
         uses: actions/github-script@v3
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
