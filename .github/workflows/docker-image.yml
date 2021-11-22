@@ -66,5 +66,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'The latest docker name:tag for this PR is <u>**${{ steps.meta.outputs.tags }}**</u> and can be found [here](https://github.com/orgs/Decentralized-Pictures/packages)'
+              body: 'The latest docker name:tag for this PR is ***${{ steps.meta.outputs.tags }}*** and can be found [here](https://github.com/orgs/Decentralized-Pictures/packages) :whale: :ship:'
             })
