@@ -12,7 +12,7 @@ on:
       - 'v*'
 
 env:
-  REGISTRY: ghcr.io
+  # REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
@@ -28,15 +28,17 @@ jobs:
       - name: Registry login
         uses: docker/login-action@v1
         with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          # registry: ${{ env.REGISTRY }}
+          # username: ${{ github.actor }}
+          # password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
       - name: Extract metadata
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: t4l3nt/t4l3nt
           tags: |
             type=ref,event=branch
             type=ref,event=pr,suffix=-{{sha}}
