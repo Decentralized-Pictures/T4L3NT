@@ -41,11 +41,11 @@ License](https://opensource.org/licenses/MIT).
 
 ### Development workflow
 
-We are a small team and intend to follow the updates to Tezos mainnet. Node operators can choose vote for upgrades.
+We are a small team and intend to follow the updates to Tezos mainnet. Node operators can choose to vote for upgrades.
 
 ## Community
 
 Links to community websites are gathered in the following community portals:
-- Telegram https://t.me/joinchat/EfCQuhnt205jMTJh
-- Reddit 
-- Decentralized Pictures https://app.decentralized.pictures
+- Discord https://discord.gg/FBKpZQNeAc
+- Reddit https://www.reddit.com/r/decentralizedpictures/
+- Decentralized Pictures Financing App https://app.decentralized.pictures
