@@ -93,10 +93,10 @@ let blockchain_network_mainnet =
   make_blockchain_network
     ~alias:"mainnet"
     {
-      time = Time.Protocol.of_notation_exn "2021-02-19T15:16:17Z";
+      time = Time.Protocol.of_notation_exn "2021-12-15T04:20:00Z";
       block =
         Block_hash.of_b58check_exn
-          "BM9tu2uu3ybiTb9kcap5oP7nGhgR9kbE8gM2Tov4fnjSTnvhNL5";
+          "BLRWV6h8maHkbyy4D9K1zUUyYap76ZsntbQYKjMz5EknUtpCrzS";
       protocol =
         Protocol_hash.of_b58check_exn
           "Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P";
@@ -108,7 +108,7 @@ let blockchain_network_mainnet =
           `O
             [ ( "genesis_pubkey",
                 `String
-                  "edpkvP2UA8K5XNpux4hd91vXNQCJuAmk3ymDhjCSA2v8nMEf7v3v3y" ) ];
+                  "edpkumhihiF9aaQ6AueVPZGux4aiMhzJ4JctBybbDBsGwnhm4R7mTQ" ) ];
       }
     ~chain_name:"TLNT_NET"
     ~incompatible_chain_name:"INCOMPATIBLE"
@@ -117,7 +117,7 @@ let blockchain_network_mainnet =
       [ ]
     ~user_activated_protocol_overrides:
       [ ]
-    ~default_bootstrap_peers:["34.217.66.19"; "34.216.112.26"; "34.219.230.202"]
+    ~default_bootstrap_peers:["network.decentralized.pictures"]
 
 let blockchain_network_sandbox =
   make_blockchain_network

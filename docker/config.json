@@ -13,20 +13,20 @@
   "shell": { "chain_validator": { "synchronisation_threshold": 2 } },
   "network": {
     "genesis": {
-      "timestamp": "2021-10-27T11:11:11Z",
-      "block": "BL3yoz8avDMFFqBjowRok6MCQyMh9yPEjvgRpTqf7PgsZzv6vdW",
+      "timestamp": "2021-12-15T04:20:00Z",
+      "block": "BLRWV6h8maHkbyy4D9K1zUUyYap76ZsntbQYKjMz5EknUtpCrzS",
       "protocol": "Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P"
     },
     "genesis_parameters": {
       "values": {
-        "genesis_pubkey": "edpkvP2UA8K5XNpux4hd91vXNQCJuAmk3ymDhjCSA2v8nMEf7v3v3y"
+        "genesis_pubkey": "edpkumhihiF9aaQ6AueVPZGux4aiMhzJ4JctBybbDBsGwnhm4R7mTQ"
       }
     },
     "chain_name": "TLNT_NET",
     "incompatible_chain_name": "INCOMPATIBLE",
     "sandboxed_chain_name": "SANDBOXED_TLNT_NET",
     "user_activated_upgrades": [
-      { "level": 32768, "replacement_protocol": "PtHangzHogokSuiMHemCuowEavgYTP8J5qQ9fQS793MHYFpCY3r" }
+
     ],
     "user_activated_protocol_overrides": [],
     "default_bootstrap_peers": [ "network.decentralized.pictures" ]
