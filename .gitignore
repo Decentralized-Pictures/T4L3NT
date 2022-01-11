@@ -31,6 +31,20 @@ __pycache__
 /tezos-codec
 /tezos-snoop
 
+/tlnt-node
+/tlnt-validator
+/tlnt-protocol-compiler
+/tlnt-client
+/tlnt-admin-client
+/tlnt-baker-*
+/tlnt-endorser-*
+/tlnt-accuser-*
+/tlnt-proxy-server
+/tlnt-signer
+/tlnt-sandbox
+/tlnt-codec
+/tlnt-snoop
+
 /src/proto_*/parameters/*-parameters.json
 
 /scripts/opam-test-all.sh.DONE
