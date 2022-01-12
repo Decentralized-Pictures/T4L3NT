@@ -43,7 +43,7 @@ ENV BAKER_NAME=${BAKER_NAME:-baker}
 VOLUME ["/home/tlnt"]
 
 RUN apt-get update && \
-  apt-get install -y libev-dev libgmp-dev libhidapi-dev netbase supervisor && \
+  apt-get install -y libev-dev libgmp-dev libhidapi-dev netbase supervisor sudo && \
   apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN mkdir -p /var/run/tezos/node /var/run/tezos/client /usr/local/share/zcash-params
@@ -87,6 +87,8 @@ COPY docker/supervisor/baker-next.conf /etc/supervisor/conf.d/
 COPY docker/supervisor/endorser-next.conf /etc/supervisor/conf.d/
 COPY docker/supervisor/accuser-next.conf /etc/supervisor/conf.d/
 COPY docker/supervisor/tlnt-node-stdout-log.conf /etc/supervisor/conf.d/
+
+RUN echo "tlnt ALL=(ALL) NOPASSWD: ALL" | tee /etc/sudoers
 
 RUN chown tlnt /var/log/supervisor /var/run
 
