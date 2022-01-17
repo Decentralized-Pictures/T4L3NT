@@ -38,7 +38,7 @@ FROM ubuntu:latest as final
 
 ARG BAKER_ID=${BAKER_ID}
 ENV BAKER_ID=${BAKER_ID}
-ENV BAKER_NAME=${BAKER_NAME:-baker}
+ENV BAKER_NAME=${BAKER_NAME:-producer}
 
 VOLUME ["/home/tlnt"]
 
