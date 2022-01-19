@@ -87,6 +87,7 @@ COPY docker/supervisor/baker-next.conf /etc/supervisor/conf.d/
 COPY docker/supervisor/endorser-next.conf /etc/supervisor/conf.d/
 COPY docker/supervisor/accuser-next.conf /etc/supervisor/conf.d/
 COPY docker/supervisor/tlnt-node-stdout-log.conf /etc/supervisor/conf.d/
+COPY docker/supervisor/tlnt-signer.conf /etc/supervisor/conf.d/
 
 RUN echo "tlnt ALL=(ALL) NOPASSWD: ALL" | tee /etc/sudoers
 
