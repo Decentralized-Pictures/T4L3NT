@@ -12,7 +12,7 @@ on:
 
 jobs:
   build-and-publish:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -59,7 +59,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          platforms: linux/amd64,linux/arm64,linux/riscv64
+          platforms: "linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6"
 
       - name: Outputs
         run: |
