@@ -3,13 +3,12 @@ name: Build and Publish Docker image
 on:
   push:
     branches:
-      - 'main'
+      - '**'
+    tags:
+      - 'v*.*.*'
   pull_request:
     branches:
       - 'main'
-  create:
-    tags:
-      - 'v*'
 
 jobs:
   build-and-publish:
@@ -25,7 +24,11 @@ jobs:
           platforms: all
 
       - name: Set up Docker Buildx
+        id: buildx
         uses: docker/setup-buildx-action@v1
+
+      - name: Available Buildx platforms
+        run: echo ${{ steps.buildx.outputs.platforms }}
 
       - name: Extract metadata
         id: meta
@@ -33,10 +36,15 @@ jobs:
         with:
           images: t4l3nt/t4l3nt
           tags: |
-            type=ref,event=branch
+            type=ref,event=branch,suffix=-{{sha}}
             type=ref,event=pr,suffix=-{{sha}}
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
+
+      - name: Docker Metadata Tags
+        run: echo "${{ steps.meta.outputs.tags }}"
 
       - name: Registry login
         uses: docker/login-action@v1
@@ -51,6 +59,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          platforms: ${{ steps.buildx.outputs.platforms }}
 
       - name: Outputs
         run: |
