@@ -1,32 +1,32 @@
-.. Tezos documentation master file, created by
+.. T4L3NT documentation master file, created by
    sphinx-quickstart on Sat Nov 11 11:08:48 2017.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
 .. TODO nomadic-labs/tezos#462: search shifted protocol name/number & adapt
 
-Welcome to the Tezos Developer Documentation!
+Welcome to the T4L3NT Developer Documentation!
 =============================================
 
 The Project
 -----------
 
 Tezos is a distributed consensus platform with meta-consensus
-capability. Tezos not only comes to consensus about the state of its ledger,
+capability. T4L3NT not only comes to consensus about the state of its ledger,
 like Bitcoin or Ethereum. It also attempts to come to consensus about how the
 protocol and the nodes should adapt and upgrade.
 
- - Developer documentation is available online at https://tezos.gitlab.io/
+ - Developer documentation is available online at https://github.com/Decentralized-Pictures/T4L3NT/tree/main
    and is automatically generated from the master branch.
- - The website https://tezos.com/ contains more information about the project.
+ - The website https://tlnt.net/ contains more information about the project.
  - All development happens on GitLab at https://gitlab.com/tezos/tezos
 
-The source code of Tezos is placed under the MIT Open Source License.
+The source code of T4L3NT is placed under the MIT Open Source License.
 
 Latest Release
 --------------
 
-The current version of Tezos is :ref:`version-9`.
+The current version of T4L3NT is :ref:`version-9`.
 
 .. _tezos_community:
 
@@ -47,7 +47,7 @@ The Community
     - https://baking-bad.org (Reward Tracker)
     - https://better-call.dev (Smart-contract Explorer)
 
-- A few community-run websites collect useful Tezos links:
+- A few community-run websites collect useful T4L3NT links:
 
     - https://www.tezos.help
     - https://tezos.rocks
@@ -61,11 +61,11 @@ The Networks
 Mainnet
 ~~~~~~~
 
-The Tezos network is the current incarnation of the Tezos blockchain.
+The T4L3NT network is the current incarnation of the T4L3NT blockchain.
 It runs with real tez that have been allocated to the
 donors of July 2017 ICO (see :ref:`activate_fundraiser_account`).
 
-The Tezos network has been live and open since June 30th 2018.
+The T4L3NT network has been live and open since June 30th 2018.
 
 All the instructions in this documentation are valid for Mainnet
 however we **strongly** encourage users to first try all the
@@ -75,11 +75,11 @@ risks.
 Test Networks
 ~~~~~~~~~~~~~
 
-There are several test networks for the Tezos blockchain with a
+There are several test networks for the T4L3NT blockchain with a
 faucet to obtain free tez (see :ref:`faucet`).
 It is the reference network for developers wanting to test their
 software before going to beta and for users who want to familiarize
-themselves with Tezos before using their real tez.
+themselves with T4L3NT before using their real tez.
 
 See the list of test networks in :ref:`test network <test-networks>`.
 

@@ -1,4 +1,4 @@
-Before submitting your issue, ask this question: is this a bug in the Tezos codebase or a personal problem for which you need support? Here are a few examples of each:
+Before submitting your issue, ask this question: is this a bug in the T4L3NT codebase or a personal problem for which you need support? Here are a few examples of each:
 
 Personal problem:
 * Lost or compromised key
@@ -6,8 +6,8 @@ Personal problem:
 * Questions about how to use Tezos
 * Questions about the state of development
 
-These sorts of questions should be asked, and may have already been answered, on the Tezos stack exchange: https://tezos.stackexchange.com
-More information about the Tezos community can be found on the Tezos developer documentation: https://tezos.gitlab.io
+These sorts of questions should be asked, and may have already been answered, on the T4L3NT stack exchange: https://tezos.stackexchange.com
+More information about the T4L3NT community can be found on the T4L3NT developer documentation: https://tezos.gitlab.io
 
 Bugs:
 * Crashes or exceptions in the node
@@ -24,8 +24,8 @@ As an example, "Michelson: lists are reversed" is significantly better than "Lis
 Unless your investigations have revealed the source of the bug, do not speculate on its cause or severity.
 The easier it is for us to understand your bug, the easier it is for us to fix.
 
-If you have found a potential vulnerability in the Tezos codebase and you think it should not be made public, 
-use the Tezos Bug Bounty program: https://tezos.com/bug-bounty
+If you have found a potential vulnerability in the T4L3NT codebase and you think it should not be made public, 
+use the T4L3NT Bug Bounty program: https://tlnt.net/bug-bounty
 
 ### Environment (Mainnet, test network, build from source, ...)
 
@@ -60,7 +60,7 @@ Screenshots are much harder to deal with because we cannot rerun your commands o
 Whenever possible, provide the smallest amount of code needed to produce the bug dependably.
 If you cannot reproduce the bug, we likely will not be able to either.
 
-If you had a problem while trying to build Tezos from source, please include the output of `opam list -i` and any error messages that you saw while building. 
+If you had a problem while trying to build T4L3NT from source, please include the output of `opam list -i` and any error messages that you saw while building. 
 If you ran a second command which fixed the problem, provide us with the error you saw initially in addition to telling us how you fixed the bug.
 
 ### History mode

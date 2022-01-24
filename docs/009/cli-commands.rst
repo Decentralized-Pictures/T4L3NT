@@ -3,7 +3,7 @@ Command Line Interface
 **********************
 
 This document is a prettier output of the documentation produced by
-the command ``man`` of the different Tezos binaries. You can obtain similar pages
+the command ``man`` of the different T4L3NT binaries. You can obtain similar pages
 using the following shell commands.
 
 ::

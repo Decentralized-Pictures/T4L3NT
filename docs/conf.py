@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# Tezos documentation build configuration file, created by
+# T4L3NT documentation build configuration file, created by
 # sphinx-quickstart on Wed Jan 17 18:04:32 2018.
 #
 # This file is execfile()d with the current directory set to its

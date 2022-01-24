@@ -38,7 +38,7 @@ the notions which are in bold in the text above.
 Further External Resources
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The original design of the proof-of-stake mechanism in Tezos can be
+The original design of the proof-of-stake mechanism in T4L3NT can be
 found in the `whitepaper
 <https://tezos.com/static/white_paper-2dc8c02267a8fb86bd67a108199441bf.pdf>`_.
 The following blog posts present the intuition behind the changes to the original consensus algorithm:
@@ -58,7 +58,7 @@ Please note that these external resources may contain outdated information.
 Blocks
 ------
 
-The Tezos blockchain is a linked list of blocks. Blocks contain a
+The T4L3NT blockchain is a linked list of blocks. Blocks contain a
 header and a list of operations. The header itself decomposes into a
 shell header (common to all protocols) and a protocol-specific header.
 
@@ -122,7 +122,7 @@ the head of the chain to the valid block that has the highest fitness.
 Cycles
 ------
 
-Blocks in Tezos are grouped into *cycles* of
+Blocks in T4L3NT are grouped into *cycles* of
 ``BLOCKS_PER_CYCLE`` = 4,096 blocks. Since blocks are at least
 ``TIME_BETWEEN_BLOCKS[0]`` = one minute apart, this means a cycle lasts *at
 least* 2 days, 20 hours, and 16 minutes. In the following description,
@@ -147,7 +147,7 @@ Delegates
 ~~~~~~~~~
 
 Tokens are controlled through a private key called the
-*manager key*. Tezos accounts let the manager specify a public
+*manager key*. T4L3NT accounts let the manager specify a public
 delegate key. This key may be controlled by the managers themselves, or
 by another party. The responsibility of the delegate is to take part in
 the proof-of-stake consensus algorithm and the governance of Tezos.

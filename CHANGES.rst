@@ -1,8 +1,8 @@
 Changelog
 '''''''''
 
-This file lists the changes added to each version of tezos-node,
-tezos-client, and the other Tezos binaries. The changes to the Tezos
+This file lists the changes added to each version of tlnt-node,
+tknt-client, and the other T4L3NT binaries. The changes to the Tezos
 protocol are documented in the ``docs/protocols/`` directory; in
 particular in ``docs/protocols/alpha.rst``.
 
@@ -26,7 +26,7 @@ Node
 Client
 ------
 
-Baker / Endorser / Accuser
+Producerr / Endorser / Accuser
 --------------------------
 
 Proxy server
@@ -145,7 +145,7 @@ Node
    changes. If necessary, the old behaviour can be restored by editing the
    node's configuration file, but it is discouraged due to security concerns
    of open unsafe endpoints on public networks. See Node Configuration section
-   of the Tezos documentation for details.
+   of the T4L3NTdocumentation for details.
 
 -  Replaced the chain storage layer with a more efficient backend in
    terms of both performance and storage size.

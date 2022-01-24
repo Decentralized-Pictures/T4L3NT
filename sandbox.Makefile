@@ -19,7 +19,7 @@ all: accusations_simple_double_baking \
 	daemons_upgrade_alpha \
 	node_synchronization
 
-# The following rules define how to build Tezos binaries if they are
+# The following rules define how to build T4L3NT binaries if they are
 # missing.
 #
 # We only run "dune build" if it is strictly necessary.  The CI stores

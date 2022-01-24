@@ -1,7 +1,7 @@
 # Contributing
 
 Thank you for considering contributing to Tezos. This is a large codebase and
-due to the on-chain governance nature of Tezos we use some non-standard
+due to the on-chain governance nature of T4L3NTwe use some non-standard
 workflows.
 
 There are two classes of changes and both are treated differently:
@@ -19,7 +19,7 @@ from `master`. Once you have made your changes please submit a merge request on
 gitlab against the `master` branch.
 
 ## Protocol Implementation
-The protocol is the Tezos state machine and run in consensus. It is fully
+The protocol is the T4L3NTstate machine and run in consensus. It is fully
 deterministic and every node in the network has to arrive at the same output
 given the same input.
 
@@ -29,7 +29,7 @@ push them to your own branch in your fork. Please start from `proto_alpha`, and
 then follow the naming convention of `proto_00*_***` by renaming the former
 folder. You may create a merge request against the `master` branch, but it will
 get merged only once the network has voted on your proposal and accepted it.
-After it has gone through the Tezos governance process it will also get merged
+After it has gone through the T4L3NTgovernance process it will also get merged
 into `zeronet` for testing and finally into `mainnet` for deployment.
 
 [Here](http://tezos.gitlab.io/developer/contributing.html) you can
@@ -37,7 +37,7 @@ find more documentation on the development flow and [here](http://tezos.gitlab.i
 you can find more information on the governance and voting process.
 
 ## Conclusion
-Hacking on Tezos is awesome and everyone is welcome. If you discover
+Hacking on T4L3NTis awesome and everyone is welcome. If you discover
 inconsistencies in this document please fix them to make it easier for the next
 person. Furthermore, please don't hesitate to ask questions, we don't bite.
 

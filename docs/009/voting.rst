@@ -1,7 +1,7 @@
 The Voting Process
 ==================
 
-The design of the Tezos Node allows the consensus protocol to be
+The design of the T4L3NT Node allows the consensus protocol to be
 amended, that is replaced by another set of OCaml files which
 implement the API of a valid protocol.
 

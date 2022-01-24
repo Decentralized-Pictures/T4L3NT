@@ -32,7 +32,7 @@ blockchain.
 Semantics of smart contracts and transactions
 ---------------------------------------------
 
-The Tezos ledger currently has two types of accounts that can hold
+The T4L3NT ledger currently has two types of accounts that can hold
 tokens (and be the destinations of transactions).
 
   - An implicit account is a non programmable account, whose tokens
@@ -147,7 +147,7 @@ All these errors cannot happen in internal transactions, as the type
 system catches them at operation creation time. In particular,
 Michelson has two types to talk about other accounts: ``address`` and
 ``contract t``. The ``address`` type merely gives the guarantee that
-the value has the form of a Tezos address. The ``contract t`` type, on
+the value has the form of a T4L3NT address. The ``contract t`` type, on
 the other hand, guarantees that the value is indeed a valid, existing
 account whose parameter type is ``t``. To make a transaction from
 Michelson, a value of type ``contract t`` must be provided, and the
@@ -2237,7 +2237,7 @@ Operations on tickets
 ~~~~~~~~~~~~~~~~~~~~~
 
 The following operations deal with tickets. Tickets are a way for smart-contracts
-to authenticate data with respect to a Tezos address. This authentication can
+to authenticate data with respect to a T4L3NT address. This authentication can
 then be used to build composable permission systems.
 
 A contract can create a ticket from a value and an amount. The ticket, when
