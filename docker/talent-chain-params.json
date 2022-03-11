@@ -1,0 +1,61 @@
+{
+  "bootstrap_accounts": [
+    [
+      "edpku6ZNh4dRUwAqAc63HUjvudhweqfgRqX8oSwL8UiFdE3BUjXdj8",
+      "250000000000"
+    ],
+    [
+      "edpkuDrZG7DomdNQ14kSN8jQdn5pCh49CfTTuRWmeEkMYDv3XAqmYz",
+      "250000000000"
+    ],
+    [
+      "edpktj19Uxr1Ph9cNyipd4Sp45AfKd61fx2zTtnSbkRjWmvMb3nsuz",
+      "250000000000"
+    ]
+  ],
+  "commitments": [
+    [
+      "btz1WPnSVt2Lhpp56r9LHabNGpmFY99EJZ8kX",
+      "25000000000000"
+    ],
+    [
+      "btz1RwJu8FAdVUbvvrQjo37gNFKhQxBLtscsv",
+      "25000000000000"
+    ],
+    [
+      "btz1dnh9jyc7MXQaWXUvjcwouNriSwmyhxiZU",
+      "25000000000000"
+    ]
+  ],
+  "preserved_cycles": 5,
+  "blocks_per_cycle": 8192,
+  "blocks_per_commitment": 64,
+  "blocks_per_roll_snapshot": 512,
+  "blocks_per_voting_period": 40960,
+  "time_between_blocks": [ "60", "40" ],
+  "endorsers_per_block": 256,
+  "hard_gas_limit_per_operation": "1040000",
+  "hard_gas_limit_per_block": "5200000",
+  "proof_of_work_threshold": "70368744177663",
+  "tokens_per_roll": "1000000000",
+  "michelson_maximum_type_size": 1000,
+  "seed_nonce_revelation_tip": "125000",
+  "origination_size": 257,
+  "block_security_deposit": "8000000",
+  "endorsement_security_deposit": "100000",
+  "baking_reward_per_endorsement": [ "78125", "11719" ],
+  "endorsement_reward": [ "78125", "52083" ],
+  "cost_per_byte": "250",
+  "hard_storage_limit_per_operation": "60000",
+  "quorum_min": 2000,
+  "quorum_max": 7000,
+  "min_proposal_quorum": 500,
+  "initial_endorsers": 192,
+  "delay_per_missing_endorsement": "4",
+  "minimal_block_delay": "15",
+  "security_deposit_ramp_up_cycles": 128,
+  "no_reward_cycles": 7,
+  "liquidity_baking_subsidy": "0",
+  "liquidity_baking_sunset_level": 1,
+  "liquidity_baking_escape_ema_threshold": 1000000
+}

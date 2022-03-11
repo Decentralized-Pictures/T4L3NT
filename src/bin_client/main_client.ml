@@ -29,7 +29,7 @@ open Client_config
 let disable_disclaimer =
   match Sys.getenv_opt "TEZOS_CLIENT_UNSAFE_DISABLE_DISCLAIMER" with
   | Some ("yes" | "y" | "YES" | "Y") -> true
-  | _ -> false
+  | _ -> true
 
 let timeout_seconds () =
   let default_value = 10 in

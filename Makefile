@@ -63,10 +63,43 @@ build: generate_dune
 ifneq (${current_ocaml_version},${ocaml_version})
 	$(error Unexpected ocaml version (found: ${current_ocaml_version}, expected: ${ocaml_version}))
 endif
-	@dune build --profile=$(PROFILE) $(COVERAGE_OPTIONS) \
-		$(foreach b, $(TEZOS_BIN), _build/install/default/bin/${b}) \
-		@copy-parameters
-	@cp -f $(foreach b, $(TEZOS_BIN), _build/install/default/bin/${b}) ./
+	@dune build $(COVERAGE_OPTIONS) --profile=$(PROFILE) \
+		src/bin_node/main.exe \
+		src/bin_validation/main_validator.exe \
+		src/bin_client/main_client.exe \
+		src/bin_client/main_admin.exe \
+		src/bin_signer/main_signer.exe \
+		src/bin_codec/codec.exe \
+		src/lib_protocol_compiler/main_native.exe \
+		src/bin_snoop/main_snoop.exe \
+		src/bin_proxy_server/main_proxy_server.exe \
+		$(foreach p, $(active_protocol_directories), src/proto_$(p)/bin_baker/main_baker_$(p).exe) \
+		$(foreach p, $(active_protocol_directories), src/proto_$(p)/bin_endorser/main_endorser_$(p).exe) \
+		$(foreach p, $(active_protocol_directories), src/proto_$(p)/bin_accuser/main_accuser_$(p).exe) \
+		$(foreach p, $(active_protocol_directories), src/proto_$(p)/lib_parameters/mainnet-parameters.json) \
+		$(foreach p, $(active_protocol_directories), src/proto_$(p)/lib_parameters/sandbox-parameters.json) \
+		$(foreach p, $(active_protocol_directories), src/proto_$(p)/lib_parameters/test-parameters.json)
+	@cp -f _build/default/src/bin_node/main.exe tlnt-node
+	@cp -f _build/default/src/bin_validation/main_validator.exe tlnt-validator
+	@cp -f _build/default/src/bin_client/main_client.exe tlnt-client
+	@cp -f _build/default/src/bin_client/main_admin.exe tlnt-admin-client
+	@cp -f _build/default/src/bin_signer/main_signer.exe tlnt-signer
+	@cp -f _build/default/src/bin_codec/codec.exe tlnt-codec
+	@cp -f _build/default/src/lib_protocol_compiler/main_native.exe tlnt-protocol-compiler
+	@cp -f _build/default/src/bin_snoop/main_snoop.exe tlnt-snoop
+	@cp -f _build/default/src/bin_proxy_server/main_proxy_server.exe tlnt-proxy-server
+	@for p in $(active_protocol_directories) ; do \
+	   cp -f _build/default/src/proto_$$p/bin_baker/main_baker_$$p.exe tlnt-baker-`echo $$p | tr -- _ -` ; \
+	   cp -f _build/default/src/proto_$$p/bin_endorser/main_endorser_$$p.exe tlnt-endorser-`echo $$p | tr -- _ -` ; \
+	   cp -f _build/default/src/proto_$$p/bin_accuser/main_accuser_$$p.exe tlnt-accuser-`echo $$p | tr -- _ -` ; \
+	   mkdir -p src/proto_$$p/parameters ; \
+	   cp -f _build/default/src/proto_$$p/lib_parameters/sandbox-parameters.json src/proto_$$p/parameters/sandbox-parameters.json ; \
+	   cp -f _build/default/src/proto_$$p/lib_parameters/test-parameters.json src/proto_$$p/parameters/test-parameters.json ; \
+	   cp -f _build/default/src/proto_$$p/lib_parameters/mainnet-parameters.json src/proto_$$p/parameters/mainnet-parameters.json ; \
+	 done
+ifeq ($(MERLIN_INSTALLED),0) # only build tooling support if merlin is installed
+	@dune build @check
+endif
 
 # List protocols, i.e. directories proto_* in src with a TEZOS_PROTOCOL file.
 TEZOS_PROTOCOL_FILES=$(wildcard src/proto_*/lib_protocol/TEZOS_PROTOCOL)

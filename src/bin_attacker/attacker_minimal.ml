@@ -303,7 +303,7 @@ let lots_transactions amount fee n conn =
 
 let main () =
   let addr = Ipaddr.V6.localhost in
-  let port = 9732 in
+  let port = 9733 in
   let run_action action = try_action addr port action in
   let run_cmd_unit lwt =
     Arg.Unit
