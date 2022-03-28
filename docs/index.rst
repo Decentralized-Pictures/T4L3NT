@@ -171,6 +171,21 @@ in the :ref:`introduction <howtoget>`.
 
 .. toctree::
    :maxdepth: 2
+   :caption: 111 Htalent Protocol doc:
+
+   111/michelson
+   111/proof_of_stake
+   111/consensus
+   111/sapling
+   111/voting
+   111/glossary
+   111/cli-commands
+   111/rpc
+   111/liquidity_baking
+   111/timelock
+
+.. toctree::
+   :maxdepth: 2
    :caption: Alpha Development Protocol doc:
 
    alpha/michelson
@@ -219,6 +234,7 @@ in the :ref:`introduction <howtoget>`.
    protocols/009_florence
    protocols/010_granada
    protocols/011_hangzhou
+   protocols/111_htalent
    protocols/alpha
 
 .. toctree::

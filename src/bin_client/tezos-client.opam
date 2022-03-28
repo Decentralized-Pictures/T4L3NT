@@ -26,6 +26,7 @@ depends: [
   "tezos-client-009-PsFLoren"
   "tezos-client-010-PtGRANAD"
   "tezos-client-011-PtHangz2"
+  "tezos-client-111-PsoRM5iz"
   "tezos-client-demo-counter"
 
   "tezos-client-alpha-commands"
@@ -40,10 +41,12 @@ depends: [
   "tezos-client-009-PsFLoren-commands-registration"
   "tezos-client-010-PtGRANAD-commands-registration"
   "tezos-client-011-PtHangz2-commands-registration"
+  "tezos-client-111-PsoRM5iz-commands-registration"
 
   "tezos-baking-alpha-commands"
   "tezos-baking-010-PtGRANAD-commands"
   "tezos-baking-011-PtHangz2-commands"
+  "tezos-baking-111-PsoRM5iz-commands"
 
   "tezos-client-base-unix"
   "tezos-mockup-commands"

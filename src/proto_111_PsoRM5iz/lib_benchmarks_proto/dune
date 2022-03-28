@@ -1,0 +1,31 @@
+(library
+ (name tezos_benchmarks_proto_111_PsoRM5iz)
+ (instrumentation (backend bisect_ppx))
+ (public_name tezos-benchmarks-proto-111-PsoRM5iz)
+ (libraries
+  tezos-base
+  tezos-protocol-111-PsoRM5iz
+  tezos-protocol-111-PsoRM5iz-parameters
+  tezos-benchmark
+  tezos-benchmark-111-PsoRM5iz
+  tezos-shell-benchmarks
+  tezos-micheline
+  tezos-111-PsoRM5iz-test-helpers
+  tezos-sapling
+  tezos-client-111-PsoRM5iz
+)
+ (library_flags (:standard -linkall))
+ (flags (:standard -open Tezos_stdlib
+                   -open Tezos_base
+                   -open Tezos_base__TzPervasives
+                   -open Tezos_error_monad
+                   -open Tezos_benchmark
+                   -open Tezos_benchmark_111_PsoRM5iz
+                   -open Tezos_benchmark_type_inference_111_PsoRM5iz
+                   -open Tezos_protocol_111_PsoRM5iz
+                   -open Tezos_raw_protocol_111_PsoRM5iz
+                   -open Tezos_client_111_PsoRM5iz
+                   -open Tezos_crypto
+                   -open Tezos_micheline
+                   -open Tezos_111_PsoRM5iz_test_helpers
+                   -open Tezos_client_111_PsoRM5iz)))

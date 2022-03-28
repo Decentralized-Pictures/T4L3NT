@@ -740,7 +740,7 @@ let prepare_first_block ~level ~timestamp ~fitness ctxt =
         (* removes michelson_maximum_type_size *)
         Constants_repr.
           {
-            minimal_block_delay = c.minimal_block_delay;
+            minimal_block_delay = Period_repr.of_seconds_exn 15L;
             preserved_cycles = c.preserved_cycles;
             blocks_per_cycle = c.blocks_per_cycle;
             blocks_per_commitment = c.blocks_per_commitment;
@@ -751,7 +751,7 @@ let prepare_first_block ~level ~timestamp ~fitness ctxt =
             hard_gas_limit_per_operation = c.hard_gas_limit_per_operation;
             hard_gas_limit_per_block = c.hard_gas_limit_per_block;
             proof_of_work_threshold = c.proof_of_work_threshold;
-            tokens_per_roll = c.tokens_per_roll;
+            tokens_per_roll = Tez_repr.(mul_exn one 5_000);
             seed_nonce_revelation_tip = c.seed_nonce_revelation_tip;
             origination_size = c.origination_size;
             block_security_deposit = c.block_security_deposit;
