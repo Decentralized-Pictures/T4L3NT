@@ -36,7 +36,7 @@ fi
 
 # The pattern to look for is "00X-<hash>".
 # Once found it's either replaced or the line is duplicated and then replaced
-old_version=$( printf '%03d' $((10#$new_version -100)) )
+old_version=$( printf '%03d' $((10#$new_version -1)) )
 old_dir=$(ls -d src/proto_${old_version}_*)
 old_hash=$(basename $old_dir | awk -F'_' '{print $3}')
 pattern=${old_version}-${old_hash}

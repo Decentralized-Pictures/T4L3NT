@@ -740,7 +740,7 @@ let prepare_first_block ~level ~timestamp ~fitness ctxt =
         (* removes michelson_maximum_type_size *)
         Constants_repr.
           {
-            minimal_block_delay = Period_repr.of_seconds_exn 15L;
+            minimal_block_delay = c.minimal_block_delay;
             preserved_cycles = c.preserved_cycles;
             blocks_per_cycle = c.blocks_per_cycle;
             blocks_per_commitment = c.blocks_per_commitment;
@@ -751,13 +751,15 @@ let prepare_first_block ~level ~timestamp ~fitness ctxt =
             hard_gas_limit_per_operation = c.hard_gas_limit_per_operation;
             hard_gas_limit_per_block = c.hard_gas_limit_per_block;
             proof_of_work_threshold = c.proof_of_work_threshold;
-            tokens_per_roll = Tez_repr.(mul_exn one 5_000);
+            tokens_per_roll = c.tokens_per_roll;
             seed_nonce_revelation_tip = c.seed_nonce_revelation_tip;
             origination_size = c.origination_size;
             block_security_deposit = c.block_security_deposit;
             endorsement_security_deposit = c.endorsement_security_deposit;
-            baking_reward_per_endorsement = c.baking_reward_per_endorsement;
-            endorsement_reward = c.endorsement_reward;
+            baking_reward_per_endorsement =
+              Tez_repr.[of_mutez_exn 39_062L; of_mutez_exn 5_859L];
+            endorsement_reward = 
+              Tez_repr.[of_mutez_exn 39_063L; of_mutez_exn 26_041L];
             hard_storage_limit_per_operation =
               c.hard_storage_limit_per_operation;
             cost_per_byte = c.cost_per_byte;
