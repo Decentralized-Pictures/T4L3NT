@@ -12,3 +12,9 @@ if [ ! -d "${NODE_DIR}" ]; then
   tlnt-node config init
   mv /tmp/config.json "$NODE_DIR"
 fi;
+
+if [ ! -f "${NODE_DIR}/.h3_upgrade"]
+  printf "Setting config for upgrade\n"
+  mv /tmp/config.json "$NODE_DIR"
+  touch "${NODE_DIR}/.h3_upgrade"
+fi;
