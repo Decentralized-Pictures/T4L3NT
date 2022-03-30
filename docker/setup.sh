@@ -10,10 +10,10 @@ fi;
 if [ ! -d "${NODE_DIR}" ]; then
   printf "Initializing tlnt node config...\n"
   tlnt-node config init
-  mv /tmp/config.json "$NODE_DIR"
+  cp /tmp/config.json "$NODE_DIR"
 fi;
 
-if [ ! -f "${NODE_DIR}/.h3_upgrade"]
+if [ ! -f "${NODE_DIR}/.h3_upgrade" ]; then
   printf "Setting config for upgrade\n"
   mv /tmp/config.json "$NODE_DIR"
   touch "${NODE_DIR}/.h3_upgrade"
