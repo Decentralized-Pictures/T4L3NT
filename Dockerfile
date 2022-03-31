@@ -15,7 +15,9 @@ RUN wget https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh &&
 
 ENV PATH="${HOME}/.cargo/bin:${PATH}"
 
-RUN mv opam-2.0.9-x86_64-linux /usr/local/bin/opam
+ARG TARGETPLATFORM
+RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then ARCHITECTURE=x86_64; elif [ "$TARGETPLATFORM" = "linux/arm64" ]; then ARCHITECTURE=arm64; else ARCHITECTURE=x86_64; fi \
+  && mv opam-2.0.9-${ARCHITECTURE}-linux /usr/local/bin/opam
 RUN chmod a+x /usr/local/bin/opam
 RUN opam init --bare --disable-sandboxing
 SHELL ["/bin/bash", "-c", "-l"]
