@@ -9,10 +9,16 @@ depends: [
   "dune" { >= "2.0" }
   "tezos-base"
   "tezos-protocol-environment"
-  "tezos-protocol-011-PtHangz2"
+  "tezos-protocol-011-Pt4FJEL6"
+  "tezos-shell-services"
+  "tezos-shell-context"
+  "tezos-client-base"
+  "tezos-client-commands"
+  "tezos-client-011-Pt4FJEL6"
+  "tezos-baking-011-Pt4FJEL6"
 ]
 build: [
   ["dune" "build" "-p" name "-j" jobs]
   ["dune" "runtest" "-p" name "-j" jobs] {with-test}
 ]
-synopsis: "Tezos/Protocol: parameters"
+synopsis: "Tezos/Protocol: protocol-specific commands for baking"

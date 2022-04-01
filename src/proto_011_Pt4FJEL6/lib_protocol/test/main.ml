@@ -32,7 +32,7 @@
 
 let () =
   Alcotest_lwt.run
-    "protocol_011_PtHangz2"
+    "protocol_011_Pt4FJEL6"
     [
       ("transfer", Test_transfer.tests);
       ("origination", Test_origination.tests);

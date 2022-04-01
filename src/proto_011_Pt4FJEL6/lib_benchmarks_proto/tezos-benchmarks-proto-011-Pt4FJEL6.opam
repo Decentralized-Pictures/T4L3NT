@@ -7,18 +7,22 @@ dev-repo: "git+https://gitlab.com/tezos/tezos.git"
 license: "MIT"
 depends: [
   "tezos-tooling" { with-test }
-  "tezos-client-011-PtHangz2" { with-test }
-  "dune" { >= "1.11" }
-  "tezos-stdlib"
-  "tezos-error-monad"
-  "tezos-crypto"
-  "tezos-protocol-011-PtHangz2"
+  "dune" { >= "2.0" }
+  "tezos-base"
+  "tezos-benchmark"
+  "tezos-benchmark-011-Pt4FJEL6"
+  "tezos-protocol-environment"
+  "tezos-protocol-011-Pt4FJEL6"
+  "tezos-protocol-011-Pt4FJEL6-parameters"
+  "tezos-shell-benchmarks"
   "tezos-micheline"
-  "tezos-micheline-rewriting"
-  "hashcons"
+  "tezos-011-Pt4FJEL6-test-helpers"
+  "tezos-sapling"
+  "tezos-client-011-Pt4FJEL6"
+
 ]
 build: [
   ["dune" "build" "-p" name "-j" jobs]
   ["dune" "runtest" "-p" name "-j" jobs] {with-test}
 ]
-synopsis: "Tezos: type inference for partial Michelson expressions"
+synopsis: "Tezos/Protocol: protocol benchmarks"

@@ -5,16 +5,16 @@
                   -cclib "-lusb-1.0 -lhidapi-libusb -ludev"))))
 
 (executable
- (name main_endorser_011_PtHangz2)
+ (name main_endorser_011_Pt4FJEL6)
  (instrumentation (backend bisect_ppx))
- (public_name tezos-endorser-011-PtHangz2)
+ (public_name tezos-endorser-011-Pt4FJEL6)
  (libraries tezos-client-base-unix
             tezos-client-commands
-            tezos-baking-011-PtHangz2-commands)
+            tezos-baking-011-Pt4FJEL6-commands)
  (flags (:standard -open Tezos_base__TzPervasives
-                   -open Tezos_protocol_011_PtHangz2
-                   -open Tezos_client_011_PtHangz2
+                   -open Tezos_protocol_011_Pt4FJEL6
+                   -open Tezos_client_011_Pt4FJEL6
                    -open Tezos_client_commands
-                   -open Tezos_baking_011_PtHangz2_commands
+                   -open Tezos_baking_011_Pt4FJEL6_commands
                    -open Tezos_stdlib_unix
                    -open Tezos_client_base_unix)))

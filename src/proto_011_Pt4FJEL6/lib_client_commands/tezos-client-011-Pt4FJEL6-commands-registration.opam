@@ -9,15 +9,16 @@ depends: [
   "dune" { >= "2.0" }
   "tezos-base"
   "tezos-protocol-environment"
-  "tezos-protocol-011-PtHangz2"
+  "tezos-protocol-011-Pt4FJEL6"
   "tezos-shell-services"
   "tezos-client-base"
+  "tezos-client-011-Pt4FJEL6"
+  "tezos-client-011-Pt4FJEL6-commands"
+  "tezos-client-sapling-011-Pt4FJEL6"
   "tezos-client-commands"
-  "tezos-client-011-PtHangz2"
-  "tezos-baking-011-PtHangz2"
 ]
 build: [
   ["dune" "build" "-p" name "-j" jobs]
   ["dune" "runtest" "-p" name "-j" jobs] {with-test}
 ]
-synopsis: "Tezos/Protocol: protocol-specific commands for `tezos-accuser`"
+synopsis: "Tezos/Protocol: protocol-specific commands for `tezos-client`"

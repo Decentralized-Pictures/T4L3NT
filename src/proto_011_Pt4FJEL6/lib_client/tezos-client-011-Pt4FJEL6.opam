@@ -9,14 +9,14 @@ depends: [
   "dune" { >= "2.0" }
   "tezos-base"
   "tezos-protocol-environment"
-  "tezos-protocol-011-PtHangz2"
+  "tezos-protocol-011-Pt4FJEL6"
   "tezos-shell-services"
   "tezos-client-base-unix"
   "tezos-mockup-registration"
   "tezos-proxy"
   "tezos-signer-backends"
-  "tezos-protocol-011-PtHangz2-parameters"
-  "tezos-protocol-plugin-011-PtHangz2"
+  "tezos-protocol-011-Pt4FJEL6-parameters"
+  "tezos-protocol-plugin-011-Pt4FJEL6"
   "alcotest-lwt" { with-test & >= "1.1.0" }
   "tezos-test-helpers" { with-test }
   "tezos-base-test-helpers" { with-test }

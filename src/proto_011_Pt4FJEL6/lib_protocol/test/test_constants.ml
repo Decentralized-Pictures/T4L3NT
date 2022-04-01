@@ -33,7 +33,7 @@
 open Test_tez
 
 let test_constants_consistency () =
-  let open Tezos_protocol_011_PtHangz2_parameters.Default_parameters in
+  let open Tezos_protocol_011_Pt4FJEL6_parameters.Default_parameters in
   List.iter_es
     Block.check_constants_consistency
     [constants_mainnet; constants_sandbox; constants_test]
@@ -43,11 +43,11 @@ let test_max_operations_ttl () =
   (* max_operations_ttl is hard-coded for mainnet to avoid any
      recomputation and is not reconfigured for other networks. *)
   let minimal_block_delay =
-    Tezos_protocol_011_PtHangz2_parameters.Default_parameters.constants_mainnet
+    Tezos_protocol_011_Pt4FJEL6_parameters.Default_parameters.constants_mainnet
       .minimal_block_delay
   in
   let time_between_blocks =
-    Tezos_protocol_011_PtHangz2_parameters.Default_parameters.constants_mainnet
+    Tezos_protocol_011_Pt4FJEL6_parameters.Default_parameters.constants_mainnet
       .time_between_blocks
   in
   Context.init ~time_between_blocks ~minimal_block_delay 1 >>=? fun (b, _) ->

@@ -8,13 +8,13 @@ license: "MIT"
 depends: [
   "dune" { >= "2.0" }
   "tezos-base"
-  "tezos-client-011-PtHangz2"
+  "tezos-client-011-Pt4FJEL6"
   "tezos-client-commands"
-  "tezos-baking-011-PtHangz2-commands"
+  "tezos-baking-011-Pt4FJEL6-commands"
   "tezos-client-base-unix"
 ]
 build: [
   ["dune" "build" "-p" name "-j" jobs]
   ["dune" "runtest" "-p" name "-j" jobs] {with-test}
 ]
-synopsis: "Tezos/Protocol: endorser binary"
+synopsis: "Tezos/Protocol: accuser binary"

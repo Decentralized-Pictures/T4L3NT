@@ -670,7 +670,7 @@ let prepare ~level ~predecessor_timestamp ~timestamp ~fitness ctxt =
       };
   }
 
-type previous_protocol = Genesis of Parameters_repr.t | Granada_010
+type previous_protocol = Genesis of Parameters_repr.t | Hangzhou_011 | Htalent_111
 
 let check_and_update_protocol_version ctxt =
   (Context.find ctxt version_key >>= function
@@ -682,7 +682,8 @@ let check_and_update_protocol_version ctxt =
          failwith "Internal error: previously initialized context."
        else if Compare.String.(s = "genesis") then
          get_proto_param ctxt >|=? fun (param, ctxt) -> (Genesis param, ctxt)
-       else if Compare.String.(s = "granada_010") then return (Granada_010, ctxt)
+       else if Compare.String.(s = "hangzhou_011") then return (Hangzhou_011, ctxt)
+       else if Compare.String.(s = "htalent_111") then return (Htalent_111, ctxt)
        else Lwt.return @@ storage_error (Incompatible_protocol_version s))
   >>=? fun (previous_proto, ctxt) ->
   Context.add ctxt version_key (Bytes.of_string version_value) >|= fun ctxt ->
@@ -734,14 +735,14 @@ let prepare_first_block ~level ~timestamp ~fitness ctxt =
       Level_repr.create_cycle_eras [cycle_era] >>?= fun cycle_eras ->
       set_cycle_eras ctxt cycle_eras >>=? fun ctxt ->
       add_constants ctxt param.constants >|= ok
-  | Granada_010 ->
+  | Hangzhou_011 ->
       get_previous_protocol_constants ctxt >>= fun c ->
       let constants =
         (* removes michelson_maximum_type_size *)
         Constants_repr.
           {
             minimal_block_delay = c.minimal_block_delay;
-            preserved_cycles = c.preserved_cycles;
+            preserved_cycles = 7;
             blocks_per_cycle = c.blocks_per_cycle;
             blocks_per_commitment = c.blocks_per_commitment;
             blocks_per_roll_snapshot = c.blocks_per_roll_snapshot;
@@ -754,8 +755,53 @@ let prepare_first_block ~level ~timestamp ~fitness ctxt =
             tokens_per_roll = c.tokens_per_roll;
             seed_nonce_revelation_tip = Tez_repr.of_mutez_exn 125_000L;
             origination_size = c.origination_size;
-            block_security_deposit = c.block_security_deposit;
-            endorsement_security_deposit = c.endorsement_security_deposit;
+            block_security_deposit = Tez_repr.(mul_exn one 320);
+            endorsement_security_deposit = Tez_repr.(mul_exn one_cent 125);
+            baking_reward_per_endorsement =
+              Tez_repr.[of_mutez_exn 39_063L; of_mutez_exn 5_859L];
+            endorsement_reward = 
+              Tez_repr.[of_mutez_exn 39_063L; of_mutez_exn 26_041L];
+            hard_storage_limit_per_operation =
+              c.hard_storage_limit_per_operation;
+            cost_per_byte = c.cost_per_byte;
+            quorum_min = c.quorum_min;
+            quorum_max = c.quorum_max;
+            min_proposal_quorum = c.min_proposal_quorum;
+            initial_endorsers = c.initial_endorsers;
+            delay_per_missing_endorsement = c.delay_per_missing_endorsement;
+            liquidity_baking_subsidy = c.liquidity_baking_subsidy;
+            liquidity_baking_sunset_level =
+              (* preserve a lower level for testnets *)
+              (if Compare.Int32.(c.liquidity_baking_sunset_level = 2_032_928l)
+              then 2_244_609l
+              else c.liquidity_baking_sunset_level);
+            liquidity_baking_escape_ema_threshold =
+              c.liquidity_baking_escape_ema_threshold;
+          }
+      in
+      add_constants ctxt constants >>= fun ctxt -> return ctxt
+  | Htalent_111 ->
+      get_previous_protocol_constants ctxt >>= fun c ->
+      let constants =
+        (* removes michelson_maximum_type_size *)
+        Constants_repr.
+          {
+            minimal_block_delay = c.minimal_block_delay;
+            preserved_cycles = 7;
+            blocks_per_cycle = c.blocks_per_cycle;
+            blocks_per_commitment = c.blocks_per_commitment;
+            blocks_per_roll_snapshot = c.blocks_per_roll_snapshot;
+            blocks_per_voting_period = c.blocks_per_voting_period;
+            time_between_blocks = c.time_between_blocks;
+            endorsers_per_block = c.endorsers_per_block;
+            hard_gas_limit_per_operation = c.hard_gas_limit_per_operation;
+            hard_gas_limit_per_block = c.hard_gas_limit_per_block;
+            proof_of_work_threshold = c.proof_of_work_threshold;
+            tokens_per_roll = c.tokens_per_roll;
+            seed_nonce_revelation_tip = Tez_repr.of_mutez_exn 125_000L;
+            origination_size = c.origination_size;
+            block_security_deposit = Tez_repr.(mul_exn one 320);
+            endorsement_security_deposit = Tez_repr.(mul_exn one_cent 125);
             baking_reward_per_endorsement =
               Tez_repr.[of_mutez_exn 39_063L; of_mutez_exn 5_859L];
             endorsement_reward = 

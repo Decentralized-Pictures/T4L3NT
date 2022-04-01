@@ -304,7 +304,8 @@ let prepare_first_block ctxt ~typecheck ~level ~timestamp ~fitness =
       Liquidity_baking_migration.init ctxt ~typecheck
       >>=? fun (ctxt, operation_results) ->
       Storage.Pending_migration.Operation_results.init ctxt operation_results
-  | Granada_010 -> Flatten_storage_for_H.flatten_storage ctxt >>= return
+  | Hangzhou_011 -> return ctxt
+  | Htalent_111 -> return ctxt
 
 let prepare ctxt ~level ~predecessor_timestamp ~timestamp ~fitness =
   Raw_context.prepare ~level ~predecessor_timestamp ~timestamp ~fitness ctxt

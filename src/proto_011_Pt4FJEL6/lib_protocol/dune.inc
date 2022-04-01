@@ -20,7 +20,7 @@
  (targets environment.ml)
  (action
   (write-file %{targets}
-              "module Name = struct let name = \"011-PtHangz2\" end
+              "module Name = struct let name = \"011-Pt4FJEL6\" end
 include Tezos_protocol_environment.MakeV3(Name)()
 module CamlinternalFormatBasics = struct include CamlinternalFormatBasics end
 ")))
@@ -128,7 +128,7 @@ module CamlinternalFormatBasics = struct include CamlinternalFormatBasics end
    (:src_dir TEZOS_PROTOCOL))
  (action
   (with-stdout-to %{targets}
-                  (chdir %{workspace_root} (run %{bin:tezos-embedded-protocol-packer} "%{src_dir}" "011_PtHangz2")))))
+                  (chdir %{workspace_root} (run %{bin:tezos-embedded-protocol-packer} "%{src_dir}" "011_Pt4FJEL6")))))
 
 (rule
  (targets functor.ml)
@@ -337,31 +337,31 @@ module CamlinternalFormatBasics = struct include CamlinternalFormatBasics end
    main.mli main.ml)
  (action
   (write-file %{targets}
-    "module Environment = Tezos_protocol_environment_011_PtHangz2.Environment
+    "module Environment = Tezos_protocol_environment_011_Pt4FJEL6.Environment
 let hash = Tezos_crypto.Protocol_hash.of_b58check_exn \"PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx\"
 let name = Environment.Name.name
-include Tezos_raw_protocol_011_PtHangz2
-include Tezos_raw_protocol_011_PtHangz2.Main
+include Tezos_raw_protocol_011_Pt4FJEL6
+include Tezos_raw_protocol_011_Pt4FJEL6.Main
 ")))
 
 (library
- (name tezos_protocol_environment_011_PtHangz2)
+ (name tezos_protocol_environment_011_Pt4FJEL6)
  (instrumentation (backend bisect_ppx))
- (public_name tezos-protocol-011-PtHangz2.environment)
+ (public_name tezos-protocol-011-Pt4FJEL6.environment)
  (library_flags (:standard -linkall))
  (libraries tezos-protocol-environment)
  (modules Environment))
 
 (library
- (name tezos_raw_protocol_011_PtHangz2)
+ (name tezos_raw_protocol_011_Pt4FJEL6)
  (instrumentation (backend bisect_ppx))
- (public_name tezos-protocol-011-PtHangz2.raw)
- (libraries tezos_protocol_environment_011_PtHangz2)
+ (public_name tezos-protocol-011-Pt4FJEL6.raw)
+ (libraries tezos_protocol_environment_011_Pt4FJEL6)
  (library_flags (:standard -linkall))
  (flags (:standard -nopervasives -nostdlib
                    -w +a-4-40..42-44-45-48
                    -warn-error +a
-                   -open Tezos_protocol_environment_011_PtHangz2__Environment
+                   -open Tezos_protocol_environment_011_Pt4FJEL6__Environment
                    -open Pervasives
                    -open Error_monad))
  (modules
@@ -465,41 +465,41 @@ include Tezos_raw_protocol_011_PtHangz2.Main
 
 (install
  (section lib)
- (package tezos-protocol-011-PtHangz2)
+ (package tezos-protocol-011-Pt4FJEL6)
  (files (TEZOS_PROTOCOL as raw/TEZOS_PROTOCOL)))
 
 (library
- (name tezos_protocol_011_PtHangz2)
+ (name tezos_protocol_011_Pt4FJEL6)
  (instrumentation (backend bisect_ppx))
- (public_name tezos-protocol-011-PtHangz2)
+ (public_name tezos-protocol-011-Pt4FJEL6)
  (libraries
       tezos-protocol-environment
       tezos-protocol-environment-sigs
-      tezos_raw_protocol_011_PtHangz2)
+      tezos_raw_protocol_011_Pt4FJEL6)
  (flags -w "+a-4-40..42-44-45-48"
         -warn-error "+a"
         -nopervasives)
  (modules Protocol))
 
 (library
- (name tezos_protocol_011_PtHangz2_functor)
+ (name tezos_protocol_011_Pt4FJEL6_functor)
  (instrumentation (backend bisect_ppx))
- (public_name tezos-protocol-functor-011-PtHangz2)
+ (public_name tezos-protocol-functor-011-Pt4FJEL6)
  (libraries
       tezos-protocol-environment
       tezos-protocol-environment-sigs
-      tezos-protocol-011-PtHangz2.raw)
+      tezos-protocol-011-Pt4FJEL6.raw)
  (flags -w "+a-4-40..42-44-45-48"
         -warn-error "+a"
         -nopervasives)
  (modules Functor))
 
 (library
- (name tezos_embedded_protocol_011_PtHangz2)
+ (name tezos_embedded_protocol_011_Pt4FJEL6)
  (instrumentation (backend bisect_ppx))
- (public_name tezos-embedded-protocol-011-PtHangz2)
+ (public_name tezos-embedded-protocol-011-Pt4FJEL6)
  (library_flags (:standard -linkall))
- (libraries tezos-protocol-011-PtHangz2
+ (libraries tezos-protocol-011-Pt4FJEL6
             tezos-protocol-updater
             tezos-protocol-environment)
  (flags (:standard -w +a-4-40..42-44-45-48
@@ -611,11 +611,11 @@ include Tezos_raw_protocol_011_PtHangz2.Main
 
 (rule
  (alias runtest_sandbox)
- (deps .tezos_protocol_011_PtHangz2.objs/native/tezos_protocol_011_PtHangz2.cmx)
+ (deps .tezos_protocol_011_Pt4FJEL6.objs/native/tezos_protocol_011_Pt4FJEL6.cmx)
  (action (progn)))
 
 (rule
  (alias runtest)
- (package tezos-protocol-011-PtHangz2)
+ (package tezos-protocol-011-Pt4FJEL6)
  (deps (alias runtest_sandbox))
  (action (progn)))

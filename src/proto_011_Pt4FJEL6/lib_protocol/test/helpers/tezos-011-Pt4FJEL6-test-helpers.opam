@@ -8,17 +8,18 @@ license: "MIT"
 depends: [
   "dune" { >= "2.0" }
   "tezos-base"
-  "tezos-protocol-environment"
-  "tezos-protocol-011-PtHangz2"
+  "tezos-stdlib-unix"
   "tezos-shell-services"
-  "tezos-client-base"
-  "tezos-client-011-PtHangz2"
-  "tezos-client-011-PtHangz2-commands"
-  "tezos-client-sapling-011-PtHangz2"
-  "tezos-client-commands"
+  "tezos-protocol-environment"
+  "tezos-protocol-011-Pt4FJEL6"
+  "tezos-protocol-011-Pt4FJEL6-parameters"
+  "tezos-client-011-Pt4FJEL6"
+  "tezos-test-helpers"
+  "alcotest-lwt"
+  "qcheck-alcotest"
 ]
 build: [
   ["dune" "build" "-p" name "-j" jobs]
   ["dune" "runtest" "-p" name "-j" jobs] {with-test}
 ]
-synopsis: "Tezos/Protocol: protocol-specific commands for `tezos-client`"
+synopsis: "Tezos/Protocol: protocol testing framework"
