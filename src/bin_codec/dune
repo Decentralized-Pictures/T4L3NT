@@ -38,12 +38,12 @@
             (select void_for_linking-010-PtGRANAD from
               (tezos-client-010-PtGRANAD -> void_for_linking-010-PtGRANAD.empty)
               (-> void_for_linking-010-PtGRANAD.empty))
-            (select void_for_linking-011-Pt4FJEL6 from
-              (tezos-client-011-Pt4FJEL6 -> void_for_linking-011-Pt4FJEL6.empty)
-              (-> void_for_linking-011-Pt4FJEL6.empty))
             (select void_for_linking-011-PtHangz2 from
               (tezos-client-011-PtHangz2 -> void_for_linking-011-PtHangz2.empty)
               (-> void_for_linking-011-PtHangz2.empty))
+            (select void_for_linking-011-Pt4FJEL6 from
+              (tezos-client-011-Pt4FJEL6 -> void_for_linking-011-Pt4FJEL6.empty)
+              (-> void_for_linking-011-Pt4FJEL6.empty))
             (select void_for_linking-111-PsoRM5iz from
               (tezos-client-111-PsoRM5iz -> void_for_linking-111-PsoRM5iz.empty)
               (-> void_for_linking-111-PsoRM5iz.empty))
@@ -67,7 +67,7 @@
    (write-file void_for_linking-008-PtEdo2Zk.empty "")
    (write-file void_for_linking-009-PsFLoren.empty "")
    (write-file void_for_linking-010-PtGRANAD.empty "")
-   (write-file void_for_linking-011-Pt4FJEL6.empty "")
    (write-file void_for_linking-011-PtHangz2.empty "")
+   (write-file void_for_linking-011-Pt4FJEL6.empty "")
    (write-file void_for_linking-111-PsoRM5iz.empty "")
 )))

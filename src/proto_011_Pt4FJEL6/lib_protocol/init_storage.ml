@@ -25,9 +25,6 @@
 (*                                                                           *)
 (*****************************************************************************)
 
-let log fmt = Logging.log Notice fmt
-
-
 (*
   To add invoices, you can use a helper function like this one:
 
