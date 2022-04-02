@@ -84,6 +84,9 @@
             (select void_for_linking-010-PtGRANAD from
               (tezos-embedded-protocol-010-PtGRANAD -> void_for_linking-010-PtGRANAD.empty)
               (-> void_for_linking-010-PtGRANAD.empty))
+            (select void_for_linking-011-Pt4FJEL6 from
+              (tezos-embedded-protocol-011-Pt4FJEL6 -> void_for_linking-011-Pt4FJEL6.empty)
+              (-> void_for_linking-011-Pt4FJEL6.empty))
             (select void_for_linking-011-PtHangz2 from
               (tezos-embedded-protocol-011-PtHangz2 -> void_for_linking-011-PtHangz2.empty)
               (-> void_for_linking-011-PtHangz2.empty))
@@ -99,6 +102,9 @@
             (select void_for_linking-010-PtGRANAD-protocol-plugin-registerer from
               (tezos-protocol-plugin-010-PtGRANAD-registerer -> void_for_linking-010-PtGRANAD-protocol-plugin-registerer.empty)
               (-> void_for_linking-010-PtGRANAD-protocol-plugin-registerer.empty))
+            (select void_for_linking-011-Pt4FJEL6-protocol-plugin-registerer from
+              (tezos-protocol-plugin-011-Pt4FJEL6-registerer -> void_for_linking-011-Pt4FJEL6-protocol-plugin-registerer.empty)
+              (-> void_for_linking-011-Pt4FJEL6-protocol-plugin-registerer.empty))
             (select void_for_linking-011-PtHangz2-protocol-plugin-registerer from
               (tezos-protocol-plugin-011-PtHangz2-registerer -> void_for_linking-011-PtHangz2-protocol-plugin-registerer.empty)
               (-> void_for_linking-011-PtHangz2-protocol-plugin-registerer.empty))
@@ -148,12 +154,14 @@
    (write-file void_for_linking-008-PtEdo2Zk.empty "")
    (write-file void_for_linking-009-PsFLoren.empty "")
    (write-file void_for_linking-010-PtGRANAD.empty "")
+   (write-file void_for_linking-011-Pt4FJEL6.empty "")
    (write-file void_for_linking-011-PtHangz2.empty "")
    (write-file void_for_linking-111-PsoRM5iz.empty "")
    (write-file void_for_linking-alpha-protocol-plugin-registerer.empty "")
    (write-file void_for_linking-008-PtEdo2Zk-protocol-plugin-registerer.empty "")
    (write-file void_for_linking-009-PsFLoren-protocol-plugin-registerer.empty "")
    (write-file void_for_linking-010-PtGRANAD-protocol-plugin-registerer.empty "")
+   (write-file void_for_linking-011-Pt4FJEL6-protocol-plugin-registerer.empty "")
    (write-file void_for_linking-011-PtHangz2-protocol-plugin-registerer.empty "")
    (write-file void_for_linking-111-PsoRM5iz-protocol-plugin-registerer.empty "")
 )))
