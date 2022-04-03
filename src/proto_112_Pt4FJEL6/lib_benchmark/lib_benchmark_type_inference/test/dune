@@ -1,0 +1,10 @@
+(tests
+ (names test_uf
+        test_inference)
+ (package tezos-benchmark-type-inference-112-Pt4FJEL6)
+ (libraries tezos-micheline tezos-micheline-rewriting
+            tezos-benchmark-type-inference-112-Pt4FJEL6 tezos-protocol-112-Pt4FJEL6
+            tezos-error-monad tezos-client-112-Pt4FJEL6)
+ (flags
+    (:standard -open Tezos_micheline
+               -open Tezos_benchmark_type_inference_112_Pt4FJEL6)))

@@ -2,4 +2,4 @@
 
 STR_ARGS="$*"
 
-/usr/local/bin/tlnt-endorser-111-PsoRM5iz ${STR_ARGS}
+/usr/local/bin/tlnt-endorser-112-Pt4FJEL6 ${STR_ARGS}
