@@ -113,7 +113,7 @@ let blockchain_network_mainnet =
     ~incompatible_chain_name:"INCOMPATIBLE"
     ~sandboxed_chain_name:"SANDBOXED_TLNT_NET"
     ~user_activated_upgrades:
-      [ (635905l, "PsoRM5iz7WFgcGd3wyLP7eJAmWqx27aG8fkMX7Cnq1q1ez3PfYX") ]
+      [ (635905l, "Pt4FJEL6jZDrWLkQ2xzpqaXaDKZa23PohrfCt9t75tkGDCqzVvM") ]
     ~user_activated_protocol_overrides:
       [ ]
     ~default_bootstrap_peers:["network.decentralized.pictures"]
