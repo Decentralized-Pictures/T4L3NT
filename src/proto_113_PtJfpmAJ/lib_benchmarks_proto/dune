@@ -1,0 +1,31 @@
+(library
+ (name tezos_benchmarks_proto_112_Pt4FJEL6)
+ (instrumentation (backend bisect_ppx))
+ (public_name tezos-benchmarks-proto-112-Pt4FJEL6)
+ (libraries
+  tezos-base
+  tezos-protocol-112-Pt4FJEL6
+  tezos-protocol-112-Pt4FJEL6-parameters
+  tezos-benchmark
+  tezos-benchmark-112-Pt4FJEL6
+  tezos-shell-benchmarks
+  tezos-micheline
+  tezos-112-Pt4FJEL6-test-helpers
+  tezos-sapling
+  tezos-client-112-Pt4FJEL6
+)
+ (library_flags (:standard -linkall))
+ (flags (:standard -open Tezos_stdlib
+                   -open Tezos_base
+                   -open Tezos_base__TzPervasives
+                   -open Tezos_error_monad
+                   -open Tezos_benchmark
+                   -open Tezos_benchmark_112_Pt4FJEL6
+                   -open Tezos_benchmark_type_inference_112_Pt4FJEL6
+                   -open Tezos_protocol_112_Pt4FJEL6
+                   -open Tezos_raw_protocol_112_Pt4FJEL6
+                   -open Tezos_client_112_Pt4FJEL6
+                   -open Tezos_crypto
+                   -open Tezos_micheline
+                   -open Tezos_112_Pt4FJEL6_test_helpers
+                   -open Tezos_client_112_Pt4FJEL6)))
