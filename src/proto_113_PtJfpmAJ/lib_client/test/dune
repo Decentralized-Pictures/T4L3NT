@@ -2,16 +2,16 @@
  (names test_michelson_v1_macros test_client_proto_contracts test_client_proto_context test_proxy)
  (libraries tezos-base
             tezos-micheline
-            tezos-protocol-112-Pt4FJEL6
-            tezos-client-112-Pt4FJEL6
+            tezos-protocol-113-PtJfpmAJ
+            tezos-client-113-PtJfpmAJ
             tezos-base-test-helpers
             tezos-test-helpers
             alcotest-lwt
             qcheck-alcotest)
- (package tezos-client-112-Pt4FJEL6)
+ (package tezos-client-113-PtJfpmAJ)
  (flags (:standard -open Tezos_base__TzPervasives
                    -open Tezos_micheline
-                   -open Tezos_client_112_Pt4FJEL6
-                   -open Tezos_protocol_112_Pt4FJEL6
+                   -open Tezos_client_113_PtJfpmAJ
+                   -open Tezos_protocol_113_PtJfpmAJ
                    -open Tezos_base_test_helpers
                    -open Lib_test)))

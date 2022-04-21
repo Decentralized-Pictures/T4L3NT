@@ -7,7 +7,7 @@ dev-repo: "git+https://gitlab.com/tezos/tezos.git"
 license: "MIT"
 depends: [
   "dune" { >= "2.0" }
-  "tezos-protocol-112-Pt4FJEL6"
+  "tezos-protocol-113-PtJfpmAJ"
   "tezos-protocol-compiler"
   "tezos-protocol-updater"
 ]
@@ -17,7 +17,7 @@ build: [
     "%{tezos-protocol-compiler:lib}%/dune_protocol.template.v1"
     "dune"
     "%{tezos-protocol-compiler:lib}%/final_protocol_versions"
-    "112_Pt4FJEL6"
+    "113_PtJfpmAJ"
   ]
   ["dune" "build" "-p" name "-j" jobs]
   ["dune" "runtest" "-p" name "-j" jobs] {with-test}

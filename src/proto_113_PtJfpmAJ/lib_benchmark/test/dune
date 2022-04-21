@@ -2,11 +2,11 @@
  (names test_sampling_data test_sampling_code test_autocompletion test_distribution)
  (libraries tezos-micheline
             tezos-micheline-rewriting
-            tezos-benchmark-type-inference-112-Pt4FJEL6
+            tezos-benchmark-type-inference-113-PtJfpmAJ
             tezos-benchmark
-            tezos-benchmark-112-Pt4FJEL6
-            tezos-protocol-112-Pt4FJEL6
-            tezos-112-Pt4FJEL6-test-helpers
+            tezos-benchmark-113-PtJfpmAJ
+            tezos-protocol-113-PtJfpmAJ
+            tezos-113-PtJfpmAJ-test-helpers
             tezos-error-monad
             alcotest-lwt
             staTz)
@@ -14,10 +14,10 @@
 ;; (ocamlopt_flags (:standard -p -ccopt -no-pie))
  (flags (:standard
          -open Tezos_micheline
-         -open Tezos_protocol_112_Pt4FJEL6
-         -open Tezos_benchmark_type_inference_112_Pt4FJEL6
-         -open Tezos_benchmark_112_Pt4FJEL6
-         -open Tezos_112_Pt4FJEL6_test_helpers)))
+         -open Tezos_protocol_113_PtJfpmAJ
+         -open Tezos_benchmark_type_inference_113_PtJfpmAJ
+         -open Tezos_benchmark_113_PtJfpmAJ
+         -open Tezos_113_PtJfpmAJ_test_helpers)))
 
 (alias
   (name buildtest)
@@ -34,7 +34,7 @@
 
 (alias
   (name runtest)
-  (package tezos-benchmark-112-Pt4FJEL6)
+  (package tezos-benchmark-113-PtJfpmAJ)
   (deps (alias runtest_micheline_rewriting_data)
         (alias runtest_micheline_rewriting_code)
   ))

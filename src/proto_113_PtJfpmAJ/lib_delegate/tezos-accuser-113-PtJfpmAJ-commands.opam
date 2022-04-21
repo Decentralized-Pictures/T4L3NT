@@ -8,19 +8,16 @@ license: "MIT"
 depends: [
   "dune" { >= "2.0" }
   "tezos-base"
-  "tezos-version"
   "tezos-protocol-environment"
-  "tezos-protocol-112-Pt4FJEL6"
-  "tezos-shell-context"
+  "tezos-protocol-113-PtJfpmAJ"
   "tezos-shell-services"
   "tezos-client-base"
   "tezos-client-commands"
-  "tezos-client-112-Pt4FJEL6"
-  "lwt-canceler" { >= "0.3" & < "0.4" }
-  "lwt-exit"
+  "tezos-client-113-PtJfpmAJ"
+  "tezos-baking-113-PtJfpmAJ"
 ]
 build: [
   ["dune" "build" "-p" name "-j" jobs]
   ["dune" "runtest" "-p" name "-j" jobs] {with-test}
 ]
-synopsis: "Tezos/Protocol: base library for `tezos-baker/endorser/accuser`"
+synopsis: "Tezos/Protocol: protocol-specific commands for `tezos-accuser`"

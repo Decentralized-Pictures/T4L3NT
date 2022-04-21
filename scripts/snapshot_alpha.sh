@@ -197,19 +197,19 @@ cd tmp
 # rename main_*.ml{,i} files of the binaries
 for file in $(find . -name main_\*.ml -or -name main_\*.mli)
 do
-    mv "$file" $(echo "$file" | sed s/_alpha/_${version}_${short_hash}/g)
+    mv "$file" $(echo "$file" | sed s/_112_Pt4FJEL6/_${version}_${short_hash}/g)
 done
 
 
 # rename .opam files
 for file in $(find . -name \*.opam)
 do
-    mv "$file" $(echo "$file" | sed s/alpha/${version}-${short_hash}/g)
+    mv "$file" $(echo "$file" | sed s/112-Pt4FJEL6/${version}-${short_hash}/g)
 done
 
 # fix content of dune and opam files
-sed -i.old -e s/_alpha/_${version}_${short_hash}/g \
-       -e s/-alpha/-${version}-${short_hash}/g \
+sed -i.old -e s/_112_Pt4FJEL6/_${version}_${short_hash}/g \
+       -e s/-112-Pt4FJEL6/-${version}-${short_hash}/g \
     $(find . -name dune -or -name \*.opam)
 
 mv $daemons ..
@@ -222,24 +222,24 @@ cd lib_protocol
 sed -i.old -e 's/"hash": "[^"]*",/"hash": "'$long_hash'",/' \
     TEZOS_PROTOCOL
 
-sed -i.old -e s/protocol_alpha/protocol_${version}_${short_hash}/ \
-           -e s/protocol-alpha/protocol-${version}-${short_hash}/ \
-           -e s/protocol-functor-alpha/protocol-functor-${version}-${short_hash}/ \
+sed -i.old -e s/protocol_112_Pt4FJEL6/protocol_${version}_${short_hash}/ \
+           -e s/protocol-112-Pt4FJEL6/protocol-${version}-${short_hash}/ \
+           -e s/protocol-functor-112-Pt4FJEL6/protocol-functor-${version}-${short_hash}/ \
     $(find . -type f)
 
-sed -i.old -e s/-alpha/-${version}-${short_hash}/ \
-           -e s/_alpha/_${version}_${short_hash}/ \
+sed -i.old -e s/-112-Pt4FJEL6/-${version}-${short_hash}/ \
+           -e s/_112_Pt4FJEL6/_${version}_${short_hash}/ \
     $(find . -type f -name dune)
 
 # replace fist the template call with underscore version,
 # then the other occurrences with dash version
-sed -i.old -e 's/"alpha"/"'${version}_${short_hash}'"/' \
-           -e 's/alpha/'${version}-${short_hash}'/' \
+sed -i.old -e 's/"112_Pt4FJEL6"/"'${version}_${short_hash}'"/' \
+           -e 's/112-Pt4FJEL6/'${version}-${short_hash}'/' \
     $(find . -name \*.opam)
 
 for file in  $(find . -name \*.opam)
 do
-    mv "$file" $(echo "$file" | sed s/alpha/${version}-${short_hash}/g)
+    mv "$file" $(echo "$file" | sed s/112-Pt4FJEL6/${version}-${short_hash}/g)
 done
 
 # add this protocol to the immutable list

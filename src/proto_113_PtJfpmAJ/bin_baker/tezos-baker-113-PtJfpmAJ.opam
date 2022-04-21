@@ -8,10 +8,13 @@ license: "MIT"
 depends: [
   "dune" { >= "2.0" }
   "tezos-base"
-  "tezos-protocol-112-Pt4FJEL6"
+  "tezos-client-113-PtJfpmAJ"
+  "tezos-client-commands"
+  "tezos-baking-113-PtJfpmAJ-commands"
+  "tezos-client-base-unix"
 ]
 build: [
   ["dune" "build" "-p" name "-j" jobs]
   ["dune" "runtest" "-p" name "-j" jobs] {with-test}
 ]
-synopsis: "Tezos/Protocol: protocol plugin"
+synopsis: "Tezos/Protocol: baker binary"

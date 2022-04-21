@@ -4,21 +4,21 @@
             tezos-micheline
             tezos-protocol-environment
             alcotest-lwt
-            tezos-112-Pt4FJEL6-test-helpers
+            tezos-113-PtJfpmAJ-test-helpers
             tezos-stdlib-unix
             tezos-client-base
-            tezos-protocol-112-Pt4FJEL6-parameters
+            tezos-protocol-113-PtJfpmAJ-parameters
             tezos-base-test-helpers)
  (flags (:standard -open Tezos_base__TzPervasives
                    -open Tezos_base_test_helpers
                    -open Tezos_micheline
-                   -open Tezos_client_112_Pt4FJEL6
-                   -open Tezos_protocol_112_Pt4FJEL6
-                   -open Tezos_protocol_environment_112_Pt4FJEL6
-                   -open Tezos_112_Pt4FJEL6_test_helpers)))
+                   -open Tezos_client_113_PtJfpmAJ
+                   -open Tezos_protocol_113_PtJfpmAJ
+                   -open Tezos_protocol_environment_113_PtJfpmAJ
+                   -open Tezos_113_PtJfpmAJ_test_helpers)))
 
 (rule
  (alias runtest)
- (package tezos-protocol-112-Pt4FJEL6-tests)
+ (package tezos-protocol-113-PtJfpmAJ-tests)
  (deps main.exe)
  (action (run ./main.exe "test" "Unit")))

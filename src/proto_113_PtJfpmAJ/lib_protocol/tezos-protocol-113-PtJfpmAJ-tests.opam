@@ -12,15 +12,15 @@ depends: [
   "astring" { with-test }
   "tezos-test-helpers" { with-test }
   "qcheck-alcotest" { with-test }
-  "tezos-112-Pt4FJEL6-test-helpers" { with-test }
+  "tezos-113-PtJfpmAJ-test-helpers" { with-test }
   "tezos-stdlib-unix" { with-test }
   "tezos-protocol-environment" { with-test }
   "tezos-client-base" { with-test }
-  "tezos-protocol-112-Pt4FJEL6-parameters" { with-test }
+  "tezos-protocol-113-PtJfpmAJ-parameters" { with-test }
   "tezos-shell-services" { with-test }
   "tezos-base-test-helpers" { with-test }
   "tezos-benchmark" { with-test }
-  "tezos-benchmark-112-Pt4FJEL6" { with-test }
+  "tezos-benchmark-113-PtJfpmAJ" { with-test }
 ]
 build: [
   [
@@ -28,7 +28,7 @@ build: [
     "%{tezos-protocol-compiler:lib}%/dune_protocol.template.v1"
     "dune"
     "%{tezos-protocol-compiler:lib}%/final_protocol_versions"
-    "112_Pt4FJEL6"
+    "113_PtJfpmAJ"
   ]
   ["dune" "build" "-p" name "-j" jobs]
   ["dune" "runtest" "-p" name "-j" jobs] {with-test}

@@ -7,16 +7,12 @@ dev-repo: "git+https://gitlab.com/tezos/tezos.git"
 license: "MIT"
 depends: [
   "dune" { >= "2.0" }
-  "tezos-base"
-  "tezos-protocol-environment"
-  "tezos-protocol-112-Pt4FJEL6"
-  "tezos-shell-services"
-  "tezos-client-base-unix"
-  "tezos-client-112-Pt4FJEL6"
-  "tezos-client-commands"
+  "tezos-embedded-protocol-113-PtJfpmAJ"
+  "tezos-protocol-plugin-113-PtJfpmAJ"
+  "tezos-shell"
 ]
 build: [
   ["dune" "build" "-p" name "-j" jobs]
   ["dune" "runtest" "-p" name "-j" jobs] {with-test}
 ]
-synopsis: "Tezos/Protocol: protocol-specific commands for `tezos-client`"
+synopsis: "Tezos/Protocol: protocol plugin registerer"

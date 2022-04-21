@@ -9,15 +9,16 @@ depends: [
   "dune" { >= "2.0" }
   "tezos-base"
   "tezos-protocol-environment"
-  "tezos-protocol-112-Pt4FJEL6"
+  "tezos-protocol-113-PtJfpmAJ"
   "tezos-shell-services"
+  "tezos-shell-context"
   "tezos-client-base"
   "tezos-client-commands"
-  "tezos-client-112-Pt4FJEL6"
-  "tezos-baking-112-Pt4FJEL6"
+  "tezos-client-113-PtJfpmAJ"
+  "tezos-baking-113-PtJfpmAJ"
 ]
 build: [
   ["dune" "build" "-p" name "-j" jobs]
   ["dune" "runtest" "-p" name "-j" jobs] {with-test}
 ]
-synopsis: "Tezos/Protocol: protocol-specific commands for `tezos-endorser`"
+synopsis: "Tezos/Protocol: protocol-specific commands for baking"

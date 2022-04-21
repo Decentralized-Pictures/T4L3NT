@@ -8,9 +8,9 @@ license: "MIT"
 depends: [
   "dune" { >= "2.0" }
   "tezos-base"
-  "tezos-client-112-Pt4FJEL6"
+  "tezos-client-113-PtJfpmAJ"
   "tezos-client-commands"
-  "tezos-baking-112-Pt4FJEL6-commands"
+  "tezos-baking-113-PtJfpmAJ-commands"
   "tezos-client-base-unix"
 ]
 build: [

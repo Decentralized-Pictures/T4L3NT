@@ -11,70 +11,70 @@
             alcotest-lwt
             tezos-test-helpers
             qcheck-alcotest
-            tezos-112-Pt4FJEL6-test-helpers
+            tezos-113-PtJfpmAJ-test-helpers
             tezos-stdlib-unix
             tezos-client-base
-            tezos-protocol-112-Pt4FJEL6-parameters
+            tezos-protocol-113-PtJfpmAJ-parameters
             tezos-base-test-helpers
             tezos-sapling
             astring
-            tezos-protocol-plugin-112-Pt4FJEL6
+            tezos-protocol-plugin-113-PtJfpmAJ
             tezos-benchmark
-            tezos-benchmark-112-Pt4FJEL6)
+            tezos-benchmark-113-PtJfpmAJ)
  (flags (:standard -open Tezos_base__TzPervasives
                    -open Tezos_micheline
-                   -open Tezos_client_112_Pt4FJEL6
-                   -open Tezos_protocol_112_Pt4FJEL6
-                   -open Tezos_protocol_plugin_112_Pt4FJEL6
-                   -open Tezos_protocol_environment_112_Pt4FJEL6
-                   -open Tezos_benchmark_112_Pt4FJEL6
-                   -open Tezos_benchmark_type_inference_112_Pt4FJEL6
-                   -open Tezos_112_Pt4FJEL6_test_helpers
+                   -open Tezos_client_113_PtJfpmAJ
+                   -open Tezos_protocol_113_PtJfpmAJ
+                   -open Tezos_protocol_plugin_113_PtJfpmAJ
+                   -open Tezos_protocol_environment_113_PtJfpmAJ
+                   -open Tezos_benchmark_113_PtJfpmAJ
+                   -open Tezos_benchmark_type_inference_113_PtJfpmAJ
+                   -open Tezos_113_PtJfpmAJ_test_helpers
                    -open Tezos_base_test_helpers)))
 
 (rule
- (copy %{lib:tezos-protocol-112-Pt4FJEL6-parameters:test-parameters.json}
+ (copy %{lib:tezos-protocol-113-PtJfpmAJ-parameters:test-parameters.json}
        protocol_parameters.json))
 
 ; runs only the `Quick tests
 (rule
- (alias runtest_proto_112_Pt4FJEL6)
+ (alias runtest_proto_113_PtJfpmAJ)
  (deps (glob_files contracts/*))
- (package tezos-protocol-112-Pt4FJEL6-tests)
+ (package tezos-protocol-113-PtJfpmAJ-tests)
  (action (run %{exe:main.exe} -q)))
 
 ; runs both `Quick and `Slow tests
 (rule
  (alias runtest_slow)
  (deps (glob_files contracts/*))
- (package tezos-protocol-112-Pt4FJEL6-tests)
+ (package tezos-protocol-113-PtJfpmAJ-tests)
  (action (run %{exe:main.exe})))
 
 (rule
  (alias runtest_saturation_fuzzing)
- (package tezos-protocol-112-Pt4FJEL6-tests)
+ (package tezos-protocol-113-PtJfpmAJ-tests)
  (action (run %{exe:saturation_fuzzing.exe})))
 
 (rule
  (alias runtest_test_script_comparison)
- (package tezos-protocol-112-Pt4FJEL6-tests)
+ (package tezos-protocol-113-PtJfpmAJ-tests)
  (action (run %{exe:test_script_comparison.exe})))
 
 (rule
  (alias runtest_test_tez_repr)
- (package tezos-protocol-112-Pt4FJEL6-tests)
+ (package tezos-protocol-113-PtJfpmAJ-tests)
  (action (run %{exe:test_tez_repr.exe})))
 
 (rule
  (alias runtest_liquidity_baking_pbt)
- (package tezos-protocol-112-Pt4FJEL6-tests)
+ (package tezos-protocol-113-PtJfpmAJ-tests)
  (action (run %{exe:liquidity_baking_pbt.exe})))
 
 (rule
  (alias runtest)
- (package tezos-protocol-112-Pt4FJEL6-tests)
+ (package tezos-protocol-113-PtJfpmAJ-tests)
  (deps
-  (alias runtest_proto_112_Pt4FJEL6)
+  (alias runtest_proto_113_PtJfpmAJ)
   (alias runtest_saturation_fuzzing)
   (alias runtest_test_tez_repr)
   (alias runtest_liquidity_baking_pbt)

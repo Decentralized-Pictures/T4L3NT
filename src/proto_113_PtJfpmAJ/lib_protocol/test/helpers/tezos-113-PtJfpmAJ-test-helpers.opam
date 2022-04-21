@@ -8,13 +8,18 @@ license: "MIT"
 depends: [
   "dune" { >= "2.0" }
   "tezos-base"
-  "tezos-client-112-Pt4FJEL6"
-  "tezos-client-commands"
-  "tezos-baking-112-Pt4FJEL6-commands"
-  "tezos-client-base-unix"
+  "tezos-stdlib-unix"
+  "tezos-shell-services"
+  "tezos-protocol-environment"
+  "tezos-protocol-113-PtJfpmAJ"
+  "tezos-protocol-113-PtJfpmAJ-parameters"
+  "tezos-client-113-PtJfpmAJ"
+  "tezos-test-helpers"
+  "alcotest-lwt"
+  "qcheck-alcotest"
 ]
 build: [
   ["dune" "build" "-p" name "-j" jobs]
   ["dune" "runtest" "-p" name "-j" jobs] {with-test}
 ]
-synopsis: "Tezos/Protocol: accuser binary"
+synopsis: "Tezos/Protocol: protocol testing framework"

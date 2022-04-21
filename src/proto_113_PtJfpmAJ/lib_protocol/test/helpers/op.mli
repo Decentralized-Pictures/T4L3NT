@@ -91,7 +91,7 @@ val register_global_constant :
   ?counter:Z.t ->
   ?public_key:Signature.public_key ->
   ?fee:Test_tez.Tez.tez ->
-  ?gas_limit:Tezos_raw_protocol_112_Pt4FJEL6.Alpha_context.Gas.Arith.integral ->
+  ?gas_limit:Tezos_raw_protocol_113_PtJfpmAJ.Alpha_context.Gas.Arith.integral ->
   ?storage_limit:Z.t ->
   Context.t ->
   (* Account doing the registration *)

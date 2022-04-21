@@ -1,17 +1,17 @@
 (library
- (name tezos_benchmark_112_Pt4FJEL6)
+ (name tezos_benchmark_113_PtJfpmAJ)
  (instrumentation (backend bisect_ppx))
- (public_name tezos-benchmark-112-Pt4FJEL6)
+ (public_name tezos-benchmark-113-PtJfpmAJ)
  (libraries
   tezos-base
-  tezos-protocol-112-Pt4FJEL6
-  tezos-protocol-112-Pt4FJEL6-parameters
+  tezos-protocol-113-PtJfpmAJ
+  tezos-protocol-113-PtJfpmAJ-parameters
   tezos-micheline-rewriting
   tezos-benchmark
-  tezos-benchmark-type-inference-112-Pt4FJEL6
+  tezos-benchmark-type-inference-113-PtJfpmAJ
   hashcons
   benchmark-utils
-  tezos-112-Pt4FJEL6-test-helpers
+  tezos-113-PtJfpmAJ-test-helpers
   staTz)
  (library_flags (:standard -linkall))
  (flags (:standard -open Tezos_stdlib
@@ -20,7 +20,7 @@
                    -open Tezos_micheline
                    -open Tezos_micheline_rewriting
                    -open Tezos_benchmark
-                   -open Tezos_benchmark_type_inference_112_Pt4FJEL6
-                   -open Tezos_protocol_112_Pt4FJEL6
+                   -open Tezos_benchmark_type_inference_113_PtJfpmAJ
+                   -open Tezos_protocol_113_PtJfpmAJ
                    -open Tezos_crypto
-                   -open Tezos_112_Pt4FJEL6_test_helpers)))
+                   -open Tezos_113_PtJfpmAJ_test_helpers)))

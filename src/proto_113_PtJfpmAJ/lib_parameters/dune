@@ -1,24 +1,24 @@
 (library
- (name tezos_protocol_112_Pt4FJEL6_parameters)
+ (name tezos_protocol_113_PtJfpmAJ_parameters)
  (instrumentation (backend bisect_ppx))
- (public_name tezos-protocol-112-Pt4FJEL6-parameters)
+ (public_name tezos-protocol-113-PtJfpmAJ-parameters)
  (modules :standard \ gen)
  (libraries tezos-base
             tezos-base.unix
             tezos-protocol-environment
-            tezos-protocol-112-Pt4FJEL6)
+            tezos-protocol-113-PtJfpmAJ)
  (flags (:standard -open Tezos_base__TzPervasives
-                   -open Tezos_protocol_112_Pt4FJEL6
+                   -open Tezos_protocol_113_PtJfpmAJ
                    -linkall))
 )
 
 (executable
  (name gen)
  (libraries tezos-base
-            tezos-protocol-112-Pt4FJEL6-parameters)
+            tezos-protocol-113-PtJfpmAJ-parameters)
  (modules gen)
  (flags (:standard -open Tezos_base__TzPervasives
-                   -open Tezos_protocol_112_Pt4FJEL6_parameters
+                   -open Tezos_protocol_113_PtJfpmAJ_parameters
                    -linkall)))
 
 (rule

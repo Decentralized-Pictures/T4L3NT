@@ -14,7 +14,7 @@
   "error_filename_blacklist": [
   ],
   "error_message_blacklist": [
-    "Unbound module Tezos_protocol_112_Pt4FJEL6_functor",
+    "Unbound module Tezos_protocol_113_PtJfpmAJ_functor",
     "The placeholders `_` in types are not handled",
     "No type known for the following variants: `Ge, `Lt, `Eq, `Le, `Gt",
     "No type known for the following variants: `Eq, `Ge, `Gt, `Le, `Lt",
@@ -27,7 +27,7 @@
     "A variable name instead of a pattern was expected",
     "We only support extensible types in patterns at the head",
     "This kind of signature is not handled",
-    "Tezos_raw_protocol_112_Pt4FJEL6.Raw_context_intf.T"
+    "Tezos_raw_protocol_113_PtJfpmAJ.Raw_context_intf.T"
   ],
   "escape_value": [
     "a",
@@ -88,7 +88,7 @@
     "type_logger"
   ],
   "first_class_module_path_blacklist": [
-    "Tezos_raw_protocol_112_Pt4FJEL6",
+    "Tezos_raw_protocol_113_PtJfpmAJ",
     "Tezos_protocol_environment_alpha.Environment",
     "Tezos_protocol_environment_alpha.Environment.Sapling"
   ],
@@ -96,7 +96,7 @@
     "Tezos_sapling__Core_sig.T_encoding",
     "Tezos_protocol_environment_alpha__Environment.Map.OrderedType",
     "Tezos_protocol_environment_alpha__Environment.Set.OrderedType",
-    "Tezos_raw_protocol_112_Pt4FJEL6__Raw_context.T",
+    "Tezos_raw_protocol_113_PtJfpmAJ__Raw_context.T",
     "Environment_context.TREE"
   ],
   "merge_returns": [
@@ -192,7 +192,7 @@
     ["Compare.Z.(Compare.S.t)", "Z.t"]
   ],
   "require": [
-    ["Tezos_raw_protocol_112_Pt4FJEL6", "TezosOfOCaml.Proto_alpha"]
+    ["Tezos_raw_protocol_113_PtJfpmAJ", "TezosOfOCaml.Proto_alpha"]
   ],
   "require_import": [
     ["Tezos_protocol_environment_alpha", "TezosOfOCaml.Proto_alpha"]

@@ -276,7 +276,7 @@ let check_constants_consistency constants =
 
 let prepare_main_init_params ?bootstrap_contracts with_commitments constants
     initial_accounts =
-  let open Tezos_protocol_112_Pt4FJEL6_parameters in
+  let open Tezos_protocol_113_PtJfpmAJ_parameters in
   let bootstrap_accounts =
     List.map
       (fun (Account.{pk; pkh; _}, amount) ->
@@ -366,7 +366,7 @@ let genesis_with_parameters parameters =
       ~operations_hash:Operation_list_list_hash.zero
   in
   let contents = Forge.make_contents ~priority:0 ~seed_nonce_hash:None () in
-  let open Tezos_protocol_112_Pt4FJEL6_parameters in
+  let open Tezos_protocol_113_PtJfpmAJ_parameters in
   let json = Default_parameters.json_of_parameters parameters in
   let proto_params =
     Data_encoding.Binary.to_bytes_exn Data_encoding.json json
@@ -405,7 +405,7 @@ let prepare_initial_context_params ?endorsers_per_block ?initial_endorsers
     ?time_between_blocks ?minimal_block_delay ?delay_per_missing_endorsement
     ?min_proposal_quorum ?level ?cost_per_byte ?liquidity_baking_subsidy
     initial_accounts =
-  let open Tezos_protocol_112_Pt4FJEL6_parameters in
+  let open Tezos_protocol_113_PtJfpmAJ_parameters in
   let constants = Default_parameters.constants_test in
   let endorsers_per_block =
     Option.value ~default:constants.endorsers_per_block endorsers_per_block
