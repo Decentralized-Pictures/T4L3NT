@@ -1,0 +1,17 @@
+(library
+ (name tezos_benchmark_type_inference_112_Pt4FJEL6)
+ (instrumentation (backend bisect_ppx))
+ (public_name tezos-benchmark-type-inference-112-Pt4FJEL6)
+ (libraries
+  tezos-stdlib
+  tezos-error-monad
+  tezos-crypto
+  tezos-micheline
+  tezos-protocol-112-Pt4FJEL6
+  tezos-micheline-rewriting
+  hashcons)
+ (flags (:standard -open Tezos_stdlib
+                   -open Tezos_error_monad
+                   -open Tezos_micheline
+                   -open Tezos_micheline_rewriting
+                   -open Tezos_protocol_112_Pt4FJEL6)))
