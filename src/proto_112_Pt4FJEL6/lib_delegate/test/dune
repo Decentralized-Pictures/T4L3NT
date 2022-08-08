@@ -1,0 +1,39 @@
+(executables
+ (names main)
+ (libraries
+  tezos-base
+  tezos-protocol-environment
+  alcotest-lwt
+  tezos-test-helpers
+  tezos-112-Pt4FJEL6-test-helpers
+  tezos-client-base
+  tezos-baking-112-Pt4FJEL6
+  tezos-base-test-helpers)
+ (flags (:standard -open Tezos_base__TzPervasives
+                   -open Tezos_micheline
+                   -open Tezos_client_112_Pt4FJEL6
+                   -open Tezos_baking_112_Pt4FJEL6
+                   -open Tezos_protocol_112_Pt4FJEL6
+                   -open Tezos_protocol_environment_112_Pt4FJEL6
+                   -open Tezos_112_Pt4FJEL6_test_helpers
+                   -open Tezos_base_test_helpers)))
+
+; runs both `Quick and `Slow tests
+(rule
+ (alias
+  runtest_baking_112_Pt4FJEL6)
+ (package
+  tezos-baking-112-Pt4FJEL6)
+ (deps main.exe)
+ (action (run %{exe:main.exe})))
+
+(rule
+ (alias runtest)
+ (package
+  tezos-baking-112-Pt4FJEL6)
+ (deps
+  (alias
+   runtest_baking_112_Pt4FJEL6))
+ (action (progn)))
+
+

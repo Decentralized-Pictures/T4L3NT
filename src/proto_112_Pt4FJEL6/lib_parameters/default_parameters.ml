@@ -28,7 +28,7 @@ open Protocol.Alpha_context
 let constants_mainnet =
   Constants.
     {
-      preserved_cycles = 7;
+      preserved_cycles = 5;
       blocks_per_cycle = 8192l;
       blocks_per_commitment = 64l;
       blocks_per_roll_snapshot = 512l;

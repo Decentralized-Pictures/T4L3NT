@@ -134,7 +134,7 @@ let initial_context
     let proxy_mem = M.proxy_mem pgi
   end in
   let empty = Proxy_context.empty @@ Some (module N) in
-  let version_value = "dcphangzhou_011" in
+  let version_value = "hangzhou_011" in
   Tezos_protocol_environment.Context.add
     empty
     ["version"]

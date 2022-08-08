@@ -26,7 +26,7 @@
 (** Testing
     -------
     Component:    pbt for liquidity baking
-    Invocation:   [QCHECK_SEED=<seed>] dune exec src/proto_alpha/lib_protocol/test/liquidity_baking_pbt.exe
+    Invocation:   [QCHECK_SEED=<seed>] dune exec src/proto_112_Pt4FJEL6/lib_protocol/test/liquidity_baking_pbt.exe
     Subject:      Test liquidity baking contracts using randomly generated inputs.
 *)
 

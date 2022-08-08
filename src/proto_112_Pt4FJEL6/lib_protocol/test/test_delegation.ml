@@ -26,7 +26,7 @@
 (** Testing
     -------
     Component:  Protocol (delegation)
-    Invocation: dune exec src/proto_alpha/lib_protocol/test/main.exe -- test "^delegation$"
+    Invocation: dune exec src/proto_112_Pt4FJEL6/lib_protocol/test/main.exe -- test "^delegation$"
     Subject:    - Properties on bootstrap contracts (self-delegation,
                 cannot delete/change their delegate (as opposed to contracts
                 not-being-delegate which can do these), bootstrap manager

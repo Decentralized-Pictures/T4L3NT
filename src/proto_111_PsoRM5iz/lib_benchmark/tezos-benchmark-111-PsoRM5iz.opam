@@ -7,19 +7,19 @@ dev-repo: "git+https://gitlab.com/tezos/tezos.git"
 license: "MIT"
 depends: [
   "tezos-tooling" { with-test }
-  "dune" { >= "2.0" }
+  "dune" { >= "2.9" }
   "tezos-base"
   "tezos-benchmark"
   "tezos-protocol-environment"
-  "tezos-protocol-111-PsoRM5iz"
-  "tezos-111-PsoRM5iz-test-helpers"
-  "tezos-protocol-111-PsoRM5iz-parameters"
+  "tezos-protocol-011-PtHangz2"
+  "tezos-011-PtHangz2-test-helpers"
+  "tezos-protocol-011-PtHangz2-parameters"
   "tezos-micheline-rewriting"
-  "tezos-benchmark-type-inference-111-PsoRM5iz"
+  "tezos-benchmark-type-inference-011-PtHangz2"
   "hashcons"
   "benchmark-utils"
-  "tezos-111-PsoRM5iz-test-helpers"
-  "staTz"
+  "tezos-011-PtHangz2-test-helpers"
+  "prbnmcn-stats" { = "0.0.2" }
   "tezos-micheline" { with-test }
   "tezos-error-monad" { with-test }
   "alcotest-lwt" { with-test }
