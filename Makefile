@@ -67,6 +67,20 @@ endif
 		$(foreach b, $(TEZOS_BIN), _build/install/default/bin/${b}) \
 		@copy-parameters
 	@cp -f $(foreach b, $(TEZOS_BIN), _build/install/default/bin/${b}) ./
+	@mv -f tezos-node tlnt-node
+	@mv -f tezos-client tlnt-client
+	@mv -f tezos-admin-client tlnt-admin-client
+	@mv -f tezos-codec tlnt-codec
+	@mv -f tezos-protocol-compiler tlnt-protocol-compiler
+	@mv -f tezos-proxy-server tlnt-proxy-server
+	@mv -f tezos-signer tlnt-signer
+	@mv -f tezos-snoop tlnt-snoop
+	@mv -f tezos-validator tlnt-validator
+	@for p in $(active_protocol_versions) ; do \
+	   mv -f tezos-baker-$$p tlnt-baker-`echo $$p | tr -- _ -` ; \
+	   mv -f tezos-endorser-$$p tlnt-endorser-`echo $$p | tr -- _ -` ; \
+	   mv -f tezos-accuser-$$p tlnt-accuser-`echo $$p | tr -- _ -` ; \
+	 done
 
 # List protocols, i.e. directories proto_* in src with a TEZOS_PROTOCOL file.
 TEZOS_PROTOCOL_FILES=$(wildcard src/proto_*/lib_protocol/TEZOS_PROTOCOL)
