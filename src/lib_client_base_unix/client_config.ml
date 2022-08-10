@@ -191,13 +191,13 @@ let base_dir_env_name = "TEZOS_CLIENT_DIR"
 
 let default_base_dir =
   try Sys.getenv base_dir_env_name
-  with Not_found -> Filename.concat home ".tezos-client"
+  with Not_found -> Filename.concat home ".tlnt-client"
 
 let default_chain = `Main
 
 let default_block = `Head 0
 
-let default_endpoint = Uri.of_string "http://localhost:8732"
+let default_endpoint = Uri.of_string "http://localhost:8733"
 
 let default_media_type = Media_type.all_media_types
 
