@@ -2,4 +2,4 @@
 
 setup.sh
 
-supervisord -c /etc/supervisor/supervisord.conf -n
+exec supervisord -c /etc/supervisor/supervisord.conf -n
