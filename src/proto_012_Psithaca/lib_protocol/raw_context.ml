@@ -778,7 +778,7 @@ let check_and_update_protocol_version ctxt =
          failwith "Internal error: previously initialized context."
        else if Compare.String.(s = "genesis") then
          get_proto_param ctxt >|=? fun (param, ctxt) -> (Genesis param, ctxt)
-       else if Compare.String.(s = "hangzhou_011") then
+       else if Compare.String.(s = "dcphangzhou_011") then
          return (Hangzhou_011, ctxt)
        else Lwt.return @@ storage_error (Incompatible_protocol_version s))
   >>=? fun (previous_proto, ctxt) ->
@@ -855,25 +855,13 @@ let prepare_first_block ~level ~timestamp ctxt =
       >>?= fun delay_increment_per_round ->
       let constants =
         let consensus_committee_size = 7000 in
-        let Constants_repr.Generated.
-              {
-                consensus_threshold;
-                baking_reward_fixed_portion;
-                baking_reward_bonus_per_slot;
-                endorsing_reward_per_slot;
-              } =
-          Constants_repr.Generated.generate
-            ~consensus_committee_size
-            ~blocks_per_minute:
-              {numerator = 60; denominator = Int64.to_int minimal_block_delay_s}
-        in
         Constants_repr.
           {
             preserved_cycles = c.preserved_cycles;
             blocks_per_cycle = c.blocks_per_cycle;
             blocks_per_commitment = c.blocks_per_commitment;
             blocks_per_stake_snapshot = c.blocks_per_roll_snapshot;
-            blocks_per_voting_period = c.blocks_per_voting_period;
+            blocks_per_voting_period = 81_920l;
             hard_gas_limit_per_operation = c.hard_gas_limit_per_operation;
             hard_gas_limit_per_block = c.hard_gas_limit_per_block;
             proof_of_work_threshold = c.proof_of_work_threshold;
@@ -885,9 +873,9 @@ let prepare_first_block ~level ~timestamp ctxt =
             origination_size = c.origination_size;
             (* Same value as in the previous protocol. *)
             max_operations_time_to_live = 120;
-            baking_reward_fixed_portion;
-            baking_reward_bonus_per_slot;
-            endorsing_reward_per_slot;
+            baking_reward_fixed_portion = Tez_repr.(mul_exn one 2);
+            baking_reward_bonus_per_slot = Tez_repr.(of_mutez_exn 1_000L);
+            endorsing_reward_per_slot = Tez_repr.(of_mutez_exn 500L);
             cost_per_byte = c.cost_per_byte;
             hard_storage_limit_per_operation =
               c.hard_storage_limit_per_operation;
@@ -895,20 +883,16 @@ let prepare_first_block ~level ~timestamp ctxt =
             quorum_max = c.quorum_max;
             min_proposal_quorum = c.min_proposal_quorum;
             liquidity_baking_subsidy = c.liquidity_baking_subsidy;
-            liquidity_baking_sunset_level =
-              (* preserve a lower level for testnets *)
-              (if Compare.Int32.(c.liquidity_baking_sunset_level = 2_244_609l)
-              then 3_063_809l
-              else c.liquidity_baking_sunset_level);
+            liquidity_baking_sunset_level = c.liquidity_baking_sunset_level;
             liquidity_baking_escape_ema_threshold = 666_667l;
             minimal_block_delay;
             delay_increment_per_round;
             consensus_committee_size;
-            consensus_threshold;
+            consensus_threshold = 4_667;
             minimal_participation_ratio = {numerator = 2; denominator = 3};
             max_slashing_period = 2;
             frozen_deposits_percentage = 10;
-            double_baking_punishment = Tez_repr.(mul_exn one 640);
+            double_baking_punishment = Tez_repr.(mul_exn one 128);
             ratio_of_frozen_deposits_slashed_per_double_endorsement =
               {numerator = 1; denominator = 2};
             delegate_selection = Random;
