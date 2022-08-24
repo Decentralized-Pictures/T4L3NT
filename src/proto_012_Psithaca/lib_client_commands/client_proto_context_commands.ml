@@ -762,6 +762,36 @@ let commands_network network () =
                   name
                 >>=? fun _res -> return_unit);
       ]
+  | Some `Mainnet ->
+      [
+        command
+          ~group
+          ~desc:"Activate a fundraiser account."
+          (args1 dry_run_switch)
+          (prefixes ["activate"; "fundraiser"; "account"]
+          @@ Public_key_hash.alias_param
+          @@ prefixes ["with"]
+          @@ param
+               ~name:"code"
+               (Clic.parameter (fun _ctx code ->
+                    match
+                      Blinded_public_key_hash.activation_code_of_hex code
+                    with
+                    | Some c -> return c
+                    | None -> failwith "Hexadecimal parsing failure"))
+               ~desc:"Activation code obtained from the Tezos foundation."
+          @@ stop)
+          (fun dry_run (name, _pkh) code cctxt ->
+            activate_existing_account
+              cctxt
+              ~chain:cctxt#chain
+              ~block:cctxt#block
+              ?confirmations:cctxt#confirmations
+              ~dry_run
+              name
+              code
+            >>=? fun _res -> return_unit);
+      ]
 
 let commands_rw () =
   let open Client_proto_programs in
