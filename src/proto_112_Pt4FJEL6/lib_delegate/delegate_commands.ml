@@ -36,7 +36,7 @@ let directory_parameter =
       else return p)
 
 let http_headers_env_variable =
-  "TEZOS_CLIENT_REMOTE_OPERATIONS_POOL_HTTP_HEADERS"
+  "T4L3NT_CLIENT_REMOTE_OPERATIONS_POOL_HTTP_HEADERS"
 
 let http_headers =
   match Sys.getenv_opt http_headers_env_variable with
