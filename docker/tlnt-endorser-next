@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+STR_ARGS="$*"
+
+printf "Endorser binary is not deprecated in Ithaca protocol"

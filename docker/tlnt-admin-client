@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+STR_ARGS="$*"
+
+tezos-admin-client ${STR_ARGS}

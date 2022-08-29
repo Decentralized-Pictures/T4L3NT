@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+STR_ARGS="$*"
+
+/usr/local/bin/tlnt-baker-112-Pt4FJEL6 ${STR_ARGS}
