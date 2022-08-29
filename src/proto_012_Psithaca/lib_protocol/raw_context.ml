@@ -873,9 +873,9 @@ let prepare_first_block ~level ~timestamp ctxt =
             origination_size = c.origination_size;
             (* Same value as in the previous protocol. *)
             max_operations_time_to_live = 120;
-            baking_reward_fixed_portion = Tez_repr.(mul_exn one 2);
-            baking_reward_bonus_per_slot = Tez_repr.(of_mutez_exn 1_000L);
-            endorsing_reward_per_slot = Tez_repr.(of_mutez_exn 500L);
+            baking_reward_fixed_portion = Tez_repr.(mul_exn one 1);
+            baking_reward_bonus_per_slot = Tez_repr.(of_mutez_exn 500L);
+            endorsing_reward_per_slot = Tez_repr.(of_mutez_exn 250L);
             cost_per_byte = c.cost_per_byte;
             hard_storage_limit_per_operation =
               c.hard_storage_limit_per_operation;
@@ -892,7 +892,7 @@ let prepare_first_block ~level ~timestamp ctxt =
             minimal_participation_ratio = {numerator = 2; denominator = 3};
             max_slashing_period = 2;
             frozen_deposits_percentage = 10;
-            double_baking_punishment = Tez_repr.(mul_exn one 128);
+            double_baking_punishment = Tez_repr.(mul_exn one 64);
             ratio_of_frozen_deposits_slashed_per_double_endorsement =
               {numerator = 1; denominator = 2};
             delegate_selection = Random;
