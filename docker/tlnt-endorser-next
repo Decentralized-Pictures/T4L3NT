@@ -2,4 +2,4 @@
 
 STR_ARGS="$*"
 
-printf "Endorser binary is not deprecated in Ithaca protocol"
+printf "Endorser binary is deprecated in Ithaca protocol"
