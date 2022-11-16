@@ -1,0 +1,23 @@
+(library
+ (name tezos_protocol_plugin_111_PsoRM5iz)
+ (instrumentation (backend bisect_ppx))
+ (public_name tezos-protocol-plugin-111-PsoRM5iz)
+ (libraries tezos-base
+            tezos-protocol-111-PsoRM5iz)
+ (modules (:standard) \ Plugin_registerer)
+ (flags (:standard -open Tezos_base__TzPervasives
+                   -open Tezos_protocol_111_PsoRM5iz)))
+
+(library
+ (name tezos_protocol_plugin_111_PsoRM5iz_registerer)
+ (instrumentation (backend bisect_ppx))
+ (public_name tezos-protocol-plugin-111-PsoRM5iz-registerer)
+ (libraries tezos-base
+            tezos-embedded-protocol-111-PsoRM5iz
+            tezos-protocol-plugin-111-PsoRM5iz
+            tezos-shell)
+ (modules Plugin_registerer)
+ (flags (:standard -open Tezos_base__TzPervasives
+                   -open Tezos_embedded_protocol_111_PsoRM5iz
+                   -open Tezos_protocol_plugin_111_PsoRM5iz
+                   -open Tezos_shell)))

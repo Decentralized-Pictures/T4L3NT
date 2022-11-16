@@ -83,6 +83,9 @@
   (select void_for_linking-tezos-embedded-protocol-009-PsFLoren from
    (tezos-embedded-protocol-009-PsFLoren -> void_for_linking-tezos-embedded-protocol-009-PsFLoren.empty)
    (-> void_for_linking-tezos-embedded-protocol-009-PsFLoren.empty))
+  (select void_for_linking-tezos-embedded-protocol-112-Pt4FJEL6 from
+   (tezos-embedded-protocol-112-Pt4FJEL6 -> void_for_linking-tezos-embedded-protocol-112-Pt4FJEL6.empty)
+   (-> void_for_linking-tezos-embedded-protocol-112-Pt4FJEL6.empty))
   (select void_for_linking-tezos-embedded-protocol-010-PtGRANAD from
    (tezos-embedded-protocol-010-PtGRANAD -> void_for_linking-tezos-embedded-protocol-010-PtGRANAD.empty)
    (-> void_for_linking-tezos-embedded-protocol-010-PtGRANAD.empty))
@@ -104,6 +107,9 @@
   (select void_for_linking-tezos-protocol-plugin-009-PsFLoren-registerer from
    (tezos-protocol-plugin-009-PsFLoren-registerer -> void_for_linking-tezos-protocol-plugin-009-PsFLoren-registerer.empty)
    (-> void_for_linking-tezos-protocol-plugin-009-PsFLoren-registerer.empty))
+  (select void_for_linking-tezos-protocol-plugin-112-Pt4FJEL6-registerer from
+   (tezos-protocol-plugin-112-Pt4FJEL6-registerer -> void_for_linking-tezos-protocol-plugin-112-Pt4FJEL6-registerer.empty)
+   (-> void_for_linking-tezos-protocol-plugin-112-Pt4FJEL6-registerer.empty))
   (select void_for_linking-tezos-protocol-plugin-010-PtGRANAD-registerer from
    (tezos-protocol-plugin-010-PtGRANAD-registerer -> void_for_linking-tezos-protocol-plugin-010-PtGRANAD-registerer.empty)
    (-> void_for_linking-tezos-protocol-plugin-010-PtGRANAD-registerer.empty))
@@ -153,6 +159,7 @@
    (write-file void_for_linking-tezos-embedded-protocol-008-PtEdoTez.empty "")
    (write-file void_for_linking-tezos-embedded-protocol-008-PtEdo2Zk.empty "")
    (write-file void_for_linking-tezos-embedded-protocol-009-PsFLoren.empty "")
+   (write-file void_for_linking-tezos-embedded-protocol-112-Pt4FJEL6.empty "")
    (write-file void_for_linking-tezos-embedded-protocol-010-PtGRANAD.empty "")
    (write-file void_for_linking-tezos-embedded-protocol-011-PtHangz2.empty "")
    (write-file void_for_linking-tezos-embedded-protocol-012-Psithaca.empty "")
@@ -160,6 +167,7 @@
    (write-file void_for_linking-tezos-protocol-plugin-007-PsDELPH1-registerer.empty "")
    (write-file void_for_linking-tezos-protocol-plugin-008-PtEdo2Zk-registerer.empty "")
    (write-file void_for_linking-tezos-protocol-plugin-009-PsFLoren-registerer.empty "")
+   (write-file void_for_linking-tezos-protocol-plugin-112-Pt4FJEL6-registerer.empty "")
    (write-file void_for_linking-tezos-protocol-plugin-010-PtGRANAD-registerer.empty "")
    (write-file void_for_linking-tezos-protocol-plugin-011-PtHangz2-registerer.empty "")
    (write-file void_for_linking-tezos-protocol-plugin-012-Psithaca-registerer.empty "")

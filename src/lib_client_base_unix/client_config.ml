@@ -187,17 +187,17 @@ let () =
 
 let home = try Sys.getenv "HOME" with Not_found -> "/root"
 
-let base_dir_env_name = "TEZOS_CLIENT_DIR"
+let base_dir_env_name = "TLNT_CLIENT_DIR"
 
 let default_base_dir =
   try Sys.getenv base_dir_env_name
-  with Not_found -> Filename.concat home ".tezos-client"
+  with Not_found -> Filename.concat home ".tlnt-client"
 
 let default_chain = `Main
 
 let default_block = `Head 0
 
-let default_endpoint = Uri.of_string "http://localhost:8732"
+let default_endpoint = Uri.of_string "http://localhost:8733"
 
 let default_media_type = Media_type.all_media_types
 
@@ -413,7 +413,7 @@ let base_dir_arg () =
     ~doc:
       (Format.asprintf
          "@[<v>@[<2>client data directory (absent: %s env)@,\
-          The directory where the Tezos client will store all its data.@,\
+          The directory where the T4L3NT client will store all its data.@,\
           If absent, its value is the value of the %s@,\
           environment variable. If %s is itself not specified,@,\
           defaults to %s@]@]@."
@@ -608,7 +608,7 @@ let fail_on_non_mockup_dir (cctxt : #Client_context.full) =
       failwith
         "base directory at %s should be a mockup directory for this operation \
          to be allowed (it may contain sensitive data otherwise). What you \
-         likely want is calling `tezos-client --mode mockup --base-dir \
+         likely want is calling `tlnt-client --mode mockup --base-dir \
          /some/dir create mockup` where `/some/dir` is **fresh** and **empty** \
          and redo this operation, specifying `--base-dir /some/dir` this time."
         base_dir
@@ -883,7 +883,7 @@ let check_base_dir_for_mode (ctx : #Client_context.full) client_mode base_dir =
       let show_cmd ppf () =
         Format.fprintf
           ppf
-          "./tezos-client --mode mockup --base-dir %s create mockup"
+          "./tlnt-client --mode mockup --base-dir %s create mockup"
           base_dir
       in
       match base_dir_class with

@@ -62,6 +62,9 @@
   (select void_for_linking-tezos-client-009-PsFLoren-commands-registration from
    (tezos-client-009-PsFLoren-commands-registration -> void_for_linking-tezos-client-009-PsFLoren-commands-registration.empty)
    (-> void_for_linking-tezos-client-009-PsFLoren-commands-registration.empty))
+  (select void_for_linking-tezos-client-112-Pt4FJEL6-commands-registration from
+   (tezos-client-112-Pt4FJEL6-commands-registration -> void_for_linking-tezos-client-112-Pt4FJEL6-commands-registration.empty)
+   (-> void_for_linking-tezos-client-112-Pt4FJEL6-commands-registration.empty))
   (select void_for_linking-tezos-client-010-PtGRANAD-commands-registration from
    (tezos-client-010-PtGRANAD-commands-registration -> void_for_linking-tezos-client-010-PtGRANAD-commands-registration.empty)
    (-> void_for_linking-tezos-client-010-PtGRANAD-commands-registration.empty))
@@ -97,6 +100,9 @@
   (select void_for_linking-tezos-protocol-plugin-009-PsFLoren from
    (tezos-protocol-plugin-009-PsFLoren -> void_for_linking-tezos-protocol-plugin-009-PsFLoren.empty)
    (-> void_for_linking-tezos-protocol-plugin-009-PsFLoren.empty))
+  (select void_for_linking-tezos-protocol-plugin-112-Pt4FJEL6 from
+   (tezos-protocol-plugin-112-Pt4FJEL6 -> void_for_linking-tezos-protocol-plugin-112-Pt4FJEL6.empty)
+   (-> void_for_linking-tezos-protocol-plugin-112-Pt4FJEL6.empty))
   (select void_for_linking-tezos-protocol-plugin-010-PtGRANAD from
    (tezos-protocol-plugin-010-PtGRANAD -> void_for_linking-tezos-protocol-plugin-010-PtGRANAD.empty)
    (-> void_for_linking-tezos-protocol-plugin-010-PtGRANAD.empty))
@@ -137,6 +143,7 @@
    (write-file void_for_linking-tezos-client-007-PsDELPH1-commands-registration.empty "")
    (write-file void_for_linking-tezos-client-008-PtEdo2Zk-commands-registration.empty "")
    (write-file void_for_linking-tezos-client-009-PsFLoren-commands-registration.empty "")
+   (write-file void_for_linking-tezos-client-112-Pt4FJEL6-commands-registration.empty "")
    (write-file void_for_linking-tezos-client-010-PtGRANAD-commands-registration.empty "")
    (write-file void_for_linking-tezos-client-011-PtHangz2-commands-registration.empty "")
    (write-file void_for_linking-tezos-client-012-Psithaca-commands-registration.empty "")
@@ -147,6 +154,7 @@
    (write-file void_for_linking-tezos-protocol-plugin-007-PsDELPH1.empty "")
    (write-file void_for_linking-tezos-protocol-plugin-008-PtEdo2Zk.empty "")
    (write-file void_for_linking-tezos-protocol-plugin-009-PsFLoren.empty "")
+   (write-file void_for_linking-tezos-protocol-plugin-112-Pt4FJEL6.empty "")
    (write-file void_for_linking-tezos-protocol-plugin-010-PtGRANAD.empty "")
    (write-file void_for_linking-tezos-protocol-plugin-011-PtHangz2.empty "")
    (write-file void_for_linking-tezos-protocol-plugin-012-Psithaca.empty "")

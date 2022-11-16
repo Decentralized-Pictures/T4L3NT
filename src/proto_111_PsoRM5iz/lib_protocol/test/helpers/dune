@@ -1,0 +1,24 @@
+(library
+ (name tezos_111_PsoRM5iz_test_helpers)
+ (instrumentation (backend bisect_ppx))
+ (public_name tezos-111-PsoRM5iz-test-helpers)
+ (libraries alcotest-lwt
+            qcheck-alcotest
+            tezos-test-helpers
+            tezos-base
+            tezos-micheline
+            tezos-stdlib-unix
+            tezos-shell-services
+            tezos-protocol-environment
+            tezos-protocol-111-PsoRM5iz
+            tezos-protocol-111-PsoRM5iz-parameters
+            tezos-client-111-PsoRM5iz
+            tezos-protocol-plugin-111-PsoRM5iz)
+ (flags (:standard -open Tezos_base__TzPervasives
+                   -open Tezos_micheline
+                   -open Tezos_stdlib_unix
+                   -open Tezos_protocol_111_PsoRM5iz
+                   -open Tezos_client_111_PsoRM5iz
+                   -open Tezos_protocol_plugin_111_PsoRM5iz
+                   -open Tezos_protocol_environment_111_PsoRM5iz
+                   -open Tezos_shell_services)))

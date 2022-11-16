@@ -174,8 +174,8 @@ let prepare_first_block ctxt ~typecheck ~level ~timestamp =
       >>=? fun ctxt ->
       Storage.Legacy_active_delegates_with_rolls.clear ctxt >>= fun ctxt ->
       let old_tokens_per_roll = Constants_storage.tokens_per_roll ctxt in
-      let new_tokens_per_roll = Tez_repr.(mul_exn one 6_000) in
-      assert (Tez_repr.(new_tokens_per_roll < old_tokens_per_roll)) ;
+      let new_tokens_per_roll = Tez_repr.(mul_exn one 1000) in
+(*      assert (Tez_repr.(new_tokens_per_roll < old_tokens_per_roll)) ;*)
       Roll_storage_legacy.fold
         ctxt
         ~f:(fun _roll pk (stakes, pk_map) ->
@@ -228,7 +228,7 @@ let prepare_first_block ctxt ~typecheck ~level ~timestamp =
       Raw_context.patch_constants ctxt (fun constants ->
           {
             constants with
-            Constants_repr.tokens_per_roll = Tez_repr.(mul_exn one 6_000);
+            Constants_repr.tokens_per_roll = Tez_repr.(mul_exn one 1_000);
           })
       >>= fun ctxt ->
       (* NOTE: the code below fails when the migration happens during

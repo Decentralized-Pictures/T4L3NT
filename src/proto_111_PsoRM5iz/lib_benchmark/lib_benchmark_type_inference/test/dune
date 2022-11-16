@@ -1,0 +1,10 @@
+(tests
+ (names test_uf
+        test_inference)
+ (package tezos-benchmark-type-inference-111-PsoRM5iz)
+ (libraries tezos-micheline tezos-micheline-rewriting
+            tezos-benchmark-type-inference-111-PsoRM5iz tezos-protocol-111-PsoRM5iz
+            tezos-error-monad tezos-client-111-PsoRM5iz)
+ (flags
+    (:standard -open Tezos_micheline
+               -open Tezos_benchmark_type_inference_111_PsoRM5iz)))

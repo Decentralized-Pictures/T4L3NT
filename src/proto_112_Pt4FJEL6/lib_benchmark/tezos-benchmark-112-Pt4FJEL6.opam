@@ -1,0 +1,32 @@
+opam-version: "2.0"
+maintainer: "contact@tezos.com"
+authors: [ "Tezos devteam" ]
+homepage: "https://www.tezos.com/"
+bug-reports: "https://gitlab.com/tezos/tezos/issues"
+dev-repo: "git+https://gitlab.com/tezos/tezos.git"
+license: "MIT"
+depends: [
+  "tezos-tooling" { with-test }
+  "dune" { >= "2.9" }
+  "tezos-base"
+  "tezos-benchmark"
+  "tezos-protocol-environment"
+  "tezos-protocol-112-Pt4FJEL6"
+  "tezos-112-Pt4FJEL6-test-helpers"
+  "tezos-protocol-112-Pt4FJEL6-parameters"
+  "tezos-micheline-rewriting"
+  "tezos-benchmark-type-inference-112-Pt4FJEL6"
+  "hashcons"
+  "benchmark-utils"
+  "tezos-112-Pt4FJEL6-test-helpers"
+  "prbnmcn-stats" { = "0.0.2" }
+  "tezos-micheline" { with-test }
+  "tezos-error-monad" { with-test }
+  "alcotest-lwt" { with-test }
+
+]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
+synopsis: "Tezos/Protocol: library for writing benchmarks (protocol-specific part)"

@@ -1,0 +1,82 @@
+(executables
+ (names main
+        saturation_fuzzing
+        test_gas_properties
+        test_tez_repr
+        liquidity_baking_pbt
+        test_script_comparison)
+ (libraries tezos-base
+            tezos-micheline
+            tezos-protocol-environment
+            alcotest-lwt
+            tezos-test-helpers
+            qcheck-alcotest
+            tezos-111-PsoRM5iz-test-helpers
+            tezos-stdlib-unix
+            tezos-client-base
+            tezos-protocol-111-PsoRM5iz-parameters
+            tezos-base-test-helpers
+            tezos-sapling
+            astring
+            tezos-protocol-plugin-111-PsoRM5iz
+            tezos-benchmark
+            tezos-benchmark-111-PsoRM5iz)
+ (flags (:standard -open Tezos_base__TzPervasives
+                   -open Tezos_micheline
+                   -open Tezos_client_111_PsoRM5iz
+                   -open Tezos_protocol_111_PsoRM5iz
+                   -open Tezos_protocol_plugin_111_PsoRM5iz
+                   -open Tezos_protocol_environment_111_PsoRM5iz
+                   -open Tezos_benchmark_111_PsoRM5iz
+                   -open Tezos_benchmark_type_inference_111_PsoRM5iz
+                   -open Tezos_111_PsoRM5iz_test_helpers
+                   -open Tezos_base_test_helpers)))
+
+(rule
+ (copy %{lib:tezos-protocol-111-PsoRM5iz-parameters:test-parameters.json}
+       protocol_parameters.json))
+
+; runs only the `Quick tests
+(rule
+ (alias runtest_proto_111_PsoRM5iz)
+ (deps (glob_files contracts/*))
+ (package tezos-protocol-111-PsoRM5iz-tests)
+ (action (run %{exe:main.exe} -q)))
+
+; runs both `Quick and `Slow tests
+(rule
+ (alias runtest_slow)
+ (deps (glob_files contracts/*))
+ (package tezos-protocol-111-PsoRM5iz-tests)
+ (action (run %{exe:main.exe})))
+
+(rule
+ (alias runtest_saturation_fuzzing)
+ (package tezos-protocol-111-PsoRM5iz-tests)
+ (action (run %{exe:saturation_fuzzing.exe})))
+
+(rule
+ (alias runtest_test_script_comparison)
+ (package tezos-protocol-111-PsoRM5iz-tests)
+ (action (run %{exe:test_script_comparison.exe})))
+
+(rule
+ (alias runtest_test_tez_repr)
+ (package tezos-protocol-111-PsoRM5iz-tests)
+ (action (run %{exe:test_tez_repr.exe})))
+
+(rule
+ (alias runtest_liquidity_baking_pbt)
+ (package tezos-protocol-111-PsoRM5iz-tests)
+ (action (run %{exe:liquidity_baking_pbt.exe})))
+
+(rule
+ (alias runtest)
+ (package tezos-protocol-111-PsoRM5iz-tests)
+ (deps
+  (alias runtest_proto_111_PsoRM5iz)
+  (alias runtest_saturation_fuzzing)
+  (alias runtest_test_tez_repr)
+  (alias runtest_liquidity_baking_pbt)
+  (alias runtest_test_script_comparison))
+ (action (progn)))

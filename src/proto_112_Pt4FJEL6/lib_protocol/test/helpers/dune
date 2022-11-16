@@ -1,0 +1,24 @@
+(library
+ (name tezos_112_Pt4FJEL6_test_helpers)
+ (instrumentation (backend bisect_ppx))
+ (public_name tezos-112-Pt4FJEL6-test-helpers)
+ (libraries alcotest-lwt
+            qcheck-alcotest
+            tezos-test-helpers
+            tezos-base
+            tezos-micheline
+            tezos-stdlib-unix
+            tezos-shell-services
+            tezos-protocol-environment
+            tezos-protocol-112-Pt4FJEL6
+            tezos-protocol-112-Pt4FJEL6-parameters
+            tezos-client-112-Pt4FJEL6
+            tezos-protocol-plugin-112-Pt4FJEL6)
+ (flags (:standard -open Tezos_base__TzPervasives
+                   -open Tezos_micheline
+                   -open Tezos_stdlib_unix
+                   -open Tezos_protocol_112_Pt4FJEL6
+                   -open Tezos_client_112_Pt4FJEL6
+                   -open Tezos_protocol_plugin_112_Pt4FJEL6
+                   -open Tezos_protocol_environment_112_Pt4FJEL6
+                   -open Tezos_shell_services)))

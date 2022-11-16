@@ -1,0 +1,24 @@
+(executable
+ (name main)
+ (libraries tezos-base
+            tezos-micheline
+            tezos-protocol-environment
+            alcotest-lwt
+            tezos-111-PsoRM5iz-test-helpers
+            tezos-stdlib-unix
+            tezos-client-base
+            tezos-protocol-111-PsoRM5iz-parameters
+            tezos-base-test-helpers)
+ (flags (:standard -open Tezos_base__TzPervasives
+                   -open Tezos_base_test_helpers
+                   -open Tezos_micheline
+                   -open Tezos_client_111_PsoRM5iz
+                   -open Tezos_protocol_111_PsoRM5iz
+                   -open Tezos_protocol_environment_111_PsoRM5iz
+                   -open Tezos_111_PsoRM5iz_test_helpers)))
+
+(rule
+ (alias runtest)
+ (package tezos-protocol-111-PsoRM5iz-tests)
+ (deps main.exe)
+ (action (run ./main.exe "test" "Unit")))

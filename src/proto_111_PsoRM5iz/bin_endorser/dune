@@ -1,0 +1,20 @@
+; build static executable with --profile static
+(env
+ (static (flags (:standard
+                  -ccopt -static
+                  -cclib "-lusb-1.0 -lhidapi-libusb -ludev"))))
+
+(executable
+ (name main_endorser_111_PsoRM5iz)
+ (instrumentation (backend bisect_ppx))
+ (public_name tezos-endorser-111-PsoRM5iz)
+ (libraries tezos-client-base-unix
+            tezos-client-commands
+            tezos-baking-111-PsoRM5iz-commands)
+ (flags (:standard -open Tezos_base__TzPervasives
+                   -open Tezos_protocol_111_PsoRM5iz
+                   -open Tezos_client_111_PsoRM5iz
+                   -open Tezos_client_commands
+                   -open Tezos_baking_111_PsoRM5iz_commands
+                   -open Tezos_stdlib_unix
+                   -open Tezos_client_base_unix)))

@@ -699,7 +699,7 @@ module Internal_for_tests = struct
       P2p_point_state.Info.default_reconnection_config
     in
     let proof_of_work_target = Crypto_box.make_pow_target 0. in
-    let listening_port = Some 9732 in
+    let listening_port = Some 9733 in
     let advertised_port = None in
     {
       incoming_app_message_queue_size;

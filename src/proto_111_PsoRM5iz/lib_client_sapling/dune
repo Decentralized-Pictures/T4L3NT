@@ -1,0 +1,19 @@
+(library
+ (name tezos_client_sapling_111_PsoRM5iz)
+ (instrumentation (backend bisect_ppx))
+ (public_name tezos-client-sapling-111-PsoRM5iz)
+ (libraries tezos-base
+            tezos-crypto
+            tezos-client-base
+            tezos-signer-backends
+            tezos-client-111-PsoRM5iz
+            tezos-client-111-PsoRM5iz-commands
+            tezos-protocol-111-PsoRM5iz)
+ (library_flags (:standard -linkall))
+ (flags (:standard -open Tezos_base__TzPervasives
+                   -open Tezos_stdlib_unix
+                   -open Tezos_client_base
+                   -open Tezos_client_111_PsoRM5iz
+                   -open Tezos_client_111_PsoRM5iz_commands
+                   -open Tezos_protocol_111_PsoRM5iz
+                   -open Tezos_protocol_environment_111_PsoRM5iz)))

@@ -28,15 +28,15 @@ open Filename.Infix
 
 let home = try Sys.getenv "HOME" with Not_found -> "/root"
 
-let data_dir_env_name = "TEZOS_NODE_DIR"
+let data_dir_env_name = "TLNT_NODE_DIR"
 
-let default_data_dir = home // ".tezos-node"
+let default_data_dir = home // ".tlnt-node"
 
-let default_rpc_port = 8732
+let default_rpc_port = 8733
 
-let default_p2p_port = 9732
+let default_p2p_port = 9733
 
-let default_discovery_port = 10732
+let default_discovery_port = 10733
 
 type chain_name = Distributed_db_version.Name.t
 
@@ -83,8 +83,7 @@ let make_blockchain_network ~alias ~chain_name ?old_chain_name
 (* BEGIN_PATCHING_ZONE_FOR_MAINNET_USER_ACTIVATED_UPGRADES *)
 let mainnet_user_activated_upgrades =
   [
-    (28082l, "PsYLVpVvgbLhAhoqAkMFUo6gudkJ9weNXhUYCiLDzcUpFpkk8Wt");
-    (204761l, "PsddFKi32cMJ2qPjf43Qv5GDWLDPZb3T3bF6fLKiF5HtvHNU7aP");
+     (635905l, "Pt4FJEL6jZDrWLkQ2xzpqaXaDKZa23PohrfCt9t75tkGDCqzVvM");
   ]
 
 (* END_PATCHING_ZONE_FOR_MAINNET_USER_ACTIVATED_UPGRADES *)
@@ -95,105 +94,33 @@ let sandbox_user_activated_upgrades = []
 (* END_PATCHING_ZONE_FOR_SANDBOX_USER_ACTIVATED_UPGRADES *)
 
 let blockchain_network_mainnet =
-  let giganode_1 = "116.202.172.21" in
-  let giganode_2 = "95.216.45.62" in
   make_blockchain_network
     ~alias:"mainnet"
     {
-      time = Time.Protocol.of_notation_exn "2018-06-30T16:07:32Z";
+      time = Time.Protocol.of_notation_exn "2021-12-15T04:20:00Z";
       block =
         Block_hash.of_b58check_exn
-          "BLockGenesisGenesisGenesisGenesisGenesisf79b5d1CoW2";
+          "BLRWV6h8maHkbyy4D9K1zUUyYap76ZsntbQYKjMz5EknUtpCrzS";
       protocol =
         Protocol_hash.of_b58check_exn
           "Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P";
     }
-    ~chain_name:"TEZOS_MAINNET"
-    ~old_chain_name:"TEZOS_BETANET_2018-06-30T16:07:32Z"
+    ~genesis_parameters:
+      {
+        context_key = "sandbox_parameter";
+        values =
+          `O
+            [ ( "genesis_pubkey",
+                `String
+                  "edpkumhihiF9aaQ6AueVPZGux4aiMhzJ4JctBybbDBsGwnhm4R7mTQ" ) ];
+      }
+    ~chain_name:"TLNT_NET"
     ~incompatible_chain_name:"INCOMPATIBLE"
-    ~sandboxed_chain_name:"SANDBOXED_TEZOS_MAINNET"
+    ~sandboxed_chain_name:"SANDBOXED_TLNT_NET"
     ~user_activated_upgrades:mainnet_user_activated_upgrades
     ~user_activated_protocol_overrides:
-      [
-        ( "PsBABY5HQTSkA4297zNHfsZNKtxULfL18y95qb3m53QJiXGmrbU",
-          "PsBabyM1eUXZseaJdmXFApDSBqj8YBfwELoxZHHW77EMcAbbwAS" );
-        ( "PtEdoTezd3RHSC31mpxxo1npxFjoWWcFgQtxapi51Z8TLu6v6Uq",
-          "PtEdo2ZkT9oKpimTah6x2embF25oss54njMuPzkJTEi5RqfdZFA" );
-        ( "PtHangzHogokSuiMHemCuowEavgYTP8J5qQ9fQS793MHYFpCY3r",
-          "PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx" );
-      ]
-    ~default_bootstrap_peers:["boot.tzbeta.net"; giganode_1; giganode_2]
-
-let blockchain_network_hangzhounet =
-  make_blockchain_network
-    ~alias:"hangzhounet"
-    {
-      time = Time.Protocol.of_notation_exn "2021-11-04T15:00:00Z";
-      block =
-        Block_hash.of_b58check_exn
-          "BLockGenesisGenesisGenesisGenesisGenesis7e8c4d4snJW";
-      protocol =
-        Protocol_hash.of_b58check_exn
-          "Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P";
-    }
-    ~genesis_parameters:
-      {
-        context_key = "sandbox_parameter";
-        values =
-          `O
-            [
-              ( "genesis_pubkey",
-                `String "edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC"
-              );
-            ];
-      }
-    ~chain_name:"TEZOS_HANGZHOUNET_2021-11-04T15:00:00Z"
-    ~sandboxed_chain_name:"SANDBOXED_TEZOS"
-    ~user_activated_upgrades:
-      [(8191l, "PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx")]
-    ~default_bootstrap_peers:
-      [
-        "hangzhounet.teztnets.xyz";
-        "hangzhounet.kaml.fr";
-        "hangzhounet.smartpy.io";
-        "hangzhounet.tezos.co.il";
-        "hangzhounet.boot.tez.ie";
-      ]
-
-let blockchain_network_ithacanet =
-  make_blockchain_network
-    ~alias:"ithacanet"
-    {
-      time = Time.Protocol.of_notation_exn "2022-01-25T15:00:00Z";
-      block =
-        Block_hash.of_b58check_exn
-          "BLockGenesisGenesisGenesisGenesisGenesis1db77eJNeJ9";
-      protocol =
-        Protocol_hash.of_b58check_exn
-          "Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P";
-    }
-    ~genesis_parameters:
-      {
-        context_key = "sandbox_parameter";
-        values =
-          `O
-            [
-              ( "genesis_pubkey",
-                `String "edpkuYLienS3Xdt5c1vfRX1ibMxQuvfM67ByhJ9nmRYYKGAAoTq1UC"
-              );
-            ];
-      }
-    ~chain_name:"TEZOS_ITHACANET_2022-01-25T15:00:00Z"
-    ~sandboxed_chain_name:"SANDBOXED_TEZOS"
-    ~user_activated_upgrades:
-      [(8191l, "Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A")]
-    ~default_bootstrap_peers:
-      [
-        "ithacanet.teztnets.xyz";
-        "ithacanet.smartpy.io";
-        "ithacanet.kaml.fr";
-        "ithacanet.boot.ecadinfra.com";
-      ]
+      [ ]
+    ~default_bootstrap_peers:["network.decentralized.pictures"]
 
 let blockchain_network_sandbox =
   make_blockchain_network
@@ -290,12 +217,8 @@ let blockchain_network_encoding : blockchain_network Data_encoding.t =
           []))
 
 let builtin_blockchain_networks_with_tags =
-  [
-    (1, blockchain_network_sandbox);
-    (4, blockchain_network_mainnet);
-    (16, blockchain_network_hangzhounet);
-    (17, blockchain_network_ithacanet);
-  ]
+  [ (1, blockchain_network_sandbox);
+    (4, blockchain_network_mainnet); ]
   |> List.map (fun (tag, network) ->
          match network.alias with
          | None -> assert false (* all built-in networks must have aliases *)
@@ -730,13 +653,13 @@ let p2p =
           "bootstrap-peers"
           ~description:
             "List of hosts. Tezos can connect to both IPv6 and IPv4 hosts. If \
-             the port is not specified, default port 9732 will be assumed."
+             the port is not specified, default port 9733 will be assumed."
           (list string))
        (opt
           "listen-addr"
           ~description:
             "Host to listen to. If the port is not specified, the default port \
-             9732 will be assumed."
+             9733 will be assumed."
           string)
        (opt
           "advertised-net-port"
@@ -748,7 +671,7 @@ let p2p =
           "discovery-addr"
           ~description:
             "Host for local peer discovery. If the port is not specified, the \
-             default port 10732 will be assumed."
+             default port 10733 will be assumed."
           (option string)
           default_p2p.discovery_addr)
        (dft
@@ -827,7 +750,7 @@ let rpc : rpc Data_encoding.t =
           "listen-addrs"
           ~description:
             "Hosts to listen to. If the port is not specified, the default \
-             port 8732 will be assumed."
+             port 8733 will be assumed."
           (list string))
        (opt "listen-addr" ~description:"Legacy value: Host to listen to" string)
        (dft

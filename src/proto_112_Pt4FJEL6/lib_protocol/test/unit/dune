@@ -1,0 +1,20 @@
+(test
+ (name main)
+ (package tezos-protocol-112-Pt4FJEL6-tests)
+ (libraries tezos-base
+            tezos-micheline
+            tezos-protocol-environment
+            alcotest-lwt
+            tezos-112-Pt4FJEL6-test-helpers
+            tezos-stdlib-unix
+            tezos-client-base
+            tezos-protocol-112-Pt4FJEL6-parameters
+            tezos-base-test-helpers)
+ (flags (:standard -open Tezos_base__TzPervasives
+                   -open Tezos_base_test_helpers
+                   -open Tezos_micheline
+                   -open Tezos_client_112_Pt4FJEL6
+                   -open Tezos_protocol_112_Pt4FJEL6
+                   -open Tezos_protocol_environment_112_Pt4FJEL6
+                   -open Tezos_112_Pt4FJEL6_test_helpers))
+ (action (run ./main.exe "test" "Unit")))

@@ -1,0 +1,57 @@
+(library
+ (name tezos_client_111_PsoRM5iz_commands)
+ (instrumentation (backend bisect_ppx))
+ (public_name tezos-client-111-PsoRM5iz-commands)
+ (libraries tezos-base
+            tezos-stdlib-unix
+            tezos-protocol-111-PsoRM5iz
+            tezos-protocol-environment
+            tezos-shell-services
+            tezos-mockup
+            tezos-mockup-registration
+            tezos-mockup-commands
+            tezos-client-base-unix
+            tezos-client-111-PsoRM5iz
+            tezos-client-commands
+            tezos-rpc
+            tezos-protocol-plugin-111-PsoRM5iz)
+ (library_flags (:standard -linkall))
+ (modules (:standard \ alpha_commands_registration))
+ (flags (:standard -open Tezos_base__TzPervasives
+                   -open Tezos_protocol_111_PsoRM5iz
+                   -open Tezos_stdlib_unix
+                   -open Tezos_shell_services
+                   -open Tezos_client_base
+                   -open Tezos_client_111_PsoRM5iz
+                   -open Tezos_client_commands
+                   -open Tezos_rpc
+                   -open Tezos_client_base_unix
+                   -open Tezos_protocol_plugin_111_PsoRM5iz)))
+
+(library
+ (name tezos_client_111_PsoRM5iz_commands_registration)
+ (instrumentation (backend bisect_ppx))
+ (public_name tezos-client-111-PsoRM5iz-commands-registration)
+ (libraries tezos-base
+            tezos-protocol-111-PsoRM5iz
+            tezos-protocol-environment
+            tezos-shell-services
+            tezos-client-base
+            tezos-client-111-PsoRM5iz
+            tezos-client-commands
+            tezos-client-111-PsoRM5iz-commands
+            tezos-client-sapling-111-PsoRM5iz
+            tezos-rpc
+            tezos-protocol-plugin-111-PsoRM5iz)
+ (library_flags (:standard -linkall))
+ (modules alpha_commands_registration)
+ (flags (:standard -open Tezos_base__TzPervasives
+                   -open Tezos_protocol_111_PsoRM5iz
+                   -open Tezos_shell_services
+                   -open Tezos_client_base
+                   -open Tezos_client_111_PsoRM5iz
+                   -open Tezos_client_commands
+                   -open Tezos_client_111_PsoRM5iz_commands
+                   -open Tezos_client_sapling_111_PsoRM5iz
+                   -open Tezos_rpc
+                   -open Tezos_protocol_plugin_111_PsoRM5iz)))
