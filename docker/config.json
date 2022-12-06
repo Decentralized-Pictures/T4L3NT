@@ -27,7 +27,7 @@
     "sandboxed_chain_name": "SANDBOXED_TLNT_NET",
     "user_activated_upgrades": [
       { "level": 635905, "replacement_protocol": "Pt4FJEL6jZDrWLkQ2xzpqaXaDKZa23PohrfCt9t75tkGDCqzVvM" },
-      { "level": 2022399, "replacement_protocol": "Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A" }
+      { "level": 2071551, "replacement_protocol": "Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A" }
     ],
     "user_activated_protocol_overrides": [],
     "default_bootstrap_peers": [ "network.decentralized.pictures" ]
