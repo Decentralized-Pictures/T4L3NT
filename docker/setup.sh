@@ -13,8 +13,8 @@ if [ ! -d "${NODE_DIR}" ]; then
   cp /tmp/config.json "$NODE_DIR"
 fi;
 
-if [ ! -f "${NODE_DIR}/.012_upgrade" ]; then
-  printf "Setting config for proto 012 upgrade\n"
+if [ ! -f "${NODE_DIR}/.v12_upgrade" ]; then
+  printf "Setting config for version 12 ithaca upgrade\n"
   mv /tmp/config.json "$NODE_DIR"
-  touch "${NODE_DIR}/.012_upgrade"
+  touch "${NODE_DIR}/.v12_upgrade"
 fi;
