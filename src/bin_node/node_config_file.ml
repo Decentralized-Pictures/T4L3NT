@@ -84,6 +84,7 @@ let make_blockchain_network ~alias ~chain_name ?old_chain_name
 let mainnet_user_activated_upgrades =
   [
      (635905l, "Pt4FJEL6jZDrWLkQ2xzpqaXaDKZa23PohrfCt9t75tkGDCqzVvM");
+     (2071551l, "Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A");
   ]
 
 (* END_PATCHING_ZONE_FOR_MAINNET_USER_ACTIVATED_UPGRADES *)
