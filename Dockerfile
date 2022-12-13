@@ -49,7 +49,7 @@ ENV BAKER_NAME=${BAKER_NAME:-producer}
 VOLUME ["/home/tlnt"]
 
 RUN apt-get update && \
-  apt-get install -y libev-dev libgmp-dev libhidapi-dev libffi7 netbase supervisor sudo && \
+  apt-get install -y libev-dev libgmp-dev libhidapi-dev libffi7 netbase supervisor sudo wget && \
   apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN mkdir -p /var/run/tezos/node /var/run/tezos/client /usr/local/share/zcash-params
