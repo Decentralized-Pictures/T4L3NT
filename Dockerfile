@@ -34,8 +34,10 @@ RUN cp -a scripts/docker/entrypoint.sh /_bin/ && \
   cp src/bin_client/bash-completion.sh /_scripts/ && \
   cp active_protocol_versions /_scripts/
 
-RUN wget https://raw.githubusercontent.com/zcash/zcash/master/zcutil/fetch-params.sh && chmod +x fetch-params.sh && \
-  ./fetch-params.sh
+RUN mkdir $HOME/.zcash-params
+RUN wget https://download.z.cash/downloads/sapling-spend.params && mv sapling-spend.params $HOME/.zcash-params
+RUN wget https://download.z.cash/downloads/sapling-output.params && mv sapling-output.params $HOME/.zcash-params
+RUN wget https://download.z.cash/downloads/sprout-groth16.params && mv sprout-groth16.params $HOME/.zcash-params
 RUN mv $HOME/.zcash-params /_zcash-params
 
 ######################## final ###############################
