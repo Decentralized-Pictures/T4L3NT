@@ -38,7 +38,7 @@ EXPERIMENTAL_EXECUTABLES := $(shell cat script-inputs/experimental-executables)
 # are not useful for users.
 # - scripts/snapshot_alpha.sh expects octez-protocol-compiler to be at the root.
 # - Some tests expect octez-snoop to be at the root.
-DEV_EXECUTABLES := octez-protocol-compiler octez-snoop
+DEV_EXECUTABLES := tlnt-protocol-compiler octez-snoop
 
 ALL_EXECUTABLES := $(RELEASED_EXECUTABLES) $(EXPERIMENTAL_EXECUTABLES) $(DEV_EXECUTABLES)
 

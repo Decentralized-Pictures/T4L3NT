@@ -3,7 +3,7 @@
 
 (executables
  (names main_client main_admin)
- (public_names octez-client octez-admin-client)
+ (public_names tlnt-client tlnt-admin-client)
  (package octez-client)
  (instrumentation (backend bisect_ppx))
  (libraries

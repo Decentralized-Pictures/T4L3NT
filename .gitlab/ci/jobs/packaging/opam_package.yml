@@ -1157,6 +1157,13 @@ opam:tezos-protocol-012-Psithaca:
   variables:
     package: tezos-protocol-012-Psithaca
 
+opam:tezos-protocol-112-Pt4FJEL6:
+  extends:
+    - .opam_template
+    - .rules_template__trigger_opam_batch_5
+  variables:
+    package: tezos-protocol-112-Pt4FJEL6
+
 opam:tezos-protocol-013-PtJakart:
   extends:
     - .opam_template

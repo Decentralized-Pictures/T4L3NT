@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+STR_ARGS="$*"
+
+/usr/local/bin/tlnt-accuser-012-Psithaca ${STR_ARGS}

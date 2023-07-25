@@ -3,7 +3,7 @@
 
 (executable
  (name main_signer)
- (public_name octez-signer)
+ (public_name tlnt-signer)
  (package octez-signer)
  (instrumentation (backend bisect_ppx))
  (libraries

@@ -1,10 +1,10 @@
 octez-smart-rollup-wasm-debugger
-octez-signer
+tlnt-signer
 octez-proxy-server
 octez-codec
-octez-client
-octez-admin-client
-octez-node
+tlnt-client
+tlnt-admin-client
+tlnt-node
 octez-smart-rollup-node-PtNairob
 octez-smart-rollup-client-PtNairob
 octez-accuser-PtNairob

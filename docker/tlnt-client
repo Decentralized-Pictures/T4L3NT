@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+STR_ARGS="$*"
+
+tlnt-client ${STR_ARGS}

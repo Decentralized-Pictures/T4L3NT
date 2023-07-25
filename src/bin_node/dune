@@ -3,7 +3,7 @@
 
 (executable
  (name main)
- (public_name octez-node)
+ (public_name tlnt-node)
  (package octez-node)
  (instrumentation (backend bisect_ppx))
  (libraries

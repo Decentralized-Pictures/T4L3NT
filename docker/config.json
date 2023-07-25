@@ -1,0 +1,35 @@
+{
+  "rpc": { "listen-addrs": [ "0.0.0.0" ],
+    "acl": [ { "address": "0.0.0.0", "blacklist": [] } ] },
+  "p2p": {
+    "bootstrap-peers": [
+      "network.decentralized.pictures"
+    ],
+    "listen-addr": "[::]:9733",
+    "limits": {
+      "min-connections": 2
+    }
+  },
+  "shell": { "chain_validator": { "synchronisation_threshold": 2 } },
+  "network": {
+    "genesis": {
+      "timestamp": "2021-12-15T04:20:00Z",
+      "block": "BLRWV6h8maHkbyy4D9K1zUUyYap76ZsntbQYKjMz5EknUtpCrzS",
+      "protocol": "Ps9mPmXaRzmzk35gbAYNCAw6UXdE2qoABTHbN2oEEc1qM7CwT9P"
+    },
+    "genesis_parameters": {
+      "values": {
+        "genesis_pubkey": "edpkumhihiF9aaQ6AueVPZGux4aiMhzJ4JctBybbDBsGwnhm4R7mTQ"
+      }
+    },
+    "chain_name": "TLNT_NET",
+    "incompatible_chain_name": "INCOMPATIBLE",
+    "sandboxed_chain_name": "SANDBOXED_TLNT_NET",
+    "user_activated_upgrades": [
+      { "level": 635905, "replacement_protocol": "Pt4FJEL6jZDrWLkQ2xzpqaXaDKZa23PohrfCt9t75tkGDCqzVvM" },
+      { "level": 2173951, "replacement_protocol": "Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A" }
+    ],
+    "user_activated_protocol_overrides": [],
+    "default_bootstrap_peers": [ "network.decentralized.pictures" ]
+  }
+}

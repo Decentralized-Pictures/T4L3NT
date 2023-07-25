@@ -10,7 +10,7 @@
 
 (executable
  (name main_native)
- (public_name octez-protocol-compiler)
+ (public_name tlnt-protocol-compiler)
  (package octez-protocol-compiler)
  (instrumentation (backend bisect_ppx))
  (modes native)

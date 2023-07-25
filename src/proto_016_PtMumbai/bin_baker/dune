@@ -3,7 +3,7 @@
 
 (executable
  (name main_baker_016_PtMumbai)
- (public_name octez-baker-PtMumbai)
+ (public_name tlnt-baker-PtMumbai)
  (package octez-baker-PtMumbai)
  (instrumentation (backend bisect_ppx))
  (libraries
