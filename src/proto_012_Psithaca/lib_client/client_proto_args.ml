@@ -46,11 +46,11 @@ let () =
     `Permanent
     ~id:"badTezArg"
     ~title:"Bad Tez Arg"
-    ~description:"Invalid \xEA\x9C\xA9 notation in parameter."
+    ~description:"Invalid \xd1\x84 notation in parameter."
     ~pp:(fun ppf (arg_name, literal) ->
       Format.fprintf
         ppf
-        "Invalid \xEA\x9C\xA9 notation in parameter %s: '%s'"
+        "Invalid \xd1\x84 notation in parameter %s: '%s'"
         arg_name
         literal)
     Data_encoding.(obj2 (req "parameter" string) (req "literal" string))
@@ -121,7 +121,7 @@ let () =
     (function Bad_preserved_levels parameter -> Some parameter | _ -> None)
     (fun parameter -> Bad_preserved_levels parameter)
 
-let tez_sym = "\xEA\x9C\xA9"
+let tez_sym = "\xd1\x84"
 
 let string_parameter = parameter (fun _ x -> return x)
 
@@ -246,7 +246,7 @@ let tez_arg ~default ~parameter ~doc =
 let tez_param ~name ~desc next =
   Clic.param
     ~name
-    ~desc:(desc ^ " in \xEA\x9C\xA9\n" ^ tez_format)
+    ~desc:(desc ^ " in \xd1\x84\n" ^ tez_format)
     (tez_parameter name)
     next
 
@@ -254,14 +254,14 @@ let fee_arg =
   arg
     ~long:"fee"
     ~placeholder:"amount"
-    ~doc:"fee in \xEA\x9C\xA9 to pay to the baker"
+    ~doc:"fee in \xd1\x84 to pay to the baker"
     (tez_parameter "--fee")
 
 let default_fee_arg =
   arg
     ~long:"default-fee"
     ~placeholder:"amount"
-    ~doc:"default fee in \xEA\x9C\xA9 to pay to the baker for each transaction"
+    ~doc:"default fee in \xd1\x84 to pay to the baker for each transaction"
     (tez_parameter "--default-fee")
 
 let level_kind =
