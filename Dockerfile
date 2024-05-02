@@ -40,7 +40,7 @@ RUN mv $HOME/.zcash-params /_zcash-params
 
 ######################## final ###############################
 
-FROM ubuntu:latest as final
+FROM ubuntu:22.04 as final
 
 ARG BAKER_ID=${BAKER_ID}
 ENV BAKER_ID=${BAKER_ID}
